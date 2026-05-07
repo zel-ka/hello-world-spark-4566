@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, ShoppingCart, Plus, Minus, Trash2, Heart, Star, Package, Truck, ShieldCheck, Dumbbell, HeartPulse, Moon, Brain, Wind, ClipboardList, X, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,38 +14,16 @@ import { useAuth } from "@/hooks/use-auth";
 type Product = {
   id: string;
   category: string;
-  nameEn: string;
-  nameSw: string;
-  descEn: string;
-  descSw: string;
+  name_en: string;
+  name_sw: string;
+  desc_en: string;
+  desc_sw: string;
   price: number;
   rating: number;
-  badge?: "best" | "new" | "deal" | null;
+  badge: string | null;
   emoji: string;
+  stock: number;
 };
-
-const _UNUSED_PRODUCTS: Product[] = [
-  // Mazoezi
-  { id: "p1", category: "exercise", nameEn: "Skipping Rope Pro", nameSw: "Kamba ya Kurukia", descEn: "Adjustable speed rope for cardio.", descSw: "Kamba ya kurekebisha kwa mazoezi ya moyo.", price: 18000, rating: 4.7, badge: "best", emoji: "🪢" },
-  { id: "p2", category: "exercise", nameEn: "Dumbbells Set 10kg", nameSw: "Dumbbells Seti 10kg", descEn: "Pair of rubber dumbbells.", descSw: "Jozi ya dumbbells za mpira.", price: 95000, rating: 4.8, emoji: "🏋️" },
-  { id: "p3", category: "exercise", nameEn: "Yoga Mat Premium", nameSw: "Mkeka wa Yoga", descEn: "Non-slip 6mm exercise mat.", descSw: "Mkeka wa mazoezi 6mm.", price: 35000, rating: 4.6, emoji: "🧘" },
-  // Afya
-  { id: "p4", category: "health", nameEn: "Digital BP Machine", nameSw: "Mashine ya Presha", descEn: "Accurate upper-arm BP monitor.", descSw: "Kipima presha cha mkono cha kisasa.", price: 145000, rating: 4.9, badge: "best", emoji: "🩺" },
-  { id: "p5", category: "health", nameEn: "Glucometer Kit", nameSw: "Kipima Sukari", descEn: "Blood sugar monitor + 50 strips.", descSw: "Kipima sukari + vipande 50.", price: 78000, rating: 4.7, emoji: "💉" },
-  { id: "p6", category: "health", nameEn: "Smart Body Scale", nameSw: "Mizani ya Mwili", descEn: "BMI, body fat, muscle mass.", descSw: "Hupima BMI, mafuta, na misuli.", price: 62000, rating: 4.5, badge: "new", emoji: "⚖️" },
-  { id: "p7", category: "health", nameEn: "Pulse Oximeter", nameSw: "Kipima Oksijeni", descEn: "SpO2 + heart rate fingertip.", descSw: "Hupima oksijeni na mapigo.", price: 28000, rating: 4.6, emoji: "🫁" },
-  // Usingizi
-  { id: "p8", category: "sleep", nameEn: "Silk Eye Mask", nameSw: "Kifuniko cha Macho", descEn: "Soft sleep mask for deep rest.", descSw: "Kifuniko laini cha kulala vizuri.", price: 12000, rating: 4.4, emoji: "😴" },
-  { id: "p9", category: "sleep", nameEn: "White Noise Machine", nameSw: "Mashine ya Sauti", descEn: "20 calming sounds for sleep.", descSw: "Sauti 20 za utulivu kwa usingizi.", price: 85000, rating: 4.7, badge: "deal", emoji: "🎵" },
-  // Msongo
-  { id: "p10", category: "stress", nameEn: "Aromatherapy Diffuser", nameSw: "Diffuser ya Harufu", descEn: "Essential oil mist for calm.", descSw: "Inazalisha harufu za kutuliza.", price: 55000, rating: 4.6, emoji: "🌿" },
-  { id: "p11", category: "stress", nameEn: "Stress Relief Puzzle", nameSw: "Mchezo wa Kupunguza Msongo", descEn: "Brain games for relaxation.", descSw: "Michezo ya akili kwa utulivu.", price: 22000, rating: 4.3, emoji: "🧩" },
-  // Hewa
-  { id: "p12", category: "air", nameEn: "HEPA Air Purifier", nameSw: "Kisafishaji Hewa", descEn: "Removes 99.97% of allergens.", descSw: "Husafisha 99.97% ya vumbi.", price: 280000, rating: 4.8, badge: "best", emoji: "🌬️" },
-  // Productivity
-  { id: "p13", category: "productivity", nameEn: "Focus Timer Cube", nameSw: "Saa ya Umakini", descEn: "Pomodoro productivity timer.", descSw: "Saa ya kuongeza umakini.", price: 32000, rating: 4.5, emoji: "⏱️" },
-  { id: "p14", category: "productivity", nameEn: "Blue Light Glasses", nameSw: "Miwani ya Kompyuta", descEn: "Reduce eye strain at screens.", descSw: "Hupunguza uchovu wa macho.", price: 38000, rating: 4.4, badge: "new", emoji: "👓" },
-];
 
 const CATEGORIES = [
   { id: "all", icon: Package, en: "All", sw: "Vyote" },
@@ -62,8 +40,12 @@ type CartItem = { id: string; qty: number };
 const fmt = (n: number) => `TZS ${n.toLocaleString()}`;
 
 export default function Shop() {
-  const { t, lang } = useI18n();
+  const { lang } = useI18n();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const isSw = lang === "sw";
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeCat, setActiveCat] = useState("all");
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -74,21 +56,42 @@ export default function Shop() {
   });
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", address: "" });
 
   useEffect(() => { localStorage.setItem("afya_cart", JSON.stringify(cart)); }, [cart]);
   useEffect(() => { localStorage.setItem("afya_favs", JSON.stringify(favs)); }, [favs]);
 
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("active", true)
+        .order("created_at", { ascending: true });
+      if (error) {
+        toast.error(isSw ? "Imeshindwa kupakia bidhaa" : "Failed to load products");
+      } else {
+        setProducts((data as Product[]) ?? []);
+      }
+      setLoading(false);
+    })();
+  }, [isSw]);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return PRODUCTS.filter(p => {
+    return products.filter(p => {
       if (activeCat !== "all" && p.category !== activeCat) return false;
       if (!q) return true;
-      return (p.nameEn + p.nameSw + p.descEn + p.descSw).toLowerCase().includes(q);
+      return (p.name_en + p.name_sw + p.desc_en + p.desc_sw).toLowerCase().includes(q);
     });
-  }, [activeCat, search]);
+  }, [activeCat, search, products]);
 
-  const cartDetailed = cart.map(c => ({ ...c, p: PRODUCTS.find(p => p.id === c.id)! })).filter(x => x.p);
-  const subtotal = cartDetailed.reduce((s, x) => s + x.p.price * x.qty, 0);
+  const cartDetailed = cart
+    .map(c => ({ ...c, p: products.find(p => p.id === c.id) }))
+    .filter((x): x is { id: string; qty: number; p: Product } => !!x.p);
+  const subtotal = cartDetailed.reduce((s, x) => s + Number(x.p.price) * x.qty, 0);
   const shipping = subtotal > 0 ? (subtotal > 200000 ? 0 : 5000) : 0;
   const total = subtotal + shipping;
   const cartCount = cart.reduce((s, c) => s + c.qty, 0);
@@ -111,7 +114,48 @@ export default function Shop() {
   const removeItem = (id: string) => setCart(c => c.filter(i => i.id !== id));
   const toggleFav = (id: string) => setFavs(f => f.includes(id) ? f.filter(x => x !== id) : [...f, id]);
 
-  const placeOrder = () => {
+  const placeOrder = async () => {
+    if (!user) {
+      toast.error(isSw ? "Tafadhali ingia kwanza" : "Please sign in to place an order");
+      navigate("/auth");
+      return;
+    }
+    if (!form.name.trim() || !form.phone.trim() || !form.address.trim()) {
+      toast.error(isSw ? "Jaza taarifa zote" : "Fill in all details");
+      return;
+    }
+    setSubmitting(true);
+    const { data: order, error: orderErr } = await supabase
+      .from("orders")
+      .insert({
+        user_id: user.id,
+        subtotal, shipping, total,
+        customer_name: form.name,
+        phone: form.phone,
+        address: form.address,
+        status: "pending",
+      })
+      .select()
+      .single();
+
+    if (orderErr || !order) {
+      setSubmitting(false);
+      toast.error(isSw ? "Imeshindwa kuagiza" : "Failed to place order");
+      return;
+    }
+
+    const items = cartDetailed.map(x => ({
+      order_id: order.id,
+      product_id: x.p.id,
+      quantity: x.qty,
+      unit_price: x.p.price,
+    }));
+    const { error: itemsErr } = await supabase.from("order_items").insert(items);
+    setSubmitting(false);
+    if (itemsErr) {
+      toast.error(isSw ? "Imeshindwa kuhifadhi vitu" : "Failed to save items");
+      return;
+    }
     setOrderPlaced(true);
     setCart([]);
     setTimeout(() => { setOrderPlaced(false); setCheckoutOpen(false); }, 2500);
@@ -153,8 +197,8 @@ export default function Shop() {
                     <div key={id} className="flex gap-3 p-3 rounded-2xl border border-slate-200 bg-white">
                       <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center text-3xl shrink-0">{p.emoji}</div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-slate-900 truncate">{isSw ? p.nameSw : p.nameEn}</p>
-                        <p className="text-xs text-blue-700 font-semibold mt-0.5">{fmt(p.price)}</p>
+                        <p className="text-sm font-bold text-slate-900 truncate">{isSw ? p.name_sw : p.name_en}</p>
+                        <p className="text-xs text-blue-700 font-semibold mt-0.5">{fmt(Number(p.price))}</p>
                         <div className="flex items-center gap-2 mt-2">
                           <button onClick={() => updateQty(id, -1)} className="h-7 w-7 rounded-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50"><Minus className="h-3 w-3" /></button>
                           <span className="text-sm font-semibold w-6 text-center">{qty}</span>
@@ -225,7 +269,9 @@ export default function Shop() {
       {/* Products */}
       <section className="px-4 sm:px-6 pb-16">
         <div className="max-w-7xl mx-auto">
-          {filtered.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-16 text-slate-500"><Loader2 className="h-8 w-8 mx-auto mb-3 animate-spin" /><p>{isSw ? "Inapakia bidhaa..." : "Loading products..."}</p></div>
+          ) : filtered.length === 0 ? (
             <div className="text-center py-16 text-slate-500"><Package className="h-12 w-12 mx-auto mb-3 opacity-40" /><p>{isSw ? "Hakuna bidhaa zilizopatikana" : "No products found"}</p></div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
@@ -243,14 +289,14 @@ export default function Shop() {
                     </button>
                   </div>
                   <div className="p-3 sm:p-4 flex-1 flex flex-col">
-                    <p className="text-sm font-bold text-slate-900 line-clamp-1">{isSw ? p.nameSw : p.nameEn}</p>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 flex-1">{isSw ? p.descSw : p.descEn}</p>
+                    <p className="text-sm font-bold text-slate-900 line-clamp-1">{isSw ? p.name_sw : p.name_en}</p>
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 flex-1">{isSw ? p.desc_sw : p.desc_en}</p>
                     <div className="flex items-center gap-1 mt-2">
                       <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
                       <span className="text-xs font-semibold text-slate-700">{p.rating}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 mt-3">
-                      <span className="text-sm sm:text-base font-black text-blue-700">{fmt(p.price)}</span>
+                      <span className="text-sm sm:text-base font-black text-blue-700">{fmt(Number(p.price))}</span>
                       <Button size="sm" onClick={() => addToCart(p.id)} className="h-8 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">
                         <Plus className="h-3 w-3 sm:mr-1" /><span className="hidden sm:inline">{isSw ? "Ongeza" : "Add"}</span>
                       </Button>
@@ -265,7 +311,7 @@ export default function Shop() {
 
       {/* Checkout Modal */}
       {checkoutOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => !orderPlaced && setCheckoutOpen(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onClick={() => !orderPlaced && !submitting && setCheckoutOpen(false)}>
           <div onClick={e => e.stopPropagation()} className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
             <button onClick={() => setCheckoutOpen(false)} className="absolute top-4 right-4 h-8 w-8 rounded-full hover:bg-slate-100 flex items-center justify-center"><X className="h-4 w-4" /></button>
             {orderPlaced ? (
@@ -277,18 +323,23 @@ export default function Shop() {
             ) : (
               <>
                 <h3 className="text-xl font-black text-slate-900 mb-4">{isSw ? "Maelezo ya Kulipia" : "Checkout Details"}</h3>
+                {!user && (
+                  <div className="mb-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800">
+                    {isSw ? "Tafadhali ingia kwanza ili kuagiza." : "Please sign in to place an order."}
+                  </div>
+                )}
                 <div className="space-y-3">
-                  <Input placeholder={isSw ? "Jina kamili" : "Full name"} className="h-11 rounded-xl" />
-                  <Input placeholder={isSw ? "Nambari ya simu" : "Phone number"} className="h-11 rounded-xl" />
-                  <Input placeholder={isSw ? "Anwani ya kupelekwa" : "Delivery address"} className="h-11 rounded-xl" />
+                  <Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder={isSw ? "Jina kamili" : "Full name"} className="h-11 rounded-xl" />
+                  <Input value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} placeholder={isSw ? "Nambari ya simu" : "Phone number"} className="h-11 rounded-xl" />
+                  <Input value={form.address} onChange={e => setForm(f => ({ ...f, address: e.target.value }))} placeholder={isSw ? "Anwani ya kupelekwa" : "Delivery address"} className="h-11 rounded-xl" />
                 </div>
                 <div className="mt-4 p-4 rounded-2xl bg-slate-50 space-y-2">
                   <div className="flex justify-between text-sm"><span>{isSw ? "Jumla ndogo" : "Subtotal"}</span><span className="font-semibold">{fmt(subtotal)}</span></div>
                   <div className="flex justify-between text-sm"><span>{isSw ? "Usafirishaji" : "Shipping"}</span><span className="font-semibold">{shipping === 0 ? (isSw ? "Bure" : "Free") : fmt(shipping)}</span></div>
                   <div className="flex justify-between text-base font-black pt-2 border-t border-slate-200"><span>{isSw ? "Jumla" : "Total"}</span><span className="text-blue-700">{fmt(total)}</span></div>
                 </div>
-                <Button onClick={placeOrder} className="w-full mt-4 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold">
-                  {isSw ? "Thibitisha Agizo" : "Confirm Order"}
+                <Button onClick={placeOrder} disabled={submitting || cartDetailed.length === 0} className="w-full mt-4 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold">
+                  {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : (isSw ? "Thibitisha Agizo" : "Confirm Order")}
                 </Button>
               </>
             )}
