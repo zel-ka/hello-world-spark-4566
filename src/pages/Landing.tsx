@@ -250,7 +250,7 @@ export default function Landing() {
               <div className="absolute -bottom-12 left-8 w-60 h-60 rounded-full bg-cyan-300/25 blur-3xl" />
               <div className="absolute -top-8 right-12 w-52 h-52 rounded-full bg-slate-900/8 blur-3xl" />
               <div className="relative glass-secondary rounded-[2rem] border border-white/30 bg-white/80 p-5 sm:p-6 lg:p-8">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                   {[
                     {
                       icon: HeartPulse,
