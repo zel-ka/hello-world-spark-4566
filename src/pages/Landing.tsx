@@ -248,39 +248,41 @@ export default function Landing() {
               <div className="absolute -bottom-12 left-8 w-60 h-60 rounded-full bg-cyan-300/25 blur-3xl" />
               <div className="absolute -top-8 right-12 w-52 h-52 rounded-full bg-slate-900/8 blur-3xl" />
               <div className="relative glass-secondary rounded-[2rem] border border-white/30 bg-white/80 p-5 sm:p-6 lg:p-8">
-                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   {[
                     {
-                      icon: HeartPulse,
-                      title: t('landing.vitalSignsCard'),
-                      path: "/try",
-                      color: "from-blue-500 to-blue-600",
+                      icon: Sparkles,
+                      title: t('overlay.features') || 'Powerful Features',
+                      desc: t('landing.featuresCardDesc') || 'Real-time tracking, AI insights, smart alerts and secure data.',
+                      cta: t('common.learnMore') || 'Explore features →',
+                      path: "/features",
+                      color: "from-cyan-500 to-blue-600",
                     },
                     {
-                      icon: TrendingUp,
-                      title: t('landing.riskEvaluationCard'),
-                      path: "/try",
-                      color: "from-cyan-500 to-blue-500",
+                      icon: Heart,
+                      title: t('overlay.about') || 'About Afya Compass',
+                      desc: t('landing.aboutCardDesc') || 'Discover our story, mission and how we guide your health journey.',
+                      cta: t('common.learnMore') || 'Learn more →',
+                      path: "/about",
+                      color: "from-blue-500 to-blue-700",
                     },
                     {
-                      icon: Zap,
-                      title: t('landing.lifestyleOptCard'),
-                      path: "/try",
-                      color: "from-emerald-500 to-teal-500",
-                    },
-                    {
-                      icon: BarChart3,
-                      title: t('landing.insightsReportsCard'),
-                      path: "/try",
-                      color: "from-purple-500 to-indigo-500",
+                      icon: Stethoscope,
+                      title: t('overlay.contact') || 'Contact Us',
+                      desc: t('landing.contactCardDesc') || 'Get in touch with our team — we are here to help you stay healthy.',
+                      cta: t('common.getInTouch') || 'Reach out →',
+                      path: "/contact",
+                      color: "from-emerald-500 to-teal-600",
                     },
                   ].map((feature, i) => (
                     <Link key={i} to={feature.path} className="group block">
-                      <div className="w-full rounded-3xl border border-slate-200/80 bg-white/95 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-4 text-center active:scale-[0.98]">
-                        <div className={`mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} text-white shadow-lg shadow-slate-900/10 transition-all group-hover:shadow-xl`}>
-                          <feature.icon className="h-5 w-5" />
+                      <div className="h-full w-full rounded-3xl border border-slate-200/80 bg-white/95 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-5 sm:p-6 text-left active:scale-[0.98]">
+                        <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} text-white shadow-lg shadow-slate-900/10 transition-all group-hover:shadow-xl`}>
+                          <feature.icon className="h-6 w-6" />
                         </div>
-                        <h3 className="text-sm font-semibold text-slate-900 leading-tight">{feature.title}</h3>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight mb-2">{feature.title}</h3>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
+                        <span className="mt-3 inline-block text-xs sm:text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">{feature.cta}</span>
                       </div>
                     </Link>
                   ))}
