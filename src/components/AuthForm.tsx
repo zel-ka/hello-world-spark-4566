@@ -16,7 +16,7 @@ interface AuthFormProps {
 
 const INTERNAL_EMAIL_DOMAIN = "app.local";
 const usernameToEmail = (u: string) => `${u.trim().toLowerCase()}@${INTERNAL_EMAIL_DOMAIN}`;
-const isValidUsername = (u: string) => /^[a-zA-Z0-9_.-]{3,30}$/.test(u);
+const isValidUsername = (u: string) => /^[a-zA-Z0-9_.-]{2,30}$/.test(u);
 
 export default function AuthForm({
   t,
@@ -39,7 +39,7 @@ export default function AuthForm({
       toast.error(t('auth.usernameInvalid'));
       return;
     }
-    if (password.length < 6) {
+    if (password.length < 4) {
       toast.error(t('auth.passwordMin'));
       return;
     }
@@ -124,7 +124,7 @@ export default function AuthForm({
               onChange={(e) => setUsername(e.target.value)}
               className="pl-10 h-11 rounded-xl text-sm border-2 focus:border-blue-500"
               required
-              minLength={3}
+              minLength={2}
               maxLength={30}
               disabled={loading}
             />
@@ -139,7 +139,7 @@ export default function AuthForm({
               onChange={(e) => setPassword(e.target.value)}
               className="pl-10 h-11 rounded-xl text-sm border-2 focus:border-blue-500"
               required
-              minLength={6}
+              minLength={4}
               disabled={loading}
             />
           </div>

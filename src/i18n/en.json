@@ -119,11 +119,11 @@
       "role": "Public Health Specialist & Lifestyle Coach"
     },
     "disclaimer": {
-      "heading": "Kanusho",
-      "p1": "Jukwaa la Tathmini Afya si mbadala wa huduma za kitabibu wala ushauri wa daktari.",
-      "p2": "Limeundwa kukusaidia kufuatilia na kusimamia afya yako, na kukuza utamaduni wa kufanya tathmini za afya mara kwa mara.",
-      "p3": "Kupitia taarifa na uchambuzi, unaweza kubaini mapema hatari za kiafya na kuchukua hatua stahiki, ikiwemo kutafuta huduma za hospitali kwa wakati.",
-      "p4": "Taarifa hizi pia humsaidia daktari kuelewa hali yako kwa urahisi zaidi na kuboresha matokeo ya matibabu."
+      "heading": "Disclaimer",
+      "p1": "The Afya Assessment platform is not a substitute for professional medical care or a doctor's advice.",
+      "p2": "It is designed to help you track and manage your health, and build a habit of regular health assessments.",
+      "p3": "Through insights and analytics, you can identify health risks early and take appropriate action, including seeking hospital care in time.",
+      "p4": "This information also helps your doctor understand your condition more easily and improve treatment outcomes."
     }
   },
   "auth": {
@@ -136,9 +136,9 @@
     "confirmEmail": "Check your email for a confirmation link. After confirmation, you'll get access to the dashboard.",
     "signupSuccess": "Account created! Check your email to verify.",
     "loginError": "Invalid email or password",
-    "usernameInvalid": "Username must be 3-30 characters, letters, numbers, dots, hyphens, and underscores only",
+    "usernameInvalid": "Username must be at least 2 characters",
     "usernameTaken": "Username is already taken",
-    "passwordMin": "Password must be at least 6 characters",
+    "passwordMin": "Password must be at least 4 characters",
     "emailRequired": "Email is required",
     "passwordRequired": "Password is required",
     "doctor": "Doctor",
