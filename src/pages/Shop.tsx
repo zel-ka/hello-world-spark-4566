@@ -162,11 +162,11 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br gradient-soft">
       {/* Nav */}
       <nav className="sticky top-0 z-40 backdrop-blur-xl bg-white/70 border-b border-white/40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
-          <Link to="/" className="flex items-center gap-2 text-slate-900 hover:text-blue-700 transition">
+          <Link to="/" className="flex items-center gap-2 text-slate-900 hover:text-primary transition">
             <ArrowLeft className="h-4 w-4" />
             <span className="text-sm font-semibold">{isSw ? "Rudi Nyumbani" : "Back to Home"}</span>
           </Link>
@@ -178,7 +178,7 @@ export default function Shop() {
                   <ShoppingCart className="h-4 w-4" />
                   <span className="hidden sm:inline">{isSw ? "Kikapu" : "Cart"}</span>
                   {cartCount > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 h-5 min-w-5 px-1 rounded-full bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">{cartCount}</span>
+                    <span className="absolute -top-1.5 -right-1.5 h-5 min-w-5 px-1 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center">{cartCount}</span>
                   )}
                 </Button>
               </SheetTrigger>
@@ -195,10 +195,10 @@ export default function Shop() {
                   )}
                   {cartDetailed.map(({ p, qty, id }) => (
                     <div key={id} className="flex gap-3 p-3 rounded-2xl border border-slate-200 bg-white">
-                      <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center text-3xl shrink-0">{p.emoji}</div>
+                      <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 flex items-center justify-center text-3xl shrink-0">{p.emoji}</div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-bold text-slate-900 truncate">{isSw ? p.name_sw : p.name_en}</p>
-                        <p className="text-xs text-blue-700 font-semibold mt-0.5">{fmt(Number(p.price))}</p>
+                        <p className="text-xs text-primary font-semibold mt-0.5">{fmt(Number(p.price))}</p>
                         <div className="flex items-center gap-2 mt-2">
                           <button onClick={() => updateQty(id, -1)} className="h-7 w-7 rounded-lg border border-slate-200 flex items-center justify-center hover:bg-slate-50"><Minus className="h-3 w-3" /></button>
                           <span className="text-sm font-semibold w-6 text-center">{qty}</span>
@@ -213,8 +213,8 @@ export default function Shop() {
                   <div className="border-t border-slate-200 pt-4 space-y-3">
                     <div className="flex justify-between text-sm"><span className="text-slate-600">{isSw ? "Jumla ndogo" : "Subtotal"}</span><span className="font-semibold">{fmt(subtotal)}</span></div>
                     <div className="flex justify-between text-sm"><span className="text-slate-600">{isSw ? "Usafirishaji" : "Shipping"}</span><span className="font-semibold">{shipping === 0 ? (isSw ? "Bure" : "Free") : fmt(shipping)}</span></div>
-                    <div className="flex justify-between text-base font-bold pt-2 border-t border-slate-200"><span>{isSw ? "Jumla" : "Total"}</span><span className="text-blue-700">{fmt(total)}</span></div>
-                    <Button onClick={() => setCheckoutOpen(true)} className="w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold">
+                    <div className="flex justify-between text-base font-bold pt-2 border-t border-slate-200"><span>{isSw ? "Jumla" : "Total"}</span><span className="text-primary">{fmt(total)}</span></div>
+                    <Button onClick={() => setCheckoutOpen(true)} className="w-full h-12 rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-bold">
                       {isSw ? "Endelea Kulipia" : "Checkout"}
                     </Button>
                   </div>
@@ -228,13 +228,13 @@ export default function Shop() {
       {/* Hero */}
       <section className="relative px-4 sm:px-6 pt-8 sm:pt-14 pb-6">
         <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 p-6 sm:p-10 text-white shadow-floating relative overflow-hidden">
+          <div className="rounded-3xl bg-gradient-to-br from-primary via-primary to-primary/80 p-6 sm:p-10 text-white shadow-floating relative overflow-hidden">
             <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-cyan-300/20 blur-3xl" />
             <div className="relative max-w-2xl">
               <Badge className="bg-white/20 text-white hover:bg-white/30 border-0 mb-3">{isSw ? "Duka la Afya" : "Health Store"}</Badge>
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight">{isSw ? "Vifaa vya Kuboresha Afya Yako" : "Tools to Improve Your Health"}</h1>
-              <p className="mt-3 text-sm sm:text-base text-blue-50">{isSw ? "Vifaa vinavyopendekezwa kulingana na mwenendo wa afya yako." : "Curated tools recommended based on your health trends."}</p>
+              <p className="mt-3 text-sm sm:text-base text-primary-foreground/90">{isSw ? "Vifaa vinavyopendekezwa kulingana na mwenendo wa afya yako." : "Curated tools recommended based on your health trends."}</p>
               <div className="flex flex-wrap gap-4 mt-5 text-xs sm:text-sm">
                 <span className="inline-flex items-center gap-1.5"><Truck className="h-4 w-4" /> {isSw ? "Usafirishaji bure >200k" : "Free shipping >200k"}</span>
                 <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> {isSw ? "Bidhaa halisi" : "Verified products"}</span>
@@ -257,7 +257,7 @@ export default function Shop() {
               const Icon = c.icon;
               const active = activeCat === c.id;
               return (
-                <button key={c.id} onClick={() => setActiveCat(c.id)} className={`shrink-0 inline-flex items-center gap-2 px-4 h-10 rounded-full border text-sm font-semibold transition-all ${active ? "bg-blue-600 text-white border-blue-600 shadow-glow" : "bg-white text-slate-700 border-slate-200 hover:border-blue-300"}`}>
+                <button key={c.id} onClick={() => setActiveCat(c.id)} className={`shrink-0 inline-flex items-center gap-2 px-4 h-10 rounded-full border text-sm font-semibold transition-all ${active ? "bg-primary text-primary-foreground border-primary shadow-glow" : "bg-white text-slate-700 border-slate-200 hover:border-primary/40"}`}>
                   <Icon className="h-4 w-4" />{isSw ? c.sw : c.en}
                 </button>
               );
@@ -277,7 +277,7 @@ export default function Shop() {
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
               {filtered.map(p => (
                 <div key={p.id} className="group rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-soft hover:shadow-elevated hover:-translate-y-1 transition-all flex flex-col">
-                  <div className="relative aspect-square bg-gradient-to-br from-blue-50 via-white to-cyan-50 flex items-center justify-center text-6xl sm:text-7xl">
+                  <div className="relative aspect-square bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center text-6xl sm:text-7xl">
                     {p.emoji}
                     {p.badge && (
                       <span className={`absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-1 rounded-full ${p.badge === "best" ? "bg-amber-100 text-amber-800" : p.badge === "new" ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"}`}>
@@ -296,8 +296,8 @@ export default function Shop() {
                       <span className="text-xs font-semibold text-slate-700">{p.rating}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 mt-3">
-                      <span className="text-sm sm:text-base font-black text-blue-700">{fmt(Number(p.price))}</span>
-                      <Button size="sm" onClick={() => addToCart(p.id)} className="h-8 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold">
+                      <span className="text-sm sm:text-base font-black text-primary">{fmt(Number(p.price))}</span>
+                      <Button size="sm" onClick={() => addToCart(p.id)} className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs font-bold">
                         <Plus className="h-3 w-3 sm:mr-1" /><span className="hidden sm:inline">{isSw ? "Ongeza" : "Add"}</span>
                       </Button>
                     </div>
@@ -336,9 +336,9 @@ export default function Shop() {
                 <div className="mt-4 p-4 rounded-2xl bg-slate-50 space-y-2">
                   <div className="flex justify-between text-sm"><span>{isSw ? "Jumla ndogo" : "Subtotal"}</span><span className="font-semibold">{fmt(subtotal)}</span></div>
                   <div className="flex justify-between text-sm"><span>{isSw ? "Usafirishaji" : "Shipping"}</span><span className="font-semibold">{shipping === 0 ? (isSw ? "Bure" : "Free") : fmt(shipping)}</span></div>
-                  <div className="flex justify-between text-base font-black pt-2 border-t border-slate-200"><span>{isSw ? "Jumla" : "Total"}</span><span className="text-blue-700">{fmt(total)}</span></div>
+                  <div className="flex justify-between text-base font-black pt-2 border-t border-slate-200"><span>{isSw ? "Jumla" : "Total"}</span><span className="text-primary">{fmt(total)}</span></div>
                 </div>
-                <Button onClick={placeOrder} disabled={submitting || cartDetailed.length === 0} className="w-full mt-4 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold">
+                <Button onClick={placeOrder} disabled={submitting || cartDetailed.length === 0} className="w-full mt-4 h-12 rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white font-bold">
                   {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : (isSw ? "Thibitisha Agizo" : "Confirm Order")}
                 </Button>
               </>
