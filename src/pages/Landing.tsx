@@ -446,23 +446,23 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 mt-12 sm:mt-20 px-4 sm:px-6 pb-6 sm:pb-8">
-        <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden border border-white/60 bg-gradient-to-br from-white/80 via-blue-50/60 to-cyan-50/60 backdrop-blur-xl shadow-floating">
+      <footer className="relative z-10 mt-12 sm:mt-20">
+        <div className="w-full border-t border-white/60 bg-gradient-to-br from-white/80 via-blue-50/60 to-cyan-50/60 backdrop-blur-xl shadow-floating">
           {/* Expert highlight strip */}
-          <div className="px-5 sm:px-8 py-5 sm:py-6 bg-gradient-to-r from-blue-600/95 via-blue-700/95 to-indigo-700/95 text-white">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center shrink-0 ring-1 ring-white/30">
-                <Stethoscope className="h-6 w-6 sm:h-7 sm:w-7" />
+          <div className="px-5 sm:px-8 py-5 sm:py-6 bg-gradient-to-r from-slate-50 via-white to-slate-50 border-b border-slate-200/70">
+            <div className="max-w-6xl mx-auto flex items-center gap-4">
+              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-slate-900/5 flex items-center justify-center shrink-0 ring-1 ring-slate-200">
+                <Stethoscope className="h-6 w-6 sm:h-7 sm:w-7 text-slate-700" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[10px] sm:text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 text-white/80"><Award className="w-3 h-3" />{t('landing.expert.heading')}</p>
-                <p className="text-sm sm:text-base font-black truncate">{t('landing.expert.name')}</p>
-                <p className="text-xs text-white/80 truncate">{t('landing.expert.credentials')} • {t('landing.expert.role')}</p>
+                <p className="text-[10px] sm:text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 text-slate-500"><Award className="w-3 h-3" />{t('landing.expert.heading')}</p>
+                <p className="text-sm sm:text-base font-black truncate text-slate-900">{t('landing.expert.name')}</p>
+                <p className="text-xs text-slate-600 truncate">{t('landing.expert.credentials')} • {t('landing.expert.role')}</p>
               </div>
             </div>
           </div>
 
-          <div className="px-5 sm:px-8 py-8 sm:py-10">
+          <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 sm:py-10">
             <div className="flex items-center gap-2 mb-6">
               <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
                 <Heart className="h-4 w-4 text-white" />
@@ -504,9 +504,8 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-200/70 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
+            <div className="mt-8 pt-6 border-t border-slate-200/70 text-xs text-slate-600">
               <p>{t('landing.copyright')}</p>
-              <p className="text-slate-500">Made with <span className="text-rose-500">♥</span> in Tanzania</p>
             </div>
           </div>
         </div>
