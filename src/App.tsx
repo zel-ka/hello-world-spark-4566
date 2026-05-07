@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import Landing from "@/pages/Landing";
 import Contact from "@/pages/Contact";
+import About from "@/pages/About";
+import Features from "@/pages/Features";
 import Index from "@/pages/Index";
 import PatientDashboard from "@/pages/PatientDashboard";
 import GuestDashboard from "@/pages/GuestDashboard";
@@ -30,6 +32,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/features" element={<Features />} />
         <Route path="/try" element={<GuestDashboard />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/signup" element={<Navigate to="/" replace />} />
@@ -57,8 +61,10 @@ function AppRoutes() {
         }
       />
       
-      {/* Public contact page for all users */}
+      {/* Public pages for all users */}
       <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/features" element={<Features />} />
 
       {/* Patient dashboard */}
       <Route

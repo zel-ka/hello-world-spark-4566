@@ -6,8 +6,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/useI18n";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import LoginDropdown from "@/components/LoginDropdown";
-import AboutAfyaSection from "@/components/sections/AboutAfyaSection";
-import FeaturesShowcaseSection from "@/components/sections/FeaturesShowcaseSection";
 import { ExpandableFeatureCard } from "@/components/landing/ExpandableFeatureCard";
 
 interface PhonePosition {
@@ -293,11 +291,31 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* About Afya Compass — Pinned scroll-driven bilingual showcase */}
-      <AboutAfyaSection />
-
-      {/* Features Showcase — Pinned scroll hijack with stacked cards & focus mode */}
-      <FeaturesShowcaseSection />
+      {/* Links to dedicated pages */}
+      <section className="relative py-16 sm:py-20 px-4 sm:px-6 z-10">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <Link to="/about" className="group block rounded-3xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center shadow-lg">
+                <Heart className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900">{t('overlay.about') || 'About Afya Compass'}</h3>
+            </div>
+            <p className="text-sm text-slate-600">Discover our story, mission and how Afya Compass guides your health journey.</p>
+            <span className="mt-4 inline-block text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">Learn more →</span>
+          </Link>
+          <Link to="/features" className="group block rounded-3xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-lg">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900">Powerful Features</h3>
+            </div>
+            <p className="text-sm text-slate-600">Real-time tracking, AI insights, smart alerts and secure data — all in one place.</p>
+            <span className="mt-4 inline-block text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">Explore features →</span>
+          </Link>
+        </div>
+      </section>
 
       {/* Modern Technology Section with full-width background */}
       <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 overflow-hidden">
