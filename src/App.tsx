@@ -8,6 +8,7 @@ import Landing from "@/pages/Landing";
 import Contact from "@/pages/Contact";
 import About from "@/pages/About";
 import Features from "@/pages/Features";
+import Shop from "@/pages/Shop";
 import Index from "@/pages/Index";
 import PatientDashboard from "@/pages/PatientDashboard";
 import GuestDashboard from "@/pages/GuestDashboard";

@@ -14,7 +14,7 @@ interface PhonePosition {
 }
 
 export default function Landing() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [phonePos, setPhonePos] = useState<PhonePosition>({ rotateX: 0, rotateY: 0 });
   const phoneContainerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef(0);
