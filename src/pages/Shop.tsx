@@ -228,17 +228,14 @@ export default function Shop() {
       {/* Hero */}
       <section className="relative px-4 sm:px-6 pt-8 sm:pt-14 pb-6">
         <div className="max-w-7xl mx-auto">
-          <div className="rounded-3xl bg-gradient-to-br from-primary via-primary to-primary/80 p-6 sm:p-10 text-white shadow-floating relative overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
-            <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-cyan-300/20 blur-3xl" />
+          <div className="rounded-3xl gradient-mesh p-6 sm:p-10 text-slate-900 shadow-floating relative overflow-hidden border border-white/60">
+            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-300/30 blur-3xl" />
+            <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-cyan-300/30 blur-3xl" />
             <div className="relative max-w-2xl">
-              <Badge className="bg-white/20 text-white hover:bg-white/30 border-0 mb-3">{isSw ? "Duka la Afya" : "Health Store"}</Badge>
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight">{isSw ? "Vifaa vya Kuboresha Afya Yako" : "Tools to Improve Your Health"}</h1>
-              <p className="mt-3 text-sm sm:text-base text-primary-foreground/90">{isSw ? "Vifaa vinavyopendekezwa kulingana na mwenendo wa afya yako." : "Curated tools recommended based on your health trends."}</p>
-              <div className="flex flex-wrap gap-4 mt-5 text-xs sm:text-sm">
-                <span className="inline-flex items-center gap-1.5"><Truck className="h-4 w-4" /> {isSw ? "Usafirishaji bure >200k" : "Free shipping >200k"}</span>
-                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> {isSw ? "Bidhaa halisi" : "Verified products"}</span>
-                <span className="inline-flex items-center gap-1.5"><Package className="h-4 w-4" /> {isSw ? "Utoaji haraka" : "Fast delivery"}</span>
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight text-slate-900">{isSw ? "Vifaa vya Kuboresha Afya Yako" : "Tools to Improve Your Health"}</h1>
+              <p className="mt-3 text-sm sm:text-base text-slate-700">{isSw ? "Vifaa vinavyopendekezwa kulingana na mwenendo wa afya yako." : "Curated tools recommended based on your health trends."}</p>
+              <div className="flex flex-wrap gap-4 mt-5 text-xs sm:text-sm text-slate-700">
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-blue-600" /> {isSw ? "Bidhaa halisi" : "Verified products"}</span>
               </div>
             </div>
           </div>
