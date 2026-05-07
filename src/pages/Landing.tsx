@@ -481,6 +481,21 @@ export default function Landing() {
               </ul>
             </div>
           </div>
+
+          {/* Our Expert */}
+          <div className="border-t border-white/40 pt-6 sm:pt-8 mb-6 sm:mb-8">
+            <div className="flex items-center gap-4 max-w-2xl mx-auto rounded-2xl border border-slate-200 bg-white/80 p-4 sm:p-5 shadow-soft">
+              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 text-white flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0">
+                <Stethoscope className="h-6 w-6 sm:h-7 sm:w-7" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] sm:text-xs font-bold text-blue-700 tracking-wider uppercase flex items-center gap-1.5"><Award className="w-3 h-3" />{t('landing.expert.heading')}</p>
+                <p className="text-sm sm:text-base font-black text-slate-900 truncate">{t('landing.expert.name')}</p>
+                <p className="text-xs text-slate-600 truncate">{t('landing.expert.credentials')} • {t('landing.expert.role')}</p>
+              </div>
+            </div>
+          </div>
+
           <div className="border-t border-white/40 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-slate-600">
             <p>{t('landing.copyright')}</p>
           </div>
