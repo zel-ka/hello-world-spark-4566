@@ -150,7 +150,7 @@ export default function AboutAfyaSection() {
       ref={sectionRef}
       className="relative bg-gradient-to-b from-white via-blue-50/40 to-white overflow-hidden"
       style={{ minHeight: "100vh" }}
-      aria-label="About Afya Compass"
+      aria-label="About Tathmini Afya"
     >
       <div className="relative h-screen flex items-center px-4 sm:px-8 lg:px-16">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
@@ -183,8 +183,8 @@ export default function AboutAfyaSection() {
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
               {isSw
-                ? "Afya Compass ni mfumo wa kisasa unaokusaidia kufuatilia, kuelewa na kuboresha afya yako kila siku — kwa lugha mbili: Kiswahili na English."
-                : "Afya Compass is a modern platform that helps you track, understand and improve your health every day — in two languages: Kiswahili and English."}
+                ? "Tathmini Afya ni mfumo wa kisasa unaokusaidia kufuatilia, kuelewa na kuboresha afya yako kila siku — kwa lugha mbili: Kiswahili na English."
+                : "Tathmini Afya is a modern platform that helps you track, understand and improve your health every day — in two languages: Kiswahili and English."}
             </p>
 
             {/* Feature bullets */}

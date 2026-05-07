@@ -471,7 +471,7 @@ function FeatureMockCard({ feature, isSw }: { feature: Feature; isSw: boolean })
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
             {isSw ? "Inasasishwa" : "Updating"}
           </div>
-          <span className="font-semibold text-blue-700">Afya Compass</span>
+          <span className="font-semibold text-blue-700">Tathmini Afya</span>
         </div>
       </div>
     </div>
