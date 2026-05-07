@@ -16,7 +16,7 @@ interface AuthFormProps {
 
 const INTERNAL_EMAIL_DOMAIN = "app.local";
 const usernameToEmail = (u: string) => `${u.trim().toLowerCase()}@${INTERNAL_EMAIL_DOMAIN}`;
-const isValidUsername = (u: string) => /^[a-zA-Z0-9_.-]{3,30}$/.test(u);
+const isValidUsername = (u: string) => /^[a-zA-Z0-9_.-]{2,30}$/.test(u);
 
 export default function AuthForm({
   t,
