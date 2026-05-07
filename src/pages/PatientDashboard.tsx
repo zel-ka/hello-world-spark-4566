@@ -51,7 +51,7 @@ export default function PatientDashboard() {
   const { data: history = [] } = useMedicalHistory(patientId);
   const { data: alertsData = [] } = useAlerts();
   const { data: healthEntries = [] } = useHealthEntries(patientId);
-  const [activeFeature, setActiveFeature] = useState<PatientFeature>("add-data");
+  const [activeFeature, setActiveFeature] = useState<PatientFeature>("summary");
   const [height, setHeight] = useState(170);
   const [age, setAge] = useState(32);
   const [manualSystolic, setManualSystolic] = useState(120);
