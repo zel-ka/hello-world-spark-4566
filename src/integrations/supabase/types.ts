@@ -348,6 +348,93 @@ export type Database = {
           },
         ]
       }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          order_id: string
+          product_id: string
+          quantity: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          order_id: string
+          product_id: string
+          quantity?: number
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          order_id?: string
+          product_id?: string
+          quantity?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          address: string
+          created_at: string
+          customer_name: string
+          id: string
+          notes: string | null
+          phone: string
+          shipping: number
+          status: string
+          subtotal: number
+          total: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          address?: string
+          created_at?: string
+          customer_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          shipping?: number
+          status?: string
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          customer_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string
+          shipping?: number
+          status?: string
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       patients: {
         Row: {
           age: number
@@ -402,6 +489,57 @@ export type Database = {
           sugar?: number | null
           updated_at?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          active: boolean
+          badge: string | null
+          category: string
+          created_at: string
+          desc_en: string
+          desc_sw: string
+          emoji: string
+          id: string
+          name_en: string
+          name_sw: string
+          price: number
+          rating: number
+          stock: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          badge?: string | null
+          category: string
+          created_at?: string
+          desc_en?: string
+          desc_sw?: string
+          emoji?: string
+          id?: string
+          name_en: string
+          name_sw: string
+          price?: number
+          rating?: number
+          stock?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          badge?: string | null
+          category?: string
+          created_at?: string
+          desc_en?: string
+          desc_sw?: string
+          emoji?: string
+          id?: string
+          name_en?: string
+          name_sw?: string
+          price?: number
+          rating?: number
+          stock?: number
+          updated_at?: string
         }
         Relationships: []
       }
