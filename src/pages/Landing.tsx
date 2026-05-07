@@ -421,36 +421,69 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Lifestyle Tools Section */}
+      {/* Discover Recommended Health Tools — Shop CTA */}
       <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 scroll-reveal delay-100">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 backdrop-blur-sm border border-emerald-200 mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
-              <span className="text-[10px] sm:text-xs font-semibold text-emerald-700 tracking-wider uppercase">{t('landing.tools.smartNote')}</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-3">{t('landing.tools.heading')}</h2>
-            <p className="text-sm sm:text-base text-slate-600">{t('landing.tools.subheading')}</p>
-            <p className="text-xs sm:text-sm text-slate-500 mt-2">{t('landing.tools.intro')}</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
-            {[
-              { icon: Dumbbell, title: t('landing.tools.exerciseTitle'), desc: t('landing.tools.exerciseDesc'), tone: "from-blue-500 to-sky-500" },
-              { icon: HeartPulse, title: t('landing.tools.healthTitle'), desc: t('landing.tools.healthDesc'), tone: "from-cyan-500 to-blue-600" },
-              { icon: Moon, title: t('landing.tools.sleepTitle'), desc: t('landing.tools.sleepDesc'), tone: "from-indigo-500 to-purple-500" },
-              { icon: Brain, title: t('landing.tools.stressTitle'), desc: t('landing.tools.stressDesc'), tone: "from-pink-500 to-rose-500" },
-              { icon: Wind, title: t('landing.tools.airTitle'), desc: t('landing.tools.airDesc'), tone: "from-emerald-500 to-teal-500" },
-              { icon: ClipboardList, title: t('landing.tools.productivityTitle'), desc: t('landing.tools.productivityDesc'), tone: "from-amber-500 to-orange-500" },
-            ].map((item, i) => (
-              <div key={i} className="rounded-2xl border border-slate-200/70 bg-white/95 p-4 shadow-floating hover:-translate-y-1 hover:shadow-glow transition-all">
-                <div className={`inline-flex h-10 w-10 rounded-xl bg-gradient-to-br ${item.tone} text-white items-center justify-center shadow-lg shadow-blue-500/20 mb-3`}>
-                  <item.icon className="h-5 w-5" />
-                </div>
-                <p className="text-sm font-bold text-slate-900">{item.title}</p>
-                <p className="text-xs text-slate-600 mt-1">{item.desc}</p>
+        <div className="max-w-5xl mx-auto">
+          <Link to="/shop" className="group block">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 p-6 sm:p-10 lg:p-12 shadow-floating hover:shadow-glow hover:-translate-y-1 transition-all duration-500">
+              {/* Decorative blobs */}
+              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/15 blur-3xl" />
+              <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-cyan-300/25 blur-3xl" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_60%)]" />
+              {/* Shine sweep */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
+                <div className="absolute -inset-y-10 -left-1/3 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-white/40 to-transparent blur-md opacity-0 group-hover:opacity-100 group-hover:translate-x-[400%] transition-all duration-1000 ease-out" />
               </div>
-            ))}
-          </div>
+
+              <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
+                <div className="text-white space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase">{t('landing.tools.smartNote')}</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight">{t('landing.tools.heading')}</h2>
+                  <p className="text-sm sm:text-base text-blue-50">{t('landing.tools.intro')}</p>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {[
+                      { icon: Dumbbell, label: t('landing.tools.exerciseTitle') },
+                      { icon: HeartPulse, label: t('landing.tools.healthTitle') },
+                      { icon: Moon, label: t('landing.tools.sleepTitle') },
+                      { icon: Brain, label: t('landing.tools.stressTitle') },
+                      { icon: Wind, label: t('landing.tools.airTitle') },
+                      { icon: ClipboardList, label: t('landing.tools.productivityTitle') },
+                    ].map((c, i) => (
+                      <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 text-[11px] sm:text-xs font-semibold text-white">
+                        <c.icon className="h-3.5 w-3.5" />{c.label}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 pt-3 text-xs sm:text-sm text-blue-50">
+                    <span className="inline-flex items-center gap-1.5"><Shield className="h-4 w-4" />{t('common.appName')}</span>
+                  </div>
+
+                  <div className="pt-3">
+                    <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-white text-blue-700 font-bold shadow-lg group-hover:shadow-xl group-hover:translate-x-1 transition-all">
+                      {t('landing.tools.subheading')} →
+                    </span>
+                  </div>
+                </div>
+
+                {/* Visual cluster */}
+                <div className="relative hidden lg:block w-64 h-64">
+                  <div className="absolute inset-0 rounded-3xl bg-white/10 backdrop-blur-md border border-white/30" />
+                  <div className="absolute top-6 left-6 h-20 w-20 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-4xl shadow-xl rotate-[-8deg]">🩺</div>
+                  <div className="absolute top-4 right-6 h-16 w-16 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-3xl shadow-xl rotate-[10deg]">🏋️</div>
+                  <div className="absolute bottom-8 left-10 h-16 w-16 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-3xl shadow-xl rotate-[6deg]">⚖️</div>
+                  <div className="absolute bottom-6 right-4 h-20 w-20 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-4xl shadow-xl rotate-[-4deg]">🌬️</div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center shadow-2xl">
+                    <ShoppingBag className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
