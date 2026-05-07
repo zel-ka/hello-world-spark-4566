@@ -49,7 +49,7 @@ function AppRoutes() {
   const isDoctor = roles.includes("doctor");
   const isPatient = roles.includes("patient");
 
-  const defaultPath = isAdmin || isDoctor ? "/" : isPatient ? "/patient" : "/patient";
+  const defaultPath = "/patient";
 
   return (
     <Routes>
