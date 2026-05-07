@@ -53,34 +53,27 @@ function AppRoutes() {
 
   return (
     <Routes>
-      {/* Main dashboard for Doctor and Admin */}
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute allowedRoles={["doctor", "admin"]}>
-            <Index />
-          </ProtectedRoute>
-        }
-      />
-      
       {/* Public pages for all users */}
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
       <Route path="/features" element={<Features />} />
       <Route path="/shop" element={<Shop />} />
 
-      {/* Patient dashboard */}
+      {/* Patient dashboard - default for everyone */}
+      <Route path="/patient" element={<PatientDashboard />} />
+
+      {/* Admin/Doctor dashboard kept available but not default */}
       <Route
-        path="/patient"
+        path="/admin"
         element={
-          <ProtectedRoute allowedRoles={["patient"]}>
-            <PatientDashboard />
+          <ProtectedRoute allowedRoles={["doctor", "admin"]}>
+            <Index />
           </ProtectedRoute>
         }
       />
 
-      {/* Catch-all route - improved patient default */}
-      <Route path="/*" element={<Navigate to={defaultPath} replace />} />
+      {/* Catch-all - all logged in users land on patient dashboard */}
+      <Route path="/*" element={<Navigate to="/patient" replace />} />
     </Routes>
   );
 }
