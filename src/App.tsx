@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import Landing from "@/pages/Landing";
 import Contact from "@/pages/Contact";
+import About from "@/pages/About";
+import Features from "@/pages/Features";
 import Index from "@/pages/Index";
 import PatientDashboard from "@/pages/PatientDashboard";
 import GuestDashboard from "@/pages/GuestDashboard";
