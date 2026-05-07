@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Search, ShoppingCart, Plus, Minus, Trash2, Heart, Star, Package, Truck, ShieldCheck, Dumbbell, HeartPulse, Moon, Brain, Wind, ClipboardList, X, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Search, ShoppingCart, Plus, Minus, Trash2, Heart, Star, Package, Truck, ShieldCheck, Dumbbell, HeartPulse, Moon, Brain, Wind, ClipboardList, X, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { useI18n } from "@/hooks/useI18n";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 
 type Product = {
   id: string;
@@ -16,13 +18,13 @@ type Product = {
   nameSw: string;
   descEn: string;
   descSw: string;
-  price: number; // TZS
+  price: number;
   rating: number;
-  badge?: "best" | "new" | "deal";
+  badge?: "best" | "new" | "deal" | null;
   emoji: string;
 };
 
-const PRODUCTS: Product[] = [
+const _UNUSED_PRODUCTS: Product[] = [
   // Mazoezi
   { id: "p1", category: "exercise", nameEn: "Skipping Rope Pro", nameSw: "Kamba ya Kurukia", descEn: "Adjustable speed rope for cardio.", descSw: "Kamba ya kurekebisha kwa mazoezi ya moyo.", price: 18000, rating: 4.7, badge: "best", emoji: "🪢" },
   { id: "p2", category: "exercise", nameEn: "Dumbbells Set 10kg", nameSw: "Dumbbells Seti 10kg", descEn: "Pair of rubber dumbbells.", descSw: "Jozi ya dumbbells za mpira.", price: 95000, rating: 4.8, emoji: "🏋️" },
