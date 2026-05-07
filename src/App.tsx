@@ -35,6 +35,7 @@ function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/features" element={<Features />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/try" element={<GuestDashboard />} />
         <Route path="/login" element={<Navigate to="/" replace />} />
         <Route path="/signup" element={<Navigate to="/" replace />} />
@@ -66,6 +67,7 @@ function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
       <Route path="/features" element={<Features />} />
+      <Route path="/shop" element={<Shop />} />
 
       {/* Patient dashboard */}
       <Route
