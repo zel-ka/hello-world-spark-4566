@@ -247,42 +247,25 @@ export default function Landing() {
               <div className="absolute inset-x-10 top-0 h-64 rounded-[1.8rem] bg-gradient-to-br from-blue-200/60 via-white/15 to-transparent blur-3xl opacity-90" />
               <div className="absolute -bottom-12 left-8 w-60 h-60 rounded-full bg-cyan-300/25 blur-3xl" />
               <div className="absolute -top-8 right-12 w-52 h-52 rounded-full bg-slate-900/8 blur-3xl" />
-              <div className="relative glass-secondary rounded-[2rem] border border-white/30 bg-white/80 p-5 sm:p-6 lg:p-8">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="relative glass-secondary rounded-[2rem] border border-white/30 bg-white/80 p-3 sm:p-6 lg:p-8">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   {[
                     {
-                      icon: Sparkles,
-                      title: t('overlay.features') || 'Powerful Features',
-                      desc: t('landing.featuresCardDesc') || 'Real-time tracking, AI insights, smart alerts and secure data.',
-                      cta: t('common.learnMore') || 'Explore features →',
+                      title: t('landing.features'),
                       path: "/features",
-                      color: "from-cyan-500 to-blue-600",
                     },
                     {
-                      icon: Heart,
-                      title: t('overlay.about') || 'About Afya Compass',
-                      desc: t('landing.aboutCardDesc') || 'Discover our story, mission and how we guide your health journey.',
-                      cta: t('common.learnMore') || 'Learn more →',
+                      title: t('landing.about'),
                       path: "/about",
-                      color: "from-blue-500 to-blue-700",
                     },
                     {
-                      icon: Stethoscope,
-                      title: t('overlay.contact') || 'Contact Us',
-                      desc: t('landing.contactCardDesc') || 'Get in touch with our team — we are here to help you stay healthy.',
-                      cta: t('common.getInTouch') || 'Reach out →',
+                      title: t('landing.contact'),
                       path: "/contact",
-                      color: "from-emerald-500 to-teal-600",
                     },
                   ].map((feature, i) => (
                     <Link key={i} to={feature.path} className="group block">
-                      <div className="h-full w-full rounded-3xl border border-slate-200/80 bg-white/95 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-5 sm:p-6 text-left active:scale-[0.98]">
-                        <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${feature.color} text-white shadow-lg shadow-slate-900/10 transition-all group-hover:shadow-xl`}>
-                          <feature.icon className="h-6 w-6" />
-                        </div>
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-tight mb-2">{feature.title}</h3>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{feature.desc}</p>
-                        <span className="mt-3 inline-block text-xs sm:text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">{feature.cta}</span>
+                      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200/80 bg-white/95 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-2 sm:p-4 text-center active:scale-[0.98]">
+                        <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight line-clamp-2">{feature.title}</h3>
                       </div>
                     </Link>
                   ))}
@@ -293,28 +276,47 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Links to dedicated pages */}
-      <section className="relative py-16 sm:py-20 px-4 sm:px-6 z-10">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <Link to="/about" className="group block rounded-3xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center shadow-lg">
-                <Heart className="h-5 w-5" />
+      {/* Discover Recommended Health Tools — Shop CTA */}
+      <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 scroll-reveal delay-100">
+        <div className="max-w-5xl mx-auto">
+          <Link to="/shop" className="group block space-y-4">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-100 via-sky-100 to-cyan-100 p-6 shadow-elevated transition-all duration-500 hover:-translate-y-1">
+              <div className="relative rounded-[1.75rem] border border-white/70 bg-white/80 p-6">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">{t('landing.tools.heading')}</h2>
+                <p className="mt-3 text-sm sm:text-base text-slate-700">{t('landing.tools.intro')}</p>
               </div>
-              <h3 className="text-lg sm:text-xl font-black text-slate-900">{t('overlay.about') || 'About Afya Compass'}</h3>
             </div>
-            <p className="text-sm text-slate-600">Discover our story, mission and how Afya Compass guides your health journey.</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">Learn more →</span>
-          </Link>
-          <Link to="/features" className="group block rounded-3xl border border-slate-200/80 bg-white/95 p-6 sm:p-8 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-lg">
-                <Sparkles className="h-5 w-5" />
+
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-100 via-sky-100 to-cyan-100 p-6 shadow-elevated transition-all duration-500 hover:-translate-y-1">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
+                <div className="space-y-4">
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900">{t('landing.tools.subheading')}</h3>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {[
+                      { icon: Dumbbell, label: t('landing.tools.exerciseTitle') },
+                      { icon: HeartPulse, label: t('landing.tools.healthTitle') },
+                      { icon: Moon, label: t('landing.tools.sleepTitle') },
+                      { icon: Brain, label: t('landing.tools.stressTitle') },
+                      { icon: Wind, label: t('landing.tools.airTitle') },
+                      { icon: ClipboardList, label: t('landing.tools.productivityTitle') },
+                    ].map((c, i) => (
+                      <span key={i} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/90 border border-slate-200 text-slate-900 text-xs sm:text-sm font-semibold">
+                        <c.icon className="h-3.5 w-3.5 text-slate-700" />{c.label}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="pt-3">
+                    <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-slate-900 text-white font-bold shadow-lg transition-all">
+                      {t('landing.tools.subheading')} →
+                    </span>
+                  </div>
+                </div>
+
+                <div className="relative hidden lg:flex h-64 w-64 items-center justify-center rounded-[2rem] border border-white/70 bg-white/80 shadow-soft">
+                  <ShoppingBag className="h-16 w-16 text-sky-700" />
+                </div>
               </div>
-              <h3 className="text-lg sm:text-xl font-black text-slate-900">Powerful Features</h3>
             </div>
-            <p className="text-sm text-slate-600">Real-time tracking, AI insights, smart alerts and secure data — all in one place.</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-blue-700 group-hover:translate-x-1 transition-transform">Explore features →</span>
           </Link>
         </div>
       </section>
@@ -420,72 +422,6 @@ export default function Landing() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Discover Recommended Health Tools — Shop CTA */}
-      <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 scroll-reveal delay-100">
-        <div className="max-w-5xl mx-auto">
-          <Link to="/shop" className="group block">
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 p-6 sm:p-10 lg:p-12 shadow-floating hover:shadow-glow hover:-translate-y-1 transition-all duration-500">
-              {/* Decorative blobs */}
-              <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/15 blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-cyan-300/25 blur-3xl" />
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_60%)]" />
-              {/* Shine sweep */}
-              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-                <div className="absolute -inset-y-10 -left-1/3 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-white/40 to-transparent blur-md opacity-0 group-hover:opacity-100 group-hover:translate-x-[400%] transition-all duration-1000 ease-out" />
-              </div>
-
-              <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
-                <div className="text-white space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase">{t('landing.tools.smartNote')}</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight">{t('landing.tools.heading')}</h2>
-                  <p className="text-sm sm:text-base text-blue-50">{t('landing.tools.intro')}</p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {[
-                      { icon: Dumbbell, label: t('landing.tools.exerciseTitle') },
-                      { icon: HeartPulse, label: t('landing.tools.healthTitle') },
-                      { icon: Moon, label: t('landing.tools.sleepTitle') },
-                      { icon: Brain, label: t('landing.tools.stressTitle') },
-                      { icon: Wind, label: t('landing.tools.airTitle') },
-                      { icon: ClipboardList, label: t('landing.tools.productivityTitle') },
-                    ].map((c, i) => (
-                      <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 text-[11px] sm:text-xs font-semibold text-white">
-                        <c.icon className="h-3.5 w-3.5" />{c.label}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-4 pt-3 text-xs sm:text-sm text-blue-50">
-                    <span className="inline-flex items-center gap-1.5"><Shield className="h-4 w-4" />{t('common.appName')}</span>
-                  </div>
-
-                  <div className="pt-3">
-                    <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-white text-blue-700 font-bold shadow-lg group-hover:shadow-xl group-hover:translate-x-1 transition-all">
-                      {t('landing.tools.subheading')} →
-                    </span>
-                  </div>
-                </div>
-
-                {/* Visual cluster */}
-                <div className="relative hidden lg:block w-64 h-64">
-                  <div className="absolute inset-0 rounded-3xl bg-white/10 backdrop-blur-md border border-white/30" />
-                  <div className="absolute top-6 left-6 h-20 w-20 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-4xl shadow-xl rotate-[-8deg]">🩺</div>
-                  <div className="absolute top-4 right-6 h-16 w-16 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-3xl shadow-xl rotate-[10deg]">🏋️</div>
-                  <div className="absolute bottom-8 left-10 h-16 w-16 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-3xl shadow-xl rotate-[6deg]">⚖️</div>
-                  <div className="absolute bottom-6 right-4 h-20 w-20 rounded-2xl bg-white text-blue-700 flex items-center justify-center text-4xl shadow-xl rotate-[-4deg]">🌬️</div>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center shadow-2xl">
-                    <ShoppingBag className="h-6 w-6 text-white" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
         </div>
       </section>
 
