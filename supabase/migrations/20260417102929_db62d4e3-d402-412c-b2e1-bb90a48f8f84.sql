@@ -1,0 +1,2 @@
+INSERT INTO public.user_roles (user_id, role) VALUES ('d03dd9be-2d34-476e-9da1-595a6791449d', 'admin'::public.app_role) ON CONFLICT (user_id, role) DO NOTHING;
+INSERT INTO public.profiles (user_id, full_name) VALUES ('d03dd9be-2d34-476e-9da1-595a6791449d', 'Ayoub Zela') ON CONFLICT (user_id) DO UPDATE SET full_name = EXCLUDED.full_name;
