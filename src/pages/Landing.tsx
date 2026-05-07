@@ -556,7 +556,8 @@ export default function Landing() {
             <div>
               <p className="text-xs sm:text-sm font-semibold text-slate-900 mb-3 sm:mb-4">{t('landing.product')}</p>
               <ul className="space-y-2 text-xs sm:text-sm text-slate-600">
-                <li><a href="#" className="hover:text-blue-600 transition">{t('landing.features')}</a></li>
+                <li><Link to="/features" className="hover:text-blue-600 transition">{t('landing.features')}</Link></li>
+                <li><Link to="/shop" className="hover:text-blue-600 transition">{lang === 'sw' ? 'Duka' : 'Shop'}</Link></li>
                 <li><a href="#" className="hover:text-blue-600 transition">{t('landing.pricing')}</a></li>
                 <li><a href="#" className="hover:text-blue-600 transition">{t('landing.security')}</a></li>
               </ul>
