@@ -124,7 +124,7 @@ export default function AuthForm({
               onChange={(e) => setUsername(e.target.value)}
               className="pl-10 h-11 rounded-xl text-sm border-2 focus:border-blue-500"
               required
-              minLength={3}
+              minLength={2}
               maxLength={30}
               disabled={loading}
             />
@@ -139,7 +139,7 @@ export default function AuthForm({
               onChange={(e) => setPassword(e.target.value)}
               className="pl-10 h-11 rounded-xl text-sm border-2 focus:border-blue-500"
               required
-              minLength={6}
+              minLength={4}
               disabled={loading}
             />
           </div>
