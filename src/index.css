@@ -133,9 +133,9 @@
     left: 0;
   }
 
-  .glass-secondary > *,
-  .frosted-glass > *,
-  .premium-card > * {
+  .glass-secondary > :where(*),
+  .frosted-glass > :where(*),
+  .premium-card > :where(*) {
     position: relative;
     z-index: 1;
   }
