@@ -39,7 +39,7 @@ export default function AuthForm({
       toast.error(t('auth.usernameInvalid'));
       return;
     }
-    if (password.length < 6) {
+    if (password.length < 4) {
       toast.error(t('auth.passwordMin'));
       return;
     }
