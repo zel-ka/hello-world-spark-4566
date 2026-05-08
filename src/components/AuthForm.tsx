@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Lock, User, ArrowRight, AtSign } from "lucide-react";
+import { Lock, User, ArrowRight, Phone } from "lucide-react";
 import LoginSuccess from "@/components/LoginSuccess";
 
 interface AuthFormProps {
@@ -14,9 +14,19 @@ interface AuthFormProps {
   className?: string;
 }
 
-const INTERNAL_EMAIL_DOMAIN = "app.local";
-const usernameToEmail = (u: string) => `${u.trim().toLowerCase()}@${INTERNAL_EMAIL_DOMAIN}`;
-const isValidUsername = (u: string) => /^[a-zA-Z0-9_.-]{2,30}$/.test(u);
+const INTERNAL_EMAIL_DOMAIN = "phone.local";
+// Normalize a Tanzanian phone: keep only digits; if starts with 0, convert to 255 prefix
+const normalizePhone = (raw: string) => {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("0")) return "255" + digits.slice(1);
+  if (digits.startsWith("255")) return digits;
+  return digits;
+};
+const phoneToEmail = (p: string) => `${normalizePhone(p)}@${INTERNAL_EMAIL_DOMAIN}`;
+const isValidPhone = (p: string) => {
+  const d = normalizePhone(p);
+  return /^\d{9,15}$/.test(d);
+};
 
 export default function AuthForm({
   t,
@@ -26,7 +36,7 @@ export default function AuthForm({
   className = "",
 }: AuthFormProps) {
   const [mode, setMode] = useState<"login" | "signup">(initialMode);
-  const [username, setUsername] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,7 +45,7 @@ export default function AuthForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isValidUsername(username)) {
+    if (!isValidPhone(phone)) {
       toast.error(t('auth.usernameInvalid'));
       return;
     }
@@ -45,7 +55,8 @@ export default function AuthForm({
     }
 
     setLoading(true);
-    const email = usernameToEmail(username);
+    const email = phoneToEmail(phone);
+    const normalized = normalizePhone(phone);
 
     try {
       if (mode === "signup") {
@@ -53,7 +64,7 @@ export default function AuthForm({
           email,
           password,
           options: {
-            data: { full_name: fullName || username, username },
+            data: { full_name: fullName || normalized, phone: normalized, username: normalized },
             emailRedirectTo: window.location.origin,
           },
         });
@@ -62,7 +73,6 @@ export default function AuthForm({
         if (data?.user?.identities?.length === 0) {
           toast.error(t('auth.usernameTaken'));
         } else {
-          // Auto sign-in (auto-confirm enabled)
           await supabase.auth.signInWithPassword({ email, password });
           setShowSuccess(true);
         }
@@ -83,7 +93,7 @@ export default function AuthForm({
   };
 
   const resetForm = () => {
-    setUsername("");
+    setPhone("");
     setPassword("");
     setFullName("");
     if (onModeChange) onModeChange("login");
