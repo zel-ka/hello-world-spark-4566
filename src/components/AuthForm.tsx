@@ -125,17 +125,16 @@ export default function AuthForm({
             </div>
           )}
           <div className="relative">
-            <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              type="text"
-              autoComplete="username"
-              placeholder={t('auth.username')}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              placeholder={t('auth.phone')}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="pl-10 h-11 rounded-xl text-sm border-2 focus:border-blue-500"
               required
-              minLength={2}
-              maxLength={30}
               disabled={loading}
             />
           </div>
