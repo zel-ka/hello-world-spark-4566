@@ -26,7 +26,7 @@ async function loadTranslations(lang: Language): Promise<Translation> {
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>('en');
+  const [lang, setLangState] = useState<Language>('sw');
   const [translations, setTranslations] = useState<Translation>({});
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +38,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   // Load saved language preference
   useEffect(() => {
     const savedLang = localStorage.getItem('lang') as Language | null;
-    const initialLang = (savedLang === 'en' || savedLang === 'sw') ? savedLang : 'en';
+    const initialLang = (savedLang === 'en' || savedLang === 'sw') ? savedLang : 'sw';
     setLangState(initialLang);
   }, []);
 
