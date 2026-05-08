@@ -179,8 +179,8 @@ export default function PatientDashboard() {
       <div ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar pb-24 safe-area-bottom">
         
         {/* Header with glassmorphism and animations */}
-        <div className="relative overflow-hidden bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md border-b border-white/20 px-5 pt-8 pb-3">
-          <div className="pointer-events-none absolute inset-0 bg-fixed bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.18),_transparent_20%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.14),_transparent_25%)] opacity-90" />
+        <div className="relative overflow-hidden bg-gradient-to-b from-[rgba(59,130,246,0.35)] via-[rgba(59,130,246,0.22)] to-[rgba(59,130,246,0.10)] backdrop-blur-md border-b border-primary/30 px-5 pt-8 pb-3">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.55),_transparent_55%),radial-gradient(circle_at_top_right,_rgba(96,165,250,0.45),_transparent_55%),radial-gradient(circle_at_bottom_center,_rgba(59,130,246,0.30),_transparent_60%)] opacity-100" />
           <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-primary/15 blur-3xl animate-float-slow" />
           <div className="relative z-10">
             <div className="flex items-center justify-between">
