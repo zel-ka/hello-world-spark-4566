@@ -23,7 +23,7 @@ import { AssessmentsHub } from "@/components/health/AssessmentsHub";
 import { CalorieCalculator } from "@/components/health/CalorieCalculator";
 import { InsightsTrends } from "@/components/health/InsightsTrends";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { HeartPulse, LogOut, LayoutDashboard, Calculator, BarChart, Activity, ArrowRight, X, PlusCircle, AlertCircle, ClipboardList } from "lucide-react";
+import { HeartPulse, LogOut, LayoutDashboard, Calculator, BarChart, Activity, ArrowRight, X, PlusCircle, AlertCircle, ClipboardList, Stethoscope, Salad, LineChart as LineChartIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, BarChart as RechartsBarChart, Bar, ResponsiveContainer, Legend } from "recharts";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
@@ -288,49 +288,50 @@ export default function PatientDashboard() {
             );
           })()}
 
-          {/* Action Buttons with premium gradients and effects */}
+          {/* Action Buttons - simplified for performance */}
           <div className="grid gap-4 sm:grid-cols-2">
-            <button type="button" onClick={() => handlePanelToggle("add-data")} className="group scroll-fade-in relative rounded-3xl frosted-glass border border-primary/25 md:border-primary/20 bg-card md:bg-gradient-to-br md:from-card/80 md:via-card/70 md:to-card/60 md:backdrop-blur-md p-4 text-left transition-all duration-500 ease-out shadow-soft md:shadow-sm md:hover:-translate-y-1.5 md:hover:scale-[1.03] md:hover:border-primary/40 md:hover:shadow-elevated press-zoom overflow-hidden">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/15 via-primary/5 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </div>
-              <div className="relative z-10">
-                <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-500">{t('patient.addDataTitle')}</p>
-                <p className="mt-1 text-xs text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-500">{t('patient.addDataDesc')}</p>
-              </div>
-            </button>
-            <button type="button" onClick={() => handlePanelToggle("assessments")} className="group scroll-fade-in relative rounded-3xl frosted-glass border border-primary/25 md:border-primary/20 bg-card md:bg-gradient-to-br md:from-card/80 md:via-card/70 md:to-card/60 md:backdrop-blur-md p-4 text-left transition-all duration-500 ease-out shadow-soft md:shadow-sm md:hover:-translate-y-1.5 md:hover:scale-[1.03] md:hover:border-primary/40 md:hover:shadow-elevated press-zoom overflow-hidden" style={{ animationDelay: "50ms" }}>
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-success/15 via-primary/5 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </div>
-              <div className="relative z-10 flex items-start gap-2">
-                <ClipboardList className="h-4 w-4 text-success mt-0.5 shrink-0" />
-                <div>
-                  <p className="text-sm font-semibold text-foreground group-hover:text-success transition-colors duration-500">{t('patient.assessmentsTitle')}</p>
-                  <p className="mt-1 text-xs text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-500">{t('patient.assessmentsDesc')}</p>
+            <button type="button" onClick={() => handlePanelToggle("add-data")} className="group scroll-fade-in relative rounded-3xl border border-primary/25 bg-card p-4 text-left shadow-soft transition-colors hover:border-primary/40 press-zoom">
+              <div className="flex items-start gap-3">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Stethoscope className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t('patient.addDataTitle')}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t('patient.addDataDesc')}</p>
                 </div>
               </div>
             </button>
-            <button type="button" onClick={() => handlePanelToggle("insights")} className="group scroll-fade-in relative rounded-3xl frosted-glass border border-primary/25 md:border-primary/20 bg-card md:bg-gradient-to-br md:from-card/80 md:via-card/70 md:to-card/60 md:backdrop-blur-md p-4 text-left transition-all duration-500 ease-out shadow-soft md:shadow-sm md:hover:-translate-y-1.5 md:hover:scale-[1.03] md:hover:border-primary/40 md:hover:shadow-elevated press-zoom overflow-hidden" style={{ animationDelay: "100ms" }}>
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/15 via-primary/5 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </div>
-              <div className="relative z-10">
-                <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-500">{t('patient.insightsTitle')}</p>
-                <p className="mt-1 text-xs text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-500">{t('patient.insightsDesc')}</p>
+            <button type="button" onClick={() => handlePanelToggle("assessments")} className="group scroll-fade-in relative rounded-3xl border border-primary/25 bg-card p-4 text-left shadow-soft transition-colors hover:border-primary/40 press-zoom" style={{ animationDelay: "50ms" }}>
+              <div className="flex items-start gap-3">
+                <div className="h-10 w-10 rounded-xl bg-success/10 text-success flex items-center justify-center shrink-0">
+                  <ClipboardList className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground group-hover:text-success transition-colors">{t('patient.assessmentsTitle')}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t('patient.assessmentsDesc')}</p>
+                </div>
               </div>
             </button>
-            <button type="button" onClick={() => handlePanelToggle("calculators")} className="group scroll-fade-in relative rounded-3xl frosted-glass border border-primary/25 md:border-primary/20 bg-card md:bg-gradient-to-br md:from-card/80 md:via-card/70 md:to-card/60 md:backdrop-blur-md p-4 text-left transition-all duration-500 ease-out shadow-soft md:shadow-sm md:hover:-translate-y-1.5 md:hover:scale-[1.03] md:hover:border-primary/40 md:hover:shadow-elevated press-zoom overflow-hidden" style={{ animationDelay: "200ms" }}>
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/15 via-primary/5 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-40 transition-opacity duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            <button type="button" onClick={() => handlePanelToggle("insights")} className="group scroll-fade-in relative rounded-3xl border border-primary/25 bg-card p-4 text-left shadow-soft transition-colors hover:border-primary/40 press-zoom" style={{ animationDelay: "100ms" }}>
+              <div className="flex items-start gap-3">
+                <div className="h-10 w-10 rounded-xl bg-info/10 text-info flex items-center justify-center shrink-0">
+                  <LineChartIcon className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t('patient.insightsTitle')}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t('patient.insightsDesc')}</p>
+                </div>
               </div>
-              <div className="relative z-10">
-                <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors duration-500">{t('patient.toolsTitle')}</p>
-                <p className="mt-1 text-xs text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-500">{t('patient.toolsDesc')}</p>
+            </button>
+            <button type="button" onClick={() => handlePanelToggle("calculators")} className="group scroll-fade-in relative rounded-3xl border border-primary/25 bg-card p-4 text-left shadow-soft transition-colors hover:border-primary/40 press-zoom" style={{ animationDelay: "150ms" }}>
+              <div className="flex items-start gap-3">
+                <div className="h-10 w-10 rounded-xl bg-warning/10 text-warning flex items-center justify-center shrink-0">
+                  <Salad className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">{t('patient.toolsTitle')}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t('patient.toolsDesc')}</p>
+                </div>
               </div>
             </button>
           </div>
@@ -457,14 +458,7 @@ export default function PatientDashboard() {
                     initialHeight={height}
                     initialAge={age}
                   />
-                  <div className="grid gap-5 lg:grid-cols-3">
-                     <CalculatorCard title={t('patient.bmi')} value={`${bmiValue}`} status={translateStatusLabel(bmiCategory, t)}
-                      description={t('patient.bmiDesc')} tone={bmiCategory === "Normal" ? "success" : "warning"}>
-                       <div className="grid gap-3 w-full">
-                         <label className="text-sm text-muted-foreground">{t('patient.height')}</label>
-                         <Input type="number" value={height} min={100} max={220} onChange={(e) => setHeight(Number(e.target.value))} />
-                      </div>
-                    </CalculatorCard>
+                  <div className="grid gap-5 lg:grid-cols-2">
                     <CalculatorCard title={t('patient.bpStatusTitle')} value={`${manualSystolic}/${manualDiastolic}`} status={translateStatusLabel(bpStatus, t)}
                       description={t('patient.bpStatusDesc')} tone={bpStatus === "Normal" ? "success" : bpStatus === "Elevated" ? "warning" : "danger"}>
                        <div className="grid gap-3 w-full">
