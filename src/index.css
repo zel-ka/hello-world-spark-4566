@@ -88,49 +88,27 @@
   .premium-card {
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(22px) saturate(200%);
-    -webkit-backdrop-filter: blur(22px) saturate(200%);
     background:
       linear-gradient(90deg,
-        hsla(204, 94%, 86%, 0.50) 0%,
-        hsla(204, 94%, 90%, 0.32) 30%,
+        hsla(204, 94%, 86%, 0.40) 0%,
+        hsla(204, 94%, 90%, 0.22) 30%,
         hsla(0, 0%, 100%, 0.55) 45%,
         hsla(0, 0%, 100%, 0.55) 55%,
-        hsla(204, 94%, 90%, 0.32) 70%,
-        hsla(204, 94%, 86%, 0.50) 100%),
+        hsla(204, 94%, 90%, 0.22) 70%,
+        hsla(204, 94%, 86%, 0.40) 100%),
       hsla(0, 0%, 100%, 0.92);
     border: 1px solid rgba(56, 189, 248, 0.28);
-    box-shadow: 0 28px 84px rgba(56, 189, 248, 0.16), 0 10px 24px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 32px rgba(56, 189, 248, 0.10), 0 4px 10px rgba(15, 23, 42, 0.05);
   }
 
-  .glass-secondary::before,
-  .glass-secondary::after,
-  .frosted-glass::before,
-  .frosted-glass::after,
-  .premium-card::before,
-  .premium-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 7.5rem;
-    pointer-events: none;
-    background: linear-gradient(90deg, rgba(59, 130, 246, 0.42) 0%, rgba(255, 255, 255, 0.72) 35%, transparent 78%);
-    filter: blur(26px);
-  }
-
-  .glass-secondary::after,
-  .frosted-glass::after,
-  .premium-card::after {
-    right: 0;
-    left: auto;
-    transform: scaleX(-1);
-  }
-
-  .glass-secondary::before,
-  .frosted-glass::before,
-  .premium-card::before {
-    left: 0;
+  /* Apply expensive backdrop-filter only on larger screens (desktop) */
+  @media (min-width: 768px) {
+    .glass-secondary,
+    .frosted-glass,
+    .premium-card {
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+    }
   }
 
   .glass-secondary > :where(*),
