@@ -616,14 +616,14 @@
 "activity.active": "Mtaratibu", "activity.moderate": "Wastani", "activity.sedentary": "Mdogo"
 },
 "cancer": {
-"title": "Mtindo wa Maisha", "subtitle": "Vigezo vya mtindo wa maisha",
-"tobacco": "Tumia tumbaku?",
-"alcohol": "Unakunywa pombe?",
-"processed": "Unakula nyama iliyochakatwa (sausage, bacon)?",
-"sun": "Je, unalinda ngozi yako kutokana na jua?",
+"title": "Tathmini ya hatari ya saratani", "subtitle": "Vigezo vya mtindo wa maisha vinavyohusiana na saratani",
+"tobacco": "Je, unatumia tumbaku (sigara, ugoro)?",
+"alcohol": "Je, unakunywa pombe?",
+"processed": "Je, unakula nyama iliyochakatwa (sausage, bacon, soseji)?",
+"sun": "Je, unalinda ngozi yako kutokana na jua kali?",
 "sun.protected": "Daima", "sun.sometimes": "Wakati mwingine", "sun.unprotected": "Hapana",
 "screening": "Je, umewahi kufanya uchunguzi wa saratani?",
-"family": "Familia ya karibu ina historia ya saratani?"
+"family": "Je, familia ya karibu ina historia ya saratani?"
 }
 },
 "rec": {
