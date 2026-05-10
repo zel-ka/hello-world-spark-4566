@@ -458,14 +458,7 @@ export default function PatientDashboard() {
                     initialHeight={height}
                     initialAge={age}
                   />
-                  <div className="grid gap-5 lg:grid-cols-3">
-                     <CalculatorCard title={t('patient.bmi')} value={`${bmiValue}`} status={translateStatusLabel(bmiCategory, t)}
-                      description={t('patient.bmiDesc')} tone={bmiCategory === "Normal" ? "success" : "warning"}>
-                       <div className="grid gap-3 w-full">
-                         <label className="text-sm text-muted-foreground">{t('patient.height')}</label>
-                         <Input type="number" value={height} min={100} max={220} onChange={(e) => setHeight(Number(e.target.value))} />
-                      </div>
-                    </CalculatorCard>
+                  <div className="grid gap-5 lg:grid-cols-2">
                     <CalculatorCard title={t('patient.bpStatusTitle')} value={`${manualSystolic}/${manualDiastolic}`} status={translateStatusLabel(bpStatus, t)}
                       description={t('patient.bpStatusDesc')} tone={bpStatus === "Normal" ? "success" : bpStatus === "Elevated" ? "warning" : "danger"}>
                        <div className="grid gap-3 w-full">
