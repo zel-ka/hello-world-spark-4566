@@ -93,15 +93,15 @@ export default function Landing() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 overflow-hidden selection:bg-blue-100 selection:text-slate-900">
       {/* Custom Cursor */}
       <div className="fixed w-6 h-6 pointer-events-none z-[9999] mix-blend-multiply" style={{ left: `${mousePos.x - 12}px`, top: `${mousePos.y - 12}px` }}>
-        <div className="w-3 h-3 bg-blue-500 rounded-full opacity-70 blur-sm" />
+        <div className="w-2.5 h-2.5 bg-blue-500 rounded-full opacity-80" />
         <div className="absolute w-6 h-6 border-2 border-blue-400 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50" />
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 glassmorphic-nav border-b border-white/20">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/90 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center border border-blue-400/30 shadow-glow neumorphic-button">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center border border-blue-400/30">
               <Heart className="h-5 w-5 text-white" />
             </div>
             <span className="text-base sm:text-lg font-bold text-slate-900">{t('common.appName')}</span>
@@ -115,30 +115,21 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Animated Background */}
+      {/* Subtle Background */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 -right-40 w-80 h-80 rounded-full bg-blue-400/15 blur-3xl animate-float opacity-60" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-slate-400/15 blur-3xl animate-float-slow opacity-60" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute top-1/3 left-1/4 w-72 h-72 rounded-full bg-blue-300/10 blur-3xl animate-float opacity-50" style={{ animationDelay: "3s" }} />
-        <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
-            <div key={i} className="absolute w-1 h-1 bg-blue-400 rounded-full opacity-20 animate-pulse" style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%`, animationDelay: `${Math.random() * 2}s` }} />
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100" />
       </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 sm:pt-40 pb-12 sm:pb-20 px-4 sm:px-6 overflow-hidden min-h-screen flex items-center justify-center z-10">
         <div ref={heroBgRef} className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 will-change-transform" style={{ backgroundImage: "url('/1 (2).png')" }} />
-        <div ref={heroMidRef} className="absolute -left-24 top-10 w-96 h-96 rounded-full bg-blue-400/12 blur-3xl opacity-70 will-change-transform" />
-        <div ref={heroFgRef} className="absolute right-0 bottom-10 w-72 h-72 rounded-full bg-slate-900/10 blur-3xl opacity-80 will-change-transform" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-blue-50/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-50 via-blue-50/70 to-transparent" />
         
         <div className="w-full max-w-5xl mx-auto relative z-20">
           <div className="space-y-8 sm:space-y-12 text-center">
             {/* Badge */}
             <div className="inline-flex justify-center">
-              <span className="text-xs sm:text-sm font-semibold text-blue-600 bg-blue-100/60 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-blue-200/50 backdrop-blur-sm hover:bg-blue-100/80 transition-colors">
+              <span className="text-xs sm:text-sm font-semibold text-blue-700 bg-blue-100 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full border border-blue-200 hover:bg-blue-200/80 transition-colors">
                 {t('landing.heroBadge')}
               </span>
             </div>
@@ -158,7 +149,7 @@ export default function Landing() {
               <Link to="/try" className="w-full sm:w-auto">
                 <Button
                   type="button"
-                  className="w-full px-8 h-12 sm:h-14 lg:h-16 rounded-2xl text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-glow hover:shadow-xl hover:-translate-y-1 transition-all text-white"
+                  className="w-full px-8 h-12 sm:h-14 lg:h-16 rounded-2xl text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:-translate-y-0.5 transition-all text-white"
                 >
                   {t('landing.cta1Text')}
                 </Button>
@@ -186,10 +177,10 @@ export default function Landing() {
                   ].map((card, idx) => (
                     <div
                       key={idx}
-                      className="flex-shrink-0 w-48 sm:w-72 px-5 py-4 sm:py-6 rounded-2xl border border-slate-200/70 bg-white/95 shadow-floating hover:shadow-glow hover:-translate-y-1 transition-all group"
+                      className="flex-shrink-0 w-48 sm:w-72 px-5 py-4 sm:py-6 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:-translate-y-0.5 transition-all group"
                     >
                       <div className="flex items-center gap-2 sm:gap-4">
-                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:shadow-xl transition-shadow flex-shrink-0">
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center flex-shrink-0">
                           <card.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                         </div>
                         <p className="text-xs sm:text-base font-bold text-slate-900 line-clamp-2">{card.title}</p>
@@ -215,10 +206,10 @@ export default function Landing() {
                   ].map((card, idx) => (
                     <div
                       key={idx}
-                      className="flex-shrink-0 w-48 sm:w-72 px-5 py-4 sm:py-6 rounded-2xl border border-slate-200/70 bg-white/95 shadow-floating hover:shadow-glow hover:-translate-y-1 transition-all group"
+                      className="flex-shrink-0 w-48 sm:w-72 px-5 py-4 sm:py-6 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:-translate-y-0.5 transition-all group"
                     >
                       <div className="flex items-center gap-2 sm:gap-4">
-                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 text-white flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-xl transition-shadow flex-shrink-0">
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 text-white flex items-center justify-center flex-shrink-0">
                           <card.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                         </div>
                         <p className="text-xs sm:text-base font-bold text-slate-900 line-clamp-2">{card.title}</p>
@@ -243,11 +234,8 @@ export default function Landing() {
               <p className="text-sm sm:text-lg text-slate-600">{t('landing.description')}</p>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-blue-50/70 border border-white/70 shadow-elevated">
-              <div className="absolute inset-x-10 top-0 h-64 rounded-[1.8rem] bg-gradient-to-br from-blue-200/60 via-white/15 to-transparent blur-3xl opacity-90" />
-              <div className="absolute -bottom-12 left-8 w-60 h-60 rounded-full bg-cyan-300/25 blur-3xl" />
-              <div className="absolute -top-8 right-12 w-52 h-52 rounded-full bg-slate-900/8 blur-3xl" />
-              <div className="relative glass-secondary rounded-[2rem] border border-white/30 bg-white/80 p-3 sm:p-6 lg:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-50 to-white border border-slate-200">
+              <div className="relative rounded-[2rem] border border-slate-100 bg-white p-3 sm:p-6 lg:p-8">
                 <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   {[
                     {
@@ -264,7 +252,7 @@ export default function Landing() {
                     },
                   ].map((feature, i) => (
                     <Link key={i} to={feature.path} className="group block">
-                      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200/80 bg-white/95 shadow-soft hover:shadow-elevated hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-2 sm:p-4 text-center active:scale-[0.98]">
+                      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-2 sm:p-4 text-center active:scale-[0.98]">
                         <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight line-clamp-2">{feature.title}</h3>
                       </div>
                     </Link>
@@ -280,14 +268,14 @@ export default function Landing() {
       <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 scroll-reveal delay-100">
         <div className="max-w-5xl mx-auto">
           <Link to="/shop" className="group block space-y-4">
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-100 via-sky-100 to-cyan-100 p-6 shadow-elevated transition-all duration-500 hover:-translate-y-1">
-              <div className="relative rounded-[1.75rem] border border-white/70 bg-white/80 p-6">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 p-6 transition-all duration-500 hover:-translate-y-0.5">
+              <div className="relative rounded-[1.75rem] border border-slate-100 bg-white p-6">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">{t('landing.tools.heading')}</h2>
                 <p className="mt-3 text-sm sm:text-base text-slate-700">{t('landing.tools.intro')}</p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-100 via-sky-100 to-cyan-100 p-6 shadow-elevated transition-all duration-500 hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 p-6 transition-all duration-500 hover:-translate-y-0.5">
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
                 <div className="space-y-4">
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900">{t('landing.tools.subheading')}</h3>
@@ -300,19 +288,19 @@ export default function Landing() {
                       { icon: Wind, label: t('landing.tools.airTitle') },
                       { icon: ClipboardList, label: t('landing.tools.productivityTitle') },
                     ].map((c, i) => (
-                      <span key={i} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/90 border border-slate-200 text-slate-900 text-xs sm:text-sm font-semibold">
+                      <span key={i} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-slate-200 text-slate-900 text-xs sm:text-sm font-semibold">
                         <c.icon className="h-3.5 w-3.5 text-slate-700" />{c.label}
                       </span>
                     ))}
                   </div>
                   <div className="pt-3">
-                    <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-slate-900 text-white font-bold shadow-lg transition-all">
+                    <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-slate-900 text-white font-bold transition-all">
                       {t('landing.tools.subheading')} →
                     </span>
                   </div>
                 </div>
 
-                <div className="relative hidden lg:flex h-64 w-64 items-center justify-center rounded-[2rem] border border-white/70 bg-white/80 shadow-soft">
+                <div className="relative hidden lg:flex h-64 w-64 items-center justify-center rounded-[2rem] border border-slate-200 bg-white">
                   <ShoppingBag className="h-16 w-16 text-sky-700" />
                 </div>
               </div>
@@ -339,7 +327,7 @@ export default function Landing() {
         </div>
         <div className="max-w-6xl mx-auto relative scroll-reveal delay-100">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
-            <div className="relative h-56 sm:h-96 rounded-3xl overflow-hidden shadow-floating border border-white/50 animate-fade-in-up order-2 lg:order-1">
+            <div className="relative h-56 sm:h-96 rounded-3xl overflow-hidden border border-slate-200 animate-fade-in-up order-2 lg:order-1">
               <img
                 src="/2 (2).png"
                 alt="Health Features"
@@ -366,7 +354,7 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
-              <button className="mt-4 sm:mt-6 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold shadow-glow transition-all hover:shadow-xl hover:-translate-y-1 neumorphic-button">
+              <button className="mt-4 sm:mt-6 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold transition-all hover:from-blue-700 hover:to-blue-800 hover:-translate-y-0.5">
                 {t('landing.learnMore')}
               </button>
             </div>
@@ -377,45 +365,17 @@ export default function Landing() {
       {/* CTA Section */}
       <section className="relative py-12 sm:py-24 px-4 sm:px-6 z-10">
         <div className="max-w-4xl mx-auto">
-          <div
-            className="group relative rounded-3xl overflow-hidden scroll-reveal delay-100 transition-all duration-500 hover:-translate-y-1"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.18) 100%)",
-              backdropFilter: "blur(28px) saturate(180%)",
-              WebkitBackdropFilter: "blur(28px) saturate(180%)",
-              border: "1px solid rgba(255,255,255,0.45)",
-              boxShadow:
-                "0 20px 60px -15px rgba(31, 70, 130, 0.25), inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 0 rgba(255,255,255,0.15)",
-            }}
-          >
-            {/* Glass refraction highlights */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-white/40 via-transparent to-transparent opacity-70" />
-            <div className="pointer-events-none absolute -top-1/2 -left-1/3 w-[160%] h-full rotate-12 bg-gradient-to-r from-transparent via-white/30 to-transparent blur-2xl opacity-60" />
-            <div className="pointer-events-none absolute -top-32 -right-32 w-64 h-64 bg-blue-400/25 rounded-full blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-32 -left-32 w-64 h-64 bg-slate-300/25 rounded-full blur-3xl" />
-            {/* Shine sweep on hover */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
-              <div className="absolute -inset-y-10 -left-1/3 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-white/50 to-transparent blur-md opacity-0 group-hover:opacity-100 group-hover:translate-x-[400%] transition-all duration-1000 ease-out" />
-            </div>
-
+          <div className="group relative rounded-3xl overflow-hidden scroll-reveal delay-100 transition-all duration-500 hover:-translate-y-0.5 bg-gradient-to-br from-white via-blue-50/60 to-white border border-slate-200">
             <div className="relative p-8 sm:p-12 lg:p-16 text-center space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-3 sm:mb-4 drop-shadow-sm">{t('landing.startToday')}</h2>
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-3 sm:mb-4">{t('landing.startToday')}</h2>
                 <p className="text-sm sm:text-lg text-slate-700 max-w-2xl mx-auto">{t('landing.ctaDesc')}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-2 sm:pt-4">
                 <LoginDropdown variant="cta" />
                 <Link
                   to="/contact"
-                  className="w-full sm:w-auto inline-flex h-12 sm:h-14 items-center justify-center rounded-xl bg-white/80 px-6 sm:px-8 text-slate-900 font-semibold transition-all hover:-translate-y-0.5 hover:bg-white"
-                  style={{
-                    backdropFilter: "blur(16px) saturate(160%)",
-                    WebkitBackdropFilter: "blur(16px) saturate(160%)",
-                    border: "1px solid rgba(255,255,255,0.55)",
-                    boxShadow:
-                      "0 8px 24px -8px rgba(31, 70, 130, 0.2), inset 0 1px 0 rgba(255,255,255,0.6)",
-                  }}
+                  className="w-full sm:w-auto inline-flex h-12 sm:h-14 items-center justify-center rounded-xl bg-white px-6 sm:px-8 text-slate-900 font-semibold border border-slate-200 transition-all hover:-translate-y-0.5 hover:border-blue-300"
                 >
                   {t('landing.qualitySummary')}
                 </Link>
@@ -447,7 +407,7 @@ export default function Landing() {
 
       {/* Footer */}
       <footer className="relative z-10 mt-12 sm:mt-20">
-        <div className="w-full border-t border-white/60 bg-gradient-to-br from-white/80 via-blue-50/60 to-cyan-50/60 backdrop-blur-xl shadow-floating">
+        <div className="w-full border-t border-slate-200 bg-gradient-to-br from-white via-blue-50/40 to-cyan-50/40">
           {/* Expert highlight strip */}
           <div className="px-5 sm:px-8 py-5 sm:py-6 bg-gradient-to-r from-slate-50 via-white to-slate-50 border-b border-slate-200/70">
             <div className="max-w-6xl mx-auto flex items-center gap-4">
@@ -464,7 +424,7 @@ export default function Landing() {
 
           <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 sm:py-10">
             <div className="flex items-center gap-2 mb-6">
-              <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
+              <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center">
                 <Heart className="h-4 w-4 text-white" />
               </div>
               <span className="text-base font-black text-slate-900">{t('common.appName')}</span>
