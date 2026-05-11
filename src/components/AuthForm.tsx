@@ -110,6 +110,10 @@ export default function AuthForm({
     <>
       {showSuccess && <LoginSuccess message={t('common.login') + "!"} onDone={onSuccess} />}
       <div className={`space-y-3 p-6 sm:p-8 rounded-3xl bg-white/80 backdrop-blur-xl border border-white/60 shadow-2xl ${className}`}>
+        {/* Logo */}
+        <div className="flex justify-center mb-4">
+          <img src="/TathminiAfyaLogo.png" alt="Tathmini Afya Logo" className="h-12 w-12" />
+        </div>
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-2.5">
           {mode === "signup" && (

@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, User2, Heart } from "lucide-react";
+import { LogOut, User2 } from "lucide-react";
 import AuthForm from "./AuthForm";
 
 const displayUsername = (email?: string | null) => {
@@ -120,7 +120,7 @@ export default function LoginDropdown({
       >
         <div className="[transform-origin:top_right] animate-dropdown-unfold p-4 sm:p-5">
           <div className="flex items-center gap-2 mb-3 justify-center">
-            <Heart className="h-5 w-5 text-blue-600" />
+            <img src="/TathminiAfyaLogo.png" alt="Tathmini Afya Logo" className="h-8 w-8" />
             <h3 className="font-bold text-base text-foreground">{t('common.appName')}</h3>
           </div>
           <AuthForm 

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/hooks/useI18n";
-import { Lock, Heart } from "lucide-react";
 import AuthForm from "./AuthForm";
 
 interface Props {
@@ -25,8 +24,8 @@ export function GuestLockDialog({ open, onOpenChange }: Props) {
         {!showAuth ? (
           <>
             <DialogHeader>
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
-                <Lock className="h-5 w-5 text-primary" />
+              <div className="flex justify-center mb-2">
+                <img src="/TathminiAfyaLogo.png" alt="Tathmini Afya Logo" className="h-12 w-12 rounded-2xl" />
               </div>
               <DialogTitle>{t("guest.lockTitle")}</DialogTitle>
               <DialogDescription>{t("guest.lockDesc")}</DialogDescription>
@@ -46,8 +45,8 @@ export function GuestLockDialog({ open, onOpenChange }: Props) {
         ) : (
           <>
             <DialogHeader>
-              <div className="flex items-center gap-2 justify-center">
-                <Heart className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-2 justify-center mb-2">
+                <img src="/TathminiAfyaLogo.png" alt="Tathmini Afya Logo" className="h-8 w-8" />
                 <DialogTitle>{t("common.appName")}</DialogTitle>
               </div>
               <DialogDescription className="text-center">
