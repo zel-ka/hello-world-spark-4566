@@ -11,7 +11,7 @@ import {
   type ActivityLevel,
   type Sex,
 } from "@/lib/calculators";
-import { Flame, Scale, Apple, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+import { Flame, Scale, Apple, Sunrise, Sun, Moon, Cookie, XCircle } from "lucide-react";
 
 const ACTIVITY_OPTIONS: { value: ActivityLevel; labelKey: string }[] = [
   { value: "sedentary", labelKey: "calc.activity.sedentary" },
