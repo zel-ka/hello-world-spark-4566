@@ -22,82 +22,84 @@ const ACTIVITY_OPTIONS: { value: ActivityLevel; labelKey: string }[] = [
 ];
 
 type Goal = "bulk" | "maintain" | "cut";
+type Category = "wanga" | "protini" | "mboga" | "matunda" | "vitafunwa";
 
 interface FoodEntry {
   name: string;
-  serving: string;
-  kcal: number;
-  // suitability per goal: good | ok | avoid
+  serving: string; // 1 serving description
+  kcal: number;    // kcal per 1 serving
+  category: Category;
+  // suitability per goal
   bulk: "good" | "ok" | "avoid";
   maintain: "good" | "ok" | "avoid";
   cut: "good" | "ok" | "avoid";
 }
 
-// Curated Tanzania foods with realistic kcal per common serving.
 const FOODS: FoodEntry[] = [
-  // Vyakula vya wanga
-  { name: "Ugali", serving: "kikombe 1 (200g)", kcal: 220, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Wali", serving: "kikombe 1 (200g)", kcal: 200, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Pilau", serving: "kikombe 1", kcal: 320, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Chapati", serving: "kipande 1", kcal: 280, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Ndizi za kupika", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Matoke", serving: "kikombe 1", kcal: 170, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Viazi vitamu", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Viazi mviringo", serving: "kikombe 1", kcal: 160, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mihogo", serving: "kikombe 1", kcal: 200, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mahindi ya kuchemsha", serving: "gunzi 1", kcal: 150, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Makande", serving: "kikombe 1", kcal: 260, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Uji wa lishe", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Uji wa ulezi", serving: "kikombe 1", kcal: 150, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Mkate wa kawaida", serving: "vipande 2", kcal: 160, bulk: "good", maintain: "ok", cut: "ok" },
+  // Wanga
+  { name: "Ugali", serving: "kikombe 1 (200g)", kcal: 220, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Wali", serving: "kikombe 1 (200g)", kcal: 200, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Ndizi za kupika", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Matoke", serving: "kikombe 1", kcal: 170, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Viazi vitamu", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mihogo", serving: "kikombe 1", kcal: 200, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Makande", serving: "kikombe 1", kcal: 260, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Uji wa lishe", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Uji wa ulezi", serving: "kikombe 1", kcal: 150, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mahindi ya kuchemsha", serving: "gunzi 1", kcal: 150, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
 
   // Protini
-  { name: "Maharage", serving: "kikombe 1", kcal: 230, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Dengu", serving: "kikombe 1", kcal: 220, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Choroko", serving: "kikombe 1", kcal: 210, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Kunde", serving: "kikombe 1", kcal: 200, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Karanga", serving: "kiganja 1 (30g)", kcal: 170, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mayai", serving: "yai 1", kcal: 78, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Maziwa fresh", serving: "glasi 1 (250ml)", kcal: 150, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mtindi wa asili", serving: "kikombe 1", kcal: 130, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Samaki (sangara/sato)", serving: "kipande (150g)", kcal: 220, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Dagaa", serving: "kikombe 1/2", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Kuku wa kuchoma", serving: "kipande (150g)", kcal: 280, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Nyama ya ng'ombe", serving: "kipande (150g)", kcal: 320, bulk: "good", maintain: "ok", cut: "ok" },
-  { name: "Tofu/Soybeans", serving: "kikombe 1/2", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
+  { name: "Maharage", serving: "kikombe 1", kcal: 230, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Dengu", serving: "kikombe 1", kcal: 220, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Choroko", serving: "kikombe 1", kcal: 210, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Kunde", serving: "kikombe 1", kcal: 200, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mayai", serving: "yai 1", kcal: 78, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Maziwa fresh", serving: "glasi 1 (250ml)", kcal: 150, category: "protini", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Mtindi wa asili", serving: "kikombe 1", kcal: 130, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Samaki (sangara/sato)", serving: "kipande 150g", kcal: 220, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Dagaa", serving: "kikombe 1/2", kcal: 180, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Kuku wa kuchemsha", serving: "kipande 150g", kcal: 250, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Nyama ya ng'ombe", serving: "kipande 150g", kcal: 320, category: "protini", bulk: "good", maintain: "ok", cut: "ok" },
+  { name: "Karanga", serving: "kiganja 1 (30g)", kcal: 170, category: "protini", bulk: "good", maintain: "good", cut: "ok" },
 
   // Mboga
-  { name: "Mchicha", serving: "kikombe 1", kcal: 40, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Sukuma wiki", serving: "kikombe 1", kcal: 45, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Matembele", serving: "kikombe 1", kcal: 50, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Kisamvu", serving: "kikombe 1", kcal: 60, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Kabichi", serving: "kikombe 1", kcal: 35, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Karoti", serving: "kikombe 1", kcal: 50, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Nyanya", serving: "kikombe 1", kcal: 30, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Bamia", serving: "kikombe 1", kcal: 35, bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Mchicha", serving: "kikombe 1", kcal: 40, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Sukuma wiki", serving: "kikombe 1", kcal: 45, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Matembele", serving: "kikombe 1", kcal: 50, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Kisamvu", serving: "kikombe 1", kcal: 60, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Kabichi", serving: "kikombe 1", kcal: 35, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Karoti", serving: "kikombe 1", kcal: 50, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
 
   // Matunda
-  { name: "Embe", serving: "tunda 1", kcal: 100, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Ndizi mbivu", serving: "tunda 1", kcal: 105, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Papai", serving: "kikombe 1", kcal: 60, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Parachichi", serving: "1/2 tunda", kcal: 160, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Chungwa", serving: "tunda 1", kcal: 65, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Tikiti maji", serving: "kikombe 1", kcal: 45, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Nanasi", serving: "kikombe 1", kcal: 80, bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Embe", serving: "tunda 1", kcal: 100, category: "matunda", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Ndizi mbivu", serving: "tunda 1", kcal: 105, category: "matunda", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Papai", serving: "kikombe 1", kcal: 60, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Parachichi", serving: "1/2 tunda", kcal: 160, category: "matunda", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Chungwa", serving: "tunda 1", kcal: 65, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Tikiti maji", serving: "kikombe 1", kcal: 45, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
 
-  // Vinywaji & vitafunwa kiwandani (epuka kwa wengi)
-  { name: "Soda", serving: "chupa (500ml)", kcal: 210, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Juice ya viwandani", serving: "glasi 1", kcal: 130, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Energy drinks", serving: "chupa 1", kcal: 160, bulk: "avoid", maintain: "avoid", cut: "avoid" },
-  { name: "Chai ya sukari nyingi", serving: "kikombe 1", kcal: 100, bulk: "ok", maintain: "ok", cut: "avoid" },
-  { name: "Mandazi", serving: "kipande 1", kcal: 180, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Vitumbua", serving: "kipande 1", kcal: 150, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Chips (potato)", serving: "sahani ndogo", kcal: 380, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Biscuits/Cookies", serving: "vipande 3", kcal: 150, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Ice cream", serving: "scoop 1", kcal: 200, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Indomie", serving: "pakiti 1", kcal: 380, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Margarine/Mayonnaise", serving: "kijiko 1", kcal: 100, bulk: "ok", maintain: "avoid", cut: "avoid" },
+  // Vitafunwa vya viwandani — epuka
+  { name: "Soda", serving: "chupa 500ml", kcal: 210, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Juice ya viwandani", serving: "glasi 1", kcal: 130, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Energy drinks", serving: "chupa 1", kcal: 160, category: "vitafunwa", bulk: "avoid", maintain: "avoid", cut: "avoid" },
+  { name: "Chips (potato)", serving: "sahani ndogo", kcal: 380, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Biscuits/Cookies", serving: "vipande 3", kcal: 150, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Ice cream", serving: "scoop 1", kcal: 200, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Indomie", serving: "pakiti 1", kcal: 380, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Mandazi", serving: "kipande 1", kcal: 180, category: "vitafunwa", bulk: "good", maintain: "ok", cut: "avoid" },
+  { name: "Margarine/Mayonnaise", serving: "kijiko 1", kcal: 100, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
 ];
+
+// Deterministic but per-user picker — same person gets stable plan, different people differ
+function pickFor(category: Category, goal: Goal, seed: number): FoodEntry {
+  const pool = FOODS.filter((f) => f.category === category && f[goal] !== "avoid");
+  const sorted = pool.sort((a, b) => (a[goal] === "good" ? -1 : 1) - (b[goal] === "good" ? -1 : 1));
+  return sorted[seed % sorted.length];
+}
+
+interface MealItem { food: FoodEntry; servings: number; kcal: number; }
+interface Meal { title: string; icon: React.ReactNode; items: MealItem[]; targetKcal: number; }
+
 
 interface Props {
   initialWeight?: number;
