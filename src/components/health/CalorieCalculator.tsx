@@ -281,35 +281,69 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
         </div>
       </div>
 
-      {/* Personalized food guide */}
-      <div className="rounded-2xl frosted-glass border border-border/40 p-4 space-y-5">
+      {/* Personalized daily meal plan */}
+      <div className="rounded-2xl frosted-glass border border-border/40 p-4 space-y-4">
         <div className="flex items-start gap-2">
           <Apple className="h-4 w-4 text-success mt-0.5" />
-          <div>
+          <div className="flex-1">
             <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-              Mwongozo wa vyakula kwa hali yako
+              Mpango wa mlo wa siku yako
             </p>
-            <p className="text-[11px] text-muted-foreground mt-0.5">{goalLabel} · ~{tdee || 0} kcal/siku</p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">
+              {goalLabel} · lengo ~{targetKcal || 0} kcal/siku
+            </p>
           </div>
         </div>
 
-        {renderFoodGroup(
-          "Vyakula vinavyoshauriwa",
-          recommended,
-          <CheckCircle2 className="h-4 w-4" />,
-          "text-success"
+        <div className="space-y-3">
+          {mealPlan.map((meal) => {
+            const mealKcal = meal.items.reduce((s, it) => s + it.kcal, 0);
+            return (
+              <div key={meal.title} className="rounded-xl bg-background/60 border border-border/40 p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2 text-primary">
+                    {meal.icon}
+                    <p className="text-sm font-semibold text-foreground">{meal.title}</p>
+                  </div>
+                  <span className="text-[11px] font-bold text-primary">{mealKcal} kcal</span>
+                </div>
+                <div className="space-y-1">
+                  {meal.items.map((it) => (
+                    <div key={it.food.name} className="flex items-center justify-between gap-2 text-[12px]">
+                      <div className="min-w-0">
+                        <span className="font-medium text-foreground">{it.food.name}</span>
+                        <span className="text-muted-foreground"> — {it.servings}× {it.food.serving}</span>
+                      </div>
+                      <span className="text-[11px] text-muted-foreground whitespace-nowrap">{it.kcal} kcal</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {planTotalKcal > 0 && (
+          <div className="flex items-center justify-between rounded-xl bg-primary/10 border border-primary/30 px-3 py-2">
+            <p className="text-xs font-semibold text-foreground">Jumla ya siku</p>
+            <p className="text-sm font-bold text-primary">{planTotalKcal} kcal</p>
+          </div>
         )}
-        {renderFoodGroup(
-          "Tumia kwa kiasi",
-          moderate,
-          <AlertTriangle className="h-4 w-4" />,
-          "text-warning"
-        )}
-        {renderFoodGroup(
-          "Vinavyofaa kuepukwa",
-          avoid,
-          <XCircle className="h-4 w-4" />,
-          "text-destructive"
+
+        {avoidList.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 mb-2 text-destructive">
+              <XCircle className="h-4 w-4" />
+              <p className="text-sm font-semibold">Vinavyofaa kuepukwa kwa hali yako</p>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {avoidList.map((f) => (
+                <span key={f.name} className="text-[11px] px-2 py-1 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
+                  {f.name}
+                </span>
+              ))}
+            </div>
+          </div>
         )}
 
         <p className="text-[10px] text-muted-foreground">{t("calc.foodNote")}</p>
