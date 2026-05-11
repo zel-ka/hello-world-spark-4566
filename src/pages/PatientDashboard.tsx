@@ -460,26 +460,6 @@ export default function PatientDashboard() {
                     initialHeight={height}
                     initialAge={age}
                   />
-                  <div className="grid gap-5 lg:grid-cols-2">
-                    <CalculatorCard title={t('patient.bpStatusTitle')} value={`${manualSystolic}/${manualDiastolic}`} status={translateStatusLabel(bpStatus, t)}
-                      description={t('patient.bpStatusDesc')} tone={bpStatus === "Normal" ? "success" : bpStatus === "Elevated" ? "warning" : "danger"}>
-                       <div className="grid gap-3 w-full">
-                         <label className="text-sm text-muted-foreground">{t('health.systolic')}</label>
-                         <Input type="number" value={manualSystolic} min={70} max={250} onChange={(e) => setManualSystolic(Number(e.target.value))} />
-                         <label className="text-sm text-muted-foreground">{t('health.diastolic')}</label>
-                         <Input type="number" value={manualDiastolic} min={40} max={150} onChange={(e) => setManualDiastolic(Number(e.target.value))} />
-                      </div>
-                    </CalculatorCard>
-                    <CalculatorCard title={t('patient.heartRateTitle')} value={`${manualHeartRate} bpm`} status={translateStatusLabel(heartRateStatus, t)}
-                      description={t('patient.heartRateDesc')} tone={heartRateStatus === "Normal" ? "success" : "danger"}>
-                       <div className="grid gap-3 w-full">
-                         <label className="text-sm text-muted-foreground">{t('patient.age')}</label>
-                         <Input type="number" value={age} min={10} max={100} onChange={(e) => setAge(Number(e.target.value))} />
-                         <label className="text-sm text-muted-foreground">{t('patient.heartRateLabel')}</label>
-                         <Input type="number" value={manualHeartRate} min={30} max={220} onChange={(e) => setManualHeartRate(Number(e.target.value))} />
-                      </div>
-                    </CalculatorCard>
-                  </div>
                 </div>
               )}
             </div>
