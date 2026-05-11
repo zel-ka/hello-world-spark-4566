@@ -11,7 +11,7 @@ import {
   type ActivityLevel,
   type Sex,
 } from "@/lib/calculators";
-import { Flame, Scale, Apple, CheckCircle2, AlertTriangle, XCircle } from "lucide-react";
+import { Flame, Scale, Apple, Sunrise, Sun, Moon, Cookie, XCircle } from "lucide-react";
 
 const ACTIVITY_OPTIONS: { value: ActivityLevel; labelKey: string }[] = [
   { value: "sedentary", labelKey: "calc.activity.sedentary" },
@@ -22,82 +22,84 @@ const ACTIVITY_OPTIONS: { value: ActivityLevel; labelKey: string }[] = [
 ];
 
 type Goal = "bulk" | "maintain" | "cut";
+type Category = "wanga" | "protini" | "mboga" | "matunda" | "vitafunwa";
 
 interface FoodEntry {
   name: string;
-  serving: string;
-  kcal: number;
-  // suitability per goal: good | ok | avoid
+  serving: string; // 1 serving description
+  kcal: number;    // kcal per 1 serving
+  category: Category;
+  // suitability per goal
   bulk: "good" | "ok" | "avoid";
   maintain: "good" | "ok" | "avoid";
   cut: "good" | "ok" | "avoid";
 }
 
-// Curated Tanzania foods with realistic kcal per common serving.
 const FOODS: FoodEntry[] = [
-  // Vyakula vya wanga
-  { name: "Ugali", serving: "kikombe 1 (200g)", kcal: 220, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Wali", serving: "kikombe 1 (200g)", kcal: 200, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Pilau", serving: "kikombe 1", kcal: 320, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Chapati", serving: "kipande 1", kcal: 280, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Ndizi za kupika", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Matoke", serving: "kikombe 1", kcal: 170, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Viazi vitamu", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Viazi mviringo", serving: "kikombe 1", kcal: 160, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mihogo", serving: "kikombe 1", kcal: 200, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mahindi ya kuchemsha", serving: "gunzi 1", kcal: 150, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Makande", serving: "kikombe 1", kcal: 260, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Uji wa lishe", serving: "kikombe 1", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Uji wa ulezi", serving: "kikombe 1", kcal: 150, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Mkate wa kawaida", serving: "vipande 2", kcal: 160, bulk: "good", maintain: "ok", cut: "ok" },
+  // Wanga
+  { name: "Ugali", serving: "kikombe 1 (200g)", kcal: 220, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Wali", serving: "kikombe 1 (200g)", kcal: 200, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Ndizi za kupika", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Matoke", serving: "kikombe 1", kcal: 170, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Viazi vitamu", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mihogo", serving: "kikombe 1", kcal: 200, category: "wanga", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Makande", serving: "kikombe 1", kcal: 260, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Uji wa lishe", serving: "kikombe 1", kcal: 180, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Uji wa ulezi", serving: "kikombe 1", kcal: 150, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mahindi ya kuchemsha", serving: "gunzi 1", kcal: 150, category: "wanga", bulk: "good", maintain: "good", cut: "good" },
 
   // Protini
-  { name: "Maharage", serving: "kikombe 1", kcal: 230, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Dengu", serving: "kikombe 1", kcal: 220, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Choroko", serving: "kikombe 1", kcal: 210, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Kunde", serving: "kikombe 1", kcal: 200, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Karanga", serving: "kiganja 1 (30g)", kcal: 170, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mayai", serving: "yai 1", kcal: 78, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Maziwa fresh", serving: "glasi 1 (250ml)", kcal: 150, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Mtindi wa asili", serving: "kikombe 1", kcal: 130, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Samaki (sangara/sato)", serving: "kipande (150g)", kcal: 220, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Dagaa", serving: "kikombe 1/2", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Kuku wa kuchoma", serving: "kipande (150g)", kcal: 280, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Nyama ya ng'ombe", serving: "kipande (150g)", kcal: 320, bulk: "good", maintain: "ok", cut: "ok" },
-  { name: "Tofu/Soybeans", serving: "kikombe 1/2", kcal: 180, bulk: "good", maintain: "good", cut: "good" },
+  { name: "Maharage", serving: "kikombe 1", kcal: 230, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Dengu", serving: "kikombe 1", kcal: 220, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Choroko", serving: "kikombe 1", kcal: 210, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Kunde", serving: "kikombe 1", kcal: 200, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Mayai", serving: "yai 1", kcal: 78, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Maziwa fresh", serving: "glasi 1 (250ml)", kcal: 150, category: "protini", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Mtindi wa asili", serving: "kikombe 1", kcal: 130, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Samaki (sangara/sato)", serving: "kipande 150g", kcal: 220, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Dagaa", serving: "kikombe 1/2", kcal: 180, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Kuku wa kuchemsha", serving: "kipande 150g", kcal: 250, category: "protini", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Nyama ya ng'ombe", serving: "kipande 150g", kcal: 320, category: "protini", bulk: "good", maintain: "ok", cut: "ok" },
+  { name: "Karanga", serving: "kiganja 1 (30g)", kcal: 170, category: "protini", bulk: "good", maintain: "good", cut: "ok" },
 
   // Mboga
-  { name: "Mchicha", serving: "kikombe 1", kcal: 40, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Sukuma wiki", serving: "kikombe 1", kcal: 45, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Matembele", serving: "kikombe 1", kcal: 50, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Kisamvu", serving: "kikombe 1", kcal: 60, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Kabichi", serving: "kikombe 1", kcal: 35, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Karoti", serving: "kikombe 1", kcal: 50, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Nyanya", serving: "kikombe 1", kcal: 30, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Bamia", serving: "kikombe 1", kcal: 35, bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Mchicha", serving: "kikombe 1", kcal: 40, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Sukuma wiki", serving: "kikombe 1", kcal: 45, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Matembele", serving: "kikombe 1", kcal: 50, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Kisamvu", serving: "kikombe 1", kcal: 60, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Kabichi", serving: "kikombe 1", kcal: 35, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Karoti", serving: "kikombe 1", kcal: 50, category: "mboga", bulk: "ok", maintain: "good", cut: "good" },
 
   // Matunda
-  { name: "Embe", serving: "tunda 1", kcal: 100, bulk: "good", maintain: "good", cut: "good" },
-  { name: "Ndizi mbivu", serving: "tunda 1", kcal: 105, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Papai", serving: "kikombe 1", kcal: 60, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Parachichi", serving: "1/2 tunda", kcal: 160, bulk: "good", maintain: "good", cut: "ok" },
-  { name: "Chungwa", serving: "tunda 1", kcal: 65, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Tikiti maji", serving: "kikombe 1", kcal: 45, bulk: "ok", maintain: "good", cut: "good" },
-  { name: "Nanasi", serving: "kikombe 1", kcal: 80, bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Embe", serving: "tunda 1", kcal: 100, category: "matunda", bulk: "good", maintain: "good", cut: "good" },
+  { name: "Ndizi mbivu", serving: "tunda 1", kcal: 105, category: "matunda", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Papai", serving: "kikombe 1", kcal: 60, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Parachichi", serving: "1/2 tunda", kcal: 160, category: "matunda", bulk: "good", maintain: "good", cut: "ok" },
+  { name: "Chungwa", serving: "tunda 1", kcal: 65, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
+  { name: "Tikiti maji", serving: "kikombe 1", kcal: 45, category: "matunda", bulk: "ok", maintain: "good", cut: "good" },
 
-  // Vinywaji & vitafunwa kiwandani (epuka kwa wengi)
-  { name: "Soda", serving: "chupa (500ml)", kcal: 210, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Juice ya viwandani", serving: "glasi 1", kcal: 130, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Energy drinks", serving: "chupa 1", kcal: 160, bulk: "avoid", maintain: "avoid", cut: "avoid" },
-  { name: "Chai ya sukari nyingi", serving: "kikombe 1", kcal: 100, bulk: "ok", maintain: "ok", cut: "avoid" },
-  { name: "Mandazi", serving: "kipande 1", kcal: 180, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Vitumbua", serving: "kipande 1", kcal: 150, bulk: "good", maintain: "ok", cut: "avoid" },
-  { name: "Chips (potato)", serving: "sahani ndogo", kcal: 380, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Biscuits/Cookies", serving: "vipande 3", kcal: 150, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Ice cream", serving: "scoop 1", kcal: 200, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Indomie", serving: "pakiti 1", kcal: 380, bulk: "ok", maintain: "avoid", cut: "avoid" },
-  { name: "Margarine/Mayonnaise", serving: "kijiko 1", kcal: 100, bulk: "ok", maintain: "avoid", cut: "avoid" },
+  // Vitafunwa vya viwandani — epuka
+  { name: "Soda", serving: "chupa 500ml", kcal: 210, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Juice ya viwandani", serving: "glasi 1", kcal: 130, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Energy drinks", serving: "chupa 1", kcal: 160, category: "vitafunwa", bulk: "avoid", maintain: "avoid", cut: "avoid" },
+  { name: "Chips (potato)", serving: "sahani ndogo", kcal: 380, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Biscuits/Cookies", serving: "vipande 3", kcal: 150, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Ice cream", serving: "scoop 1", kcal: 200, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Indomie", serving: "pakiti 1", kcal: 380, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
+  { name: "Mandazi", serving: "kipande 1", kcal: 180, category: "vitafunwa", bulk: "good", maintain: "ok", cut: "avoid" },
+  { name: "Margarine/Mayonnaise", serving: "kijiko 1", kcal: 100, category: "vitafunwa", bulk: "ok", maintain: "avoid", cut: "avoid" },
 ];
+
+// Deterministic but per-user picker — same person gets stable plan, different people differ
+function pickFor(category: Category, goal: Goal, seed: number): FoodEntry {
+  const pool = FOODS.filter((f) => f.category === category && f[goal] !== "avoid");
+  const sorted = pool.sort((a, b) => (a[goal] === "good" ? -1 : 1) - (b[goal] === "good" ? -1 : 1));
+  return sorted[seed % sorted.length];
+}
+
+interface MealItem { food: FoodEntry; servings: number; kcal: number; }
+interface Meal { title: string; icon: React.ReactNode; items: MealItem[]; targetKcal: number; }
+
 
 interface Props {
   initialWeight?: number;
@@ -134,9 +136,60 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
         ? "Lengo: Kupunguza uzito polepole"
         : "Lengo: Kudumisha uzito wako";
 
-  const recommended = FOODS.filter((f) => f[goal] === "good");
-  const moderate = FOODS.filter((f) => f[goal] === "ok");
-  const avoid = FOODS.filter((f) => f[goal] === "avoid");
+  // Target kcal adjusted by goal
+  const targetKcal = useMemo(() => {
+    if (!tdee) return 0;
+    if (goal === "bulk") return tdee + 300;
+    if (goal === "cut") return Math.max(1200, tdee - 500);
+    return tdee;
+  }, [tdee, goal]);
+
+  // Per-user seed so two different users get different (but stable) plans
+  const seed = useMemo(() => {
+    const s = (sex === "male" ? 1 : 2) * 7 + age + Math.round(weight) + Math.round(height) +
+      ACTIVITY_OPTIONS.findIndex((a) => a.value === activity);
+    return Math.abs(s);
+  }, [sex, age, weight, height, activity]);
+
+  // Build a daily meal plan that hits targetKcal
+  const mealPlan: Meal[] = useMemo(() => {
+    if (!targetKcal) return [];
+    const split = { breakfast: 0.25, lunch: 0.35, dinner: 0.30, snack: 0.10 };
+
+    const buildMeal = (
+      title: string,
+      icon: React.ReactNode,
+      portion: number,
+      pattern: Category[],
+      offset: number
+    ): Meal => {
+      const mealTarget = Math.round(targetKcal * portion);
+      const picks = pattern.map((c, i) => pickFor(c, goal, seed + offset + i));
+      const baseSum = picks.reduce((s, f) => s + f.kcal, 0);
+      const factor = baseSum > 0 ? mealTarget / baseSum : 1;
+      const items: MealItem[] = picks.map((f) => {
+        // round servings to nearest 0.5, min 0.5
+        const raw = factor;
+        const servings = Math.max(0.5, Math.round(raw * 2) / 2);
+        return { food: f, servings, kcal: Math.round(f.kcal * servings) };
+      });
+      return { title, icon, items, targetKcal: mealTarget };
+    };
+
+    return [
+      buildMeal("Kifungua kinywa", <Sunrise className="h-4 w-4" />, split.breakfast, ["wanga", "protini", "matunda"], 0),
+      buildMeal("Chakula cha mchana", <Sun className="h-4 w-4" />, split.lunch, ["wanga", "protini", "mboga"], 3),
+      buildMeal("Chakula cha jioni", <Moon className="h-4 w-4" />, split.dinner, ["wanga", "protini", "mboga"], 6),
+      buildMeal("Kitafunwa", <Cookie className="h-4 w-4" />, split.snack, ["matunda"], 9),
+    ];
+  }, [targetKcal, goal, seed]);
+
+  const planTotalKcal = mealPlan.reduce(
+    (s, m) => s + m.items.reduce((x, it) => x + it.kcal, 0),
+    0
+  );
+
+  const avoidList = FOODS.filter((f) => f[goal] === "avoid");
 
   const toneClass =
     bmiBand.tone === "success"
@@ -144,35 +197,6 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
       : bmiBand.tone === "warning"
         ? "text-warning bg-warning/15 border-warning/30"
         : "text-destructive bg-destructive/15 border-destructive/30";
-
-  const renderFoodGroup = (
-    title: string,
-    items: FoodEntry[],
-    icon: React.ReactNode,
-    accent: string
-  ) => (
-    <div>
-      <div className={`flex items-center gap-2 mb-2 ${accent}`}>
-        {icon}
-        <p className="text-sm font-semibold">{title}</p>
-        <span className="text-[10px] text-muted-foreground">({items.length})</span>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-        {items.map((f) => (
-          <div
-            key={f.name}
-            className="flex items-center justify-between gap-2 rounded-lg bg-background/60 border border-border/40 px-2.5 py-1.5"
-          >
-            <div className="min-w-0">
-              <p className="text-[12px] font-medium text-foreground truncate">{f.name}</p>
-              <p className="text-[10px] text-muted-foreground truncate">{f.serving}</p>
-            </div>
-            <span className="text-[11px] font-bold text-primary whitespace-nowrap">{f.kcal} kcal</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 
   return (
     <div className="space-y-5 animate-fade-in">
@@ -257,35 +281,69 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
         </div>
       </div>
 
-      {/* Personalized food guide */}
-      <div className="rounded-2xl frosted-glass border border-border/40 p-4 space-y-5">
+      {/* Personalized daily meal plan */}
+      <div className="rounded-2xl frosted-glass border border-border/40 p-4 space-y-4">
         <div className="flex items-start gap-2">
           <Apple className="h-4 w-4 text-success mt-0.5" />
-          <div>
+          <div className="flex-1">
             <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
-              Mwongozo wa vyakula kwa hali yako
+              Mpango wa mlo wa siku yako
             </p>
-            <p className="text-[11px] text-muted-foreground mt-0.5">{goalLabel} · ~{tdee || 0} kcal/siku</p>
+            <p className="text-[11px] text-muted-foreground mt-0.5">
+              {goalLabel} · lengo ~{targetKcal || 0} kcal/siku
+            </p>
           </div>
         </div>
 
-        {renderFoodGroup(
-          "Vyakula vinavyoshauriwa",
-          recommended,
-          <CheckCircle2 className="h-4 w-4" />,
-          "text-success"
+        <div className="space-y-3">
+          {mealPlan.map((meal) => {
+            const mealKcal = meal.items.reduce((s, it) => s + it.kcal, 0);
+            return (
+              <div key={meal.title} className="rounded-xl bg-background/60 border border-border/40 p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2 text-primary">
+                    {meal.icon}
+                    <p className="text-sm font-semibold text-foreground">{meal.title}</p>
+                  </div>
+                  <span className="text-[11px] font-bold text-primary">{mealKcal} kcal</span>
+                </div>
+                <div className="space-y-1">
+                  {meal.items.map((it) => (
+                    <div key={it.food.name} className="flex items-center justify-between gap-2 text-[12px]">
+                      <div className="min-w-0">
+                        <span className="font-medium text-foreground">{it.food.name}</span>
+                        <span className="text-muted-foreground"> — {it.servings}× {it.food.serving}</span>
+                      </div>
+                      <span className="text-[11px] text-muted-foreground whitespace-nowrap">{it.kcal} kcal</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {planTotalKcal > 0 && (
+          <div className="flex items-center justify-between rounded-xl bg-primary/10 border border-primary/30 px-3 py-2">
+            <p className="text-xs font-semibold text-foreground">Jumla ya siku</p>
+            <p className="text-sm font-bold text-primary">{planTotalKcal} kcal</p>
+          </div>
         )}
-        {renderFoodGroup(
-          "Tumia kwa kiasi",
-          moderate,
-          <AlertTriangle className="h-4 w-4" />,
-          "text-warning"
-        )}
-        {renderFoodGroup(
-          "Vinavyofaa kuepukwa",
-          avoid,
-          <XCircle className="h-4 w-4" />,
-          "text-destructive"
+
+        {avoidList.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 mb-2 text-destructive">
+              <XCircle className="h-4 w-4" />
+              <p className="text-sm font-semibold">Vinavyofaa kuepukwa kwa hali yako</p>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {avoidList.map((f) => (
+                <span key={f.name} className="text-[11px] px-2 py-1 rounded-full bg-destructive/10 text-destructive border border-destructive/20">
+                  {f.name}
+                </span>
+              ))}
+            </div>
+          </div>
         )}
 
         <p className="text-[10px] text-muted-foreground">{t("calc.foodNote")}</p>
