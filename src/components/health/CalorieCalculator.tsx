@@ -42,20 +42,29 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
   const tdee = useMemo(() => calcTdee(bmr, activity), [bmr, activity]);
   const macros = useMemo(() => macroSplit(tdee), [tdee]);
 
-  const foodSuggestions = useMemo(() => {
-    // Show 4 foods that together come close to one meal (~ tdee / 3)
-    const target = tdee / 3;
-    let acc = 0;
-    const picks: typeof TZ_FOODS = [];
-    const pool = [...TZ_FOODS].filter((f) => f.category !== "drink" && f.category !== "snack");
-    for (const f of pool) {
-      if (acc >= target) break;
-      picks.push(f);
-      acc += f.kcal;
-      if (picks.length >= 4) break;
-    }
-    return picks;
-  }, [tdee]);
+  const TZ_FOOD_CATALOG: { titleSw: string; titleEn: string; items: string[] }[] = [
+    {
+      titleSw: "Vyakula vya asili",
+      titleEn: "Traditional foods",
+      items: [
+        "Ugali","Wali","Pilau ya mboga","Ndizi za kupika","Matoke","Viazi vitamu","Viazi mviringo","Mihogo","Makande","Gimbi","Mahindi ya kuchemsha","Mahindi ya kuchoma","Ulezi","Mtama","Uji","Uji wa ulezi","Uji wa dona","Uji wa lishe","Maharage","Dengu","Choroko","Kunde","Njegere","Karanga","Korosho","Ufuta","Soybeans","Tofu","Mayai","Maziwa fresh","Mtindi wa asili","Siagi","Samaki wenye magamba","Dagaa","Sangara","Sato","Kamba","Mchicha","Matembele","Kisamvu","Sukuma wiki","Kabichi","Bamia","Karoti","Nyanya","Hoho","Matango","Maboga","Mnavu","Mwage","Ndizi","Embe","Papai","Nanasi","Tikiti maji","Chungwa","Passion","Zabibu","Fenesi","Parachichi","Tende","Mapera","Vitumbua","Chapati za nyumbani","Maandazi ya nyumbani","Kashata","Mkate wa kawaida",
+      ],
+    },
+    {
+      titleSw: "Nyama na samaki",
+      titleEn: "Meat & fish",
+      items: [
+        "Nyama za kawaida","Samaki","Mayai","Fish sausage","Processed fish products","Canned fish","Frozen fish products","Fish balls","Fish burger patties","Fish fingers",
+      ],
+    },
+    {
+      titleSw: "Vyakula vya viwandani (vinavyokubalika)",
+      titleEn: "Processed foods (acceptable)",
+      items: [
+        "Biscuits","Cookies","Chocolate","Crisps","Potato chips","Popcorn za packet","Chevda","Ice cream","Candy","Bubble gum","Donuts","Cakes za viwandani","Wafers","Instant noodles","Tambi za packet","Macaroni za box","Frozen pizza ya mboga","Frozen fries","Sandwiches za viwandani","Soda","Energy drinks","Juice za viwandani","Flavoured milk","Milkshake za packet","Ice tea za bottle","Coffee substitute drinks","White bread ya viwandani","Corn flakes","Cereals","Oats za packet","Pasta","Pancake mix","Canned beans","Canned fish","Tomato sauce","Tomato paste","Mayonnaise","Margarine","Peanut butter ya viwandani","Jam","Ketchup","Pickles","Azam products","Sayona drinks","Indomie","Oreo","Pringles","Minute Maid","Sprite","Fanta","Pepsi","Coca-Cola",
+      ],
+    },
+  ];
 
   const toneClass =
     bmiBand.tone === "success"
