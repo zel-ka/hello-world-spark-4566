@@ -185,9 +185,11 @@ export default function PatientDashboard() {
           <div className="relative z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                  <HeartPulse className="h-5 w-5 text-primary" />
-                </div>
+                <img
+                  src="/TathminiAfyaLogo.png"
+                  alt="Tathmini Afya Logo"
+                  className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+                />
                 <div>
                   <h1 className="text-lg font-bold text-foreground">{t('common.appName')}</h1>
                 </div>

@@ -101,9 +101,11 @@ export default function Landing() {
       <nav className="fixed top-0 left-0 right-0 z-40 bg-white/90 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center border border-blue-400/30">
-              <Heart className="h-5 w-5 text-white" />
-            </div>
+            <img
+              src="/TathminiAfyaLogo.png"
+              alt="Tathmini Afya Logo"
+              className="h-10 w-10 rounded-lg border border-blue-400/30"
+            />
             <span className="text-base sm:text-lg font-bold text-slate-900">{t('common.appName')}</span>
           </div>
           <div className="flex items-center gap-2">
@@ -234,9 +236,8 @@ export default function Landing() {
               <p className="text-sm sm:text-lg text-slate-600">{t('landing.description')}</p>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-50 to-white border border-slate-200">
-              <div className="relative rounded-[2rem] border border-slate-100 bg-white p-3 sm:p-6 lg:p-8">
-                <div className="grid grid-cols-3 gap-2 sm:gap-4">
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[rgba(59,130,246,0.40)] via-[rgba(96,165,250,0.30)] to-[rgba(147,197,253,0.25)] border border-blue-200/40 p-6">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   {[
                     {
                       title: t('landing.features'),
@@ -252,13 +253,12 @@ export default function Landing() {
                     },
                   ].map((feature, i) => (
                     <Link key={i} to={feature.path} className="group block">
-                      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-2 sm:p-4 text-center active:scale-[0.98]">
+                      <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer overflow-hidden p-3 sm:p-5 text-center active:scale-[0.98]">
                         <h3 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight line-clamp-2">{feature.title}</h3>
                       </div>
                     </Link>
                   ))}
                 </div>
-              </div>
             </div>
           </div>
         </div>
@@ -268,14 +268,14 @@ export default function Landing() {
       <section className="relative py-12 sm:py-20 px-4 sm:px-6 z-10 scroll-reveal delay-100">
         <div className="max-w-5xl mx-auto">
           <Link to="/shop" className="group block space-y-4">
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 p-6 transition-all duration-500 hover:-translate-y-0.5">
-              <div className="relative rounded-[1.75rem] border border-slate-100 bg-white p-6">
+            <div className="relative overflow-hidden rounded-[2rem] border border-blue-200/40 bg-gradient-to-br from-[rgba(59,130,246,0.35)] via-[rgba(96,165,250,0.25)] to-[rgba(147,197,253,0.20)] p-6 transition-all duration-500 hover:-translate-y-0.5">
+              <div className="relative rounded-[1.75rem] border border-slate-200 bg-white p-6">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">{t('landing.tools.heading')}</h2>
                 <p className="mt-3 text-sm sm:text-base text-slate-700">{t('landing.tools.intro')}</p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 p-6 transition-all duration-500 hover:-translate-y-0.5">
+            <div className="relative overflow-hidden rounded-[2rem] border border-blue-200/40 bg-gradient-to-br from-[rgba(59,130,246,0.38)] via-[rgba(96,165,250,0.28)] to-[rgba(147,197,253,0.22)] p-6 transition-all duration-500 hover:-translate-y-0.5">
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 lg:gap-10 items-center">
                 <div className="space-y-4">
                   <h3 className="text-xl sm:text-2xl font-black text-slate-900">{t('landing.tools.subheading')}</h3>
@@ -291,7 +291,7 @@ export default function Landing() {
                       <span key={i} className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white border border-slate-200 text-slate-900 text-xs sm:text-sm font-semibold">
                         <c.icon className="h-3.5 w-3.5 text-slate-700" />{c.label}
                       </span>
-                    ))}
+                    ))}  
                   </div>
                   <div className="pt-3">
                     <span className="inline-flex items-center gap-2 h-12 px-6 rounded-xl bg-slate-900 text-white font-bold transition-all">
@@ -301,7 +301,7 @@ export default function Landing() {
                 </div>
 
                 <div className="relative hidden lg:flex h-64 w-64 items-center justify-center rounded-[2rem] border border-slate-200 bg-white">
-                  <ShoppingBag className="h-16 w-16 text-sky-700" />
+                  <ShoppingBag className="h-16 w-16 text-slate-700" />
                 </div>
               </div>
             </div>
@@ -327,14 +327,14 @@ export default function Landing() {
         </div>
         <div className="max-w-6xl mx-auto relative scroll-reveal delay-100">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center">
-            <div className="relative h-56 sm:h-96 rounded-3xl overflow-hidden border border-slate-200 animate-fade-in-up order-2 lg:order-1">
+            <div className="relative h-56 sm:h-96 rounded-3xl overflow-hidden border border-blue-200/40 animate-fade-in-up order-2 lg:order-1">
               <img
                 src="/2 (2).png"
                 alt="Health Features"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
             </div>
             <div className="space-y-4 sm:space-y-6 scroll-reveal delay-200 order-1 lg:order-2">
               <h3 className="text-2xl sm:text-4xl font-black text-slate-900">
@@ -365,7 +365,7 @@ export default function Landing() {
       {/* CTA Section */}
       <section className="relative py-12 sm:py-24 px-4 sm:px-6 z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="group relative rounded-3xl overflow-hidden scroll-reveal delay-100 transition-all duration-500 hover:-translate-y-0.5 bg-gradient-to-br from-white via-blue-50/60 to-white border border-slate-200">
+          <div className="group relative rounded-3xl overflow-hidden scroll-reveal delay-100 transition-all duration-500 hover:-translate-y-0.5 bg-gradient-to-br from-[rgba(255,255,255,0.95)] via-[rgba(96,165,250,0.15)] to-[rgba(255,255,255,0.95)] border border-blue-200/30">
             <div className="relative p-8 sm:p-12 lg:p-16 text-center space-y-6 sm:space-y-8">
               <div>
                 <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-3 sm:mb-4">{t('landing.startToday')}</h2>
@@ -375,7 +375,7 @@ export default function Landing() {
                 <LoginDropdown variant="cta" />
                 <Link
                   to="/contact"
-                  className="w-full sm:w-auto inline-flex h-12 sm:h-14 items-center justify-center rounded-xl bg-white px-6 sm:px-8 text-slate-900 font-semibold border border-slate-200 transition-all hover:-translate-y-0.5 hover:border-blue-300"
+                  className="w-full sm:w-auto inline-flex h-12 sm:h-14 items-center justify-center rounded-xl bg-gradient-to-br from-[rgba(255,255,255,0.9)] to-[rgba(96,165,250,0.10)] px-6 sm:px-8 text-slate-900 font-semibold border border-blue-200/40 transition-all hover:-translate-y-0.5 hover:border-blue-300"
                 >
                   {t('landing.qualitySummary')}
                 </Link>
@@ -388,9 +388,9 @@ export default function Landing() {
       {/* Disclaimer */}
       <section className="relative py-10 sm:py-14 px-4 sm:px-6 z-10 scroll-reveal delay-100">
         <div className="max-w-4xl mx-auto">
-          <div className="rounded-3xl border border-amber-200 bg-amber-50/60 p-5 sm:p-8">
+          <div className="rounded-3xl border border-amber-200/50 bg-gradient-to-br from-amber-50/70 to-amber-50/40 p-5 sm:p-8">
             <div className="flex items-start gap-3 sm:gap-4">
-              <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0">
+              <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-amber-100/80 to-amber-50/60 text-amber-700 flex items-center justify-center shrink-0">
                 <AlertTriangle className="h-5 w-5" />
               </div>
               <div className="space-y-2 sm:space-y-3">
@@ -411,8 +411,8 @@ export default function Landing() {
           {/* Expert highlight strip */}
           <div className="px-5 sm:px-8 py-5 sm:py-6 bg-gradient-to-r from-slate-50 via-white to-slate-50 border-b border-slate-200/70">
             <div className="max-w-6xl mx-auto flex items-center gap-4">
-              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-slate-900/5 flex items-center justify-center shrink-0 ring-1 ring-slate-200">
-                <Stethoscope className="h-6 w-6 sm:h-7 sm:w-7 text-slate-700" />
+              <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-gradient-to-br from-blue-100/40 to-slate-100/30 flex items-center justify-center shrink-0 border border-blue-200/30">
+                <Stethoscope className="h-6 w-6 sm:h-7 sm:w-7 text-blue-600" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-[10px] sm:text-xs font-bold tracking-wider uppercase flex items-center gap-1.5 text-slate-500"><Award className="w-3 h-3" />{t('landing.expert.heading')}</p>
@@ -424,9 +424,11 @@ export default function Landing() {
 
           <div className="max-w-6xl mx-auto px-5 sm:px-8 py-8 sm:py-10">
             <div className="flex items-center gap-2 mb-6">
-              <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center">
-                <Heart className="h-4 w-4 text-white" />
-              </div>
+              <img
+                src="/TathminiAfyaLogo.png"
+                alt="Tathmini Afya Logo"
+                className="h-12 w-12 rounded-xl"
+              />
               <span className="text-base font-black text-slate-900">{t('common.appName')}</span>
             </div>
 

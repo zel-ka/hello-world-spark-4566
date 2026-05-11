@@ -12,9 +12,11 @@ export default function About() {
       <nav className="fixed top-0 left-0 right-0 z-40 glassmorphic-nav border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center border border-blue-400/30 shadow-glow">
-              <Heart className="h-5 w-5 text-white" />
-            </div>
+            <img
+              src="/TathminiAfyaLogo.png"
+              alt="Tathmini Afya Logo"
+              className="h-8 w-8 rounded-lg border border-blue-400/30 shadow-glow"
+            />
             <span className="text-base sm:text-lg font-bold text-slate-900">{t('common.appName')}</span>
           </Link>
           <div className="flex items-center gap-2">

@@ -28,6 +28,9 @@ import {
   Droplet,
   Brain,
   Utensils,
+  Stethoscope,
+  LineChart as LineChartIcon,
+  Salad,
 } from "lucide-react";
 
 type GuestFeature = "summary" | "add-data" | "insights" | "calculators" | "assessments";
@@ -100,9 +103,11 @@ export default function GuestDashboard() {
           <div className="relative z-10">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <HeartPulse className="h-5 w-5 text-primary" />
-                </div>
+                <img
+                  src="/TathminiAfyaLogo.png"
+                  alt="Tathmini Afya Logo"
+                  className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0"
+                />
                 <div className="min-w-0">
                   <p className="text-xs text-muted-foreground truncate">{t("guest.greeting")}</p>
                   <h1 className="text-base font-bold text-foreground truncate">{t("guest.name")}</h1>
@@ -163,22 +168,41 @@ export default function GuestDashboard() {
           {/* Locked feature buttons (mirror PatientDashboard) */}
           <div className="grid gap-4 sm:grid-cols-2">
             <LockedTile
+              icon={
+                <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Stethoscope className="h-5 w-5" />
+                </div>
+              }
               title={t("patient.addDataTitle")}
               desc={t("patient.addDataDesc")}
               onClick={() => lock("add-data")}
             />
             <LockedTile
-              icon={<ClipboardList className="h-4 w-4 text-success mt-0.5 shrink-0" />}
+              icon={
+                <div className="h-10 w-10 rounded-xl bg-success/10 text-success flex items-center justify-center shrink-0">
+                  <ClipboardList className="h-5 w-5" />
+                </div>
+              }
               title={t("patient.assessmentsTitle")}
               desc={t("patient.assessmentsDesc")}
               onClick={() => lock("assessments")}
             />
             <LockedTile
+              icon={
+                <div className="h-10 w-10 rounded-xl bg-info/10 text-info flex items-center justify-center shrink-0">
+                  <LineChartIcon className="h-5 w-5" />
+                </div>
+              }
               title={t("patient.insightsTitle")}
               desc={t("patient.insightsDesc")}
               onClick={() => lock("insights")}
             />
             <LockedTile
+              icon={
+                <div className="h-10 w-10 rounded-xl bg-warning/10 text-warning flex items-center justify-center shrink-0">
+                  <Salad className="h-5 w-5" />
+                </div>
+              }
               title={t("patient.toolsTitle")}
               desc={t("patient.toolsDesc")}
               onClick={() => lock("calculators")}
