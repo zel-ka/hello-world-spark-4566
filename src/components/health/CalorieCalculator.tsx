@@ -136,9 +136,60 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
         ? "Lengo: Kupunguza uzito polepole"
         : "Lengo: Kudumisha uzito wako";
 
-  const recommended = FOODS.filter((f) => f[goal] === "good");
-  const moderate = FOODS.filter((f) => f[goal] === "ok");
-  const avoid = FOODS.filter((f) => f[goal] === "avoid");
+  // Target kcal adjusted by goal
+  const targetKcal = useMemo(() => {
+    if (!tdee) return 0;
+    if (goal === "bulk") return tdee + 300;
+    if (goal === "cut") return Math.max(1200, tdee - 500);
+    return tdee;
+  }, [tdee, goal]);
+
+  // Per-user seed so two different users get different (but stable) plans
+  const seed = useMemo(() => {
+    const s = (sex === "male" ? 1 : 2) * 7 + age + Math.round(weight) + Math.round(height) +
+      ACTIVITY_OPTIONS.findIndex((a) => a.value === activity);
+    return Math.abs(s);
+  }, [sex, age, weight, height, activity]);
+
+  // Build a daily meal plan that hits targetKcal
+  const mealPlan: Meal[] = useMemo(() => {
+    if (!targetKcal) return [];
+    const split = { breakfast: 0.25, lunch: 0.35, dinner: 0.30, snack: 0.10 };
+
+    const buildMeal = (
+      title: string,
+      icon: React.ReactNode,
+      portion: number,
+      pattern: Category[],
+      offset: number
+    ): Meal => {
+      const mealTarget = Math.round(targetKcal * portion);
+      const picks = pattern.map((c, i) => pickFor(c, goal, seed + offset + i));
+      const baseSum = picks.reduce((s, f) => s + f.kcal, 0);
+      const factor = baseSum > 0 ? mealTarget / baseSum : 1;
+      const items: MealItem[] = picks.map((f) => {
+        // round servings to nearest 0.5, min 0.5
+        const raw = factor;
+        const servings = Math.max(0.5, Math.round(raw * 2) / 2);
+        return { food: f, servings, kcal: Math.round(f.kcal * servings) };
+      });
+      return { title, icon, items, targetKcal: mealTarget };
+    };
+
+    return [
+      buildMeal("Kifungua kinywa", <Sunrise className="h-4 w-4" />, split.breakfast, ["wanga", "protini", "matunda"], 0),
+      buildMeal("Chakula cha mchana", <Sun className="h-4 w-4" />, split.lunch, ["wanga", "protini", "mboga"], 3),
+      buildMeal("Chakula cha jioni", <Moon className="h-4 w-4" />, split.dinner, ["wanga", "protini", "mboga"], 6),
+      buildMeal("Kitafunwa", <Cookie className="h-4 w-4" />, split.snack, ["matunda"], 9),
+    ];
+  }, [targetKcal, goal, seed]);
+
+  const planTotalKcal = mealPlan.reduce(
+    (s, m) => s + m.items.reduce((x, it) => x + it.kcal, 0),
+    0
+  );
+
+  const avoidList = FOODS.filter((f) => f[goal] === "avoid");
 
   const toneClass =
     bmiBand.tone === "success"
@@ -146,35 +197,6 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
       : bmiBand.tone === "warning"
         ? "text-warning bg-warning/15 border-warning/30"
         : "text-destructive bg-destructive/15 border-destructive/30";
-
-  const renderFoodGroup = (
-    title: string,
-    items: FoodEntry[],
-    icon: React.ReactNode,
-    accent: string
-  ) => (
-    <div>
-      <div className={`flex items-center gap-2 mb-2 ${accent}`}>
-        {icon}
-        <p className="text-sm font-semibold">{title}</p>
-        <span className="text-[10px] text-muted-foreground">({items.length})</span>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-        {items.map((f) => (
-          <div
-            key={f.name}
-            className="flex items-center justify-between gap-2 rounded-lg bg-background/60 border border-border/40 px-2.5 py-1.5"
-          >
-            <div className="min-w-0">
-              <p className="text-[12px] font-medium text-foreground truncate">{f.name}</p>
-              <p className="text-[10px] text-muted-foreground truncate">{f.serving}</p>
-            </div>
-            <span className="text-[11px] font-bold text-primary whitespace-nowrap">{f.kcal} kcal</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 
   return (
     <div className="space-y-5 animate-fade-in">
