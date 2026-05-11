@@ -202,25 +202,30 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
         </div>
       </div>
 
-      {/* Tanzania food suggestions */}
-      <div className="rounded-2xl frosted-glass border border-border/40 p-4">
-        <div className="flex items-center gap-2 mb-3">
+      {/* Tanzania food catalog */}
+      <div className="rounded-2xl frosted-glass border border-border/40 p-4 space-y-4">
+        <div className="flex items-center gap-2">
           <Apple className="h-4 w-4 text-success" />
           <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
             {t("calc.foodIdeas")}
           </p>
         </div>
-        <ul className="space-y-2">
-          {foodSuggestions.map((f) => (
-            <li key={f.id} className="flex items-center justify-between text-sm">
-              <span className="text-foreground">
-                {t(f.nameKey)} <span className="text-xs text-muted-foreground">· {t(f.servingKey)}</span>
-              </span>
-              <span className="text-xs font-mono font-semibold text-foreground">{f.kcal} kcal</span>
-            </li>
-          ))}
-        </ul>
-        <p className="text-[10px] text-muted-foreground mt-3">{t("calc.foodNote")}</p>
+        {TZ_FOOD_CATALOG.map((cat) => (
+          <div key={cat.titleSw}>
+            <p className="text-sm font-semibold text-foreground mb-2">{cat.titleSw}</p>
+            <div className="flex flex-wrap gap-1.5">
+              {cat.items.map((item, i) => (
+                <span
+                  key={`${cat.titleSw}-${i}`}
+                  className="text-[11px] bg-primary/10 text-primary rounded-full px-2.5 py-1 font-medium border border-primary/20"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+        <p className="text-[10px] text-muted-foreground">{t("calc.foodNote")}</p>
       </div>
     </div>
   );
