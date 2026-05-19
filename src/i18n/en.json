@@ -114,7 +114,7 @@
     },
     "expert": {
       "heading": "Our Expert",
-      "name": "Dr. Daniel Josia Magomele",
+      "name": "Dr. Daniel Josia Magomere",
       "credentials": "MD, MPH",
       "role": "Public Health Specialist & Lifestyle Coach"
     },
@@ -731,7 +731,6 @@
     "condition.kidney": "Kidney",
     "diet": "Dietary mode",
     "diet.balanced": "Balanced",
-    "diet.sda": "SDA",
     "diet.vegetarian": "Vegetarian",
     "diet.vegan": "Vegan",
     "diet.highProtein": "High protein",
