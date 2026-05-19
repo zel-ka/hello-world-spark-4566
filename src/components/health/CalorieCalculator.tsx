@@ -297,18 +297,18 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
           <div>
             <label className="text-xs font-semibold text-muted-foreground">{t("nutrition.condition")}</label>
             <select value={condition} onChange={(e) => setCondition(e.target.value as Condition)}
-              className="mt-1 w-full h-10 rounded-xl border-2 border-border/40 bg-background px-2 text-xs font-medium">
+              className="mt-1 w-full h-10 rounded-xl border-2 border-border/40 bg-background text-foreground px-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
               {(["none","diabetes","hypertension","kidney"] as Condition[]).map((c) => (
-                <option key={c} value={c}>{t(`nutrition.condition.${c}`)}</option>
+                <option key={c} value={c} className="bg-background text-foreground">{t(`nutrition.condition.${c}`)}</option>
               ))}
             </select>
           </div>
           <div>
             <label className="text-xs font-semibold text-muted-foreground">{t("nutrition.diet")}</label>
             <select value={diet} onChange={(e) => setDiet(e.target.value as DietMode)}
-              className="mt-1 w-full h-10 rounded-xl border-2 border-border/40 bg-background px-2 text-xs font-medium">
+              className="mt-1 w-full h-10 rounded-xl border-2 border-border/40 bg-background text-foreground px-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary">
               {(["balanced","vegetarian","vegan","highProtein","lowSugar","lowSodium"] as DietMode[]).map((d) => (
-                <option key={d} value={d}>{t(`nutrition.diet.${d}`)}</option>
+                <option key={d} value={d} className="bg-background text-foreground">{t(`nutrition.diet.${d}`)}</option>
               ))}
             </select>
           </div>
