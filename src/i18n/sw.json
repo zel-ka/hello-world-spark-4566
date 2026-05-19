@@ -112,7 +112,7 @@
 },
 "expert": {
 "heading": "Mtaalamu Wetu",
-"name": "Dr. Daniel Josia Magomele",
+"name": "Dr. Daniel Josia Magomere",
 "credentials": "MD, MPH",
 "role": "Mtaalamu wa Afya ya Umma & Kocha wa Mtindo wa Maisha"
 },
@@ -739,7 +739,6 @@
   "condition.kidney": "Figo",
   "diet": "Mtindo wa lishe",
   "diet.balanced": "Mlo kamili",
-  "diet.sda": "SDA",
   "diet.vegetarian": "Vegetarian",
   "diet.vegan": "Vegan",
   "diet.highProtein": "Protini nyingi",
