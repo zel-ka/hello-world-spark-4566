@@ -26,7 +26,7 @@ const ACTIVITY_OPTIONS: { value: ActivityLevel; labelKey: string }[] = [
 
 type Goal = "bulk" | "maintain" | "cut";
 type Condition = "none" | "diabetes" | "hypertension" | "kidney";
-type DietMode = "balanced" | "sda" | "vegetarian" | "vegan" | "highProtein" | "lowSugar" | "lowSodium";
+type DietMode = "balanced" | "vegetarian" | "vegan" | "highProtein" | "lowSugar" | "lowSodium";
 type Category = "carbs" | "legumes" | "vegetables" | "fruits" | "animal" | "fats" | "snacks" | "drinks";
 type MealKey = "breakfast" | "lunch" | "dinner" | "snacks" | "drinks";
 
@@ -179,8 +179,8 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
     return FOODS.filter((f) => {
       // Dietary mode
       if (diet === "vegan" && f.animal) return false;
-      if ((diet === "vegetarian" || diet === "sda") && (f.id === "samaki" || f.id === "dagaa" || f.id === "kuku")) return false;
-      if (diet !== "balanced" && diet !== "vegan" && diet !== "vegetarian" && diet !== "sda") {
+      if (diet === "vegetarian" && (f.id === "samaki" || f.id === "dagaa" || f.id === "kuku")) return false;
+      if (diet !== "balanced" && diet !== "vegan" && diet !== "vegetarian") {
         // For specialty diets, prefer foods tagged for that diet
         if (!f.diets.includes(diet)) return false;
       }
@@ -211,7 +211,7 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
       if (diet === "lowSugar" && r.flags.highSugar) return true;
       if (diet === "lowSodium" && r.flags.highSodium) return true;
       // default: show all general reduce items
-      return condition === "none" && (diet === "balanced" || diet === "highProtein" || diet === "vegan" || diet === "vegetarian" || diet === "sda");
+      return condition === "none" && (diet === "balanced" || diet === "highProtein" || diet === "vegan" || diet === "vegetarian");
     });
   }, [condition, diet]);
 
