@@ -47,70 +47,70 @@ interface Food {
 
 const FOODS: Food[] = [
   // Carbohydrates
-  { id: "ugali_dona", sw: "Ugali wa dona", en: "Stiff porridge (whole maize)", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 210, meals: ["lunch", "dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "wali", sw: "Wali wa kawaida", en: "White rice", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "wali_brown", sw: "Wali wa brown", en: "Brown rice", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 215, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "makande", sw: "Makande", en: "Maize & beans", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 260, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium","highProtein"], highProtein: true },
-  { id: "viazi", sw: "Viazi mviringo", en: "Potatoes", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 160, meals: ["lunch","dinner","breakfast"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "viazi_vitamu", sw: "Viazi vitamu", en: "Sweet potatoes", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["breakfast","lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "mhogo", sw: "Mhogo", en: "Cassava", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner","snacks"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "ndizi_kupika", sw: "Ndizi za kupika", en: "Cooking bananas", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "matoke", sw: "Matoke", en: "Matoke", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 170, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "mahindi", sw: "Mahindi ya kuchemsha", en: "Boiled maize", category: "carbs", serving: { sw: "gunzi 1", en: "1 cob" }, kcal: 150, meals: ["snacks","breakfast"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "uji_lishe", sw: "Uji wa lishe", en: "Nutrient porridge", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["breakfast"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "uji_ulezi", sw: "Uji wa ulezi", en: "Finger-millet porridge", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 150, meals: ["breakfast"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "ugali_dona", sw: "Ugali wa dona", en: "Stiff porridge (whole maize)", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 210, meals: ["lunch", "dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "wali", sw: "Wali wa kawaida", en: "White rice", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "wali_brown", sw: "Wali wa brown", en: "Brown rice", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 215, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "makande", sw: "Makande", en: "Maize & beans", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 260, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium","highProtein"], highProtein: true },
+  { id: "viazi", sw: "Viazi mviringo", en: "Potatoes", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 160, meals: ["lunch","dinner","breakfast"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "viazi_vitamu", sw: "Viazi vitamu", en: "Sweet potatoes", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["breakfast","lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "mhogo", sw: "Mhogo", en: "Cassava", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner","snacks"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "ndizi_kupika", sw: "Ndizi za kupika", en: "Cooking bananas", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "matoke", sw: "Matoke", en: "Matoke", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 170, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "mahindi", sw: "Mahindi ya kuchemsha", en: "Boiled maize", category: "carbs", serving: { sw: "gunzi 1", en: "1 cob" }, kcal: 150, meals: ["snacks","breakfast"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "uji_lishe", sw: "Uji wa lishe", en: "Nutrient porridge", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["breakfast"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "uji_ulezi", sw: "Uji wa ulezi", en: "Finger-millet porridge", category: "carbs", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 150, meals: ["breakfast"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
 
   // Legumes / plant proteins
-  { id: "maharage", sw: "Maharage", en: "Beans", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 230, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
-  { id: "choroko", sw: "Choroko", en: "Green grams", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 210, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
-  { id: "kunde", sw: "Kunde", en: "Cowpeas", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
-  { id: "dengu", sw: "Dengu", en: "Lentils", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 220, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
-  { id: "njegere", sw: "Njegere", en: "Peas", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "soya", sw: "Soya", en: "Soya", category: "legumes", serving: { sw: "kikombe 1/2", en: "1/2 cup" }, kcal: 190, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
-  { id: "karanga", sw: "Karanga", en: "Peanuts", category: "legumes", serving: { sw: "kiganja 1 (30g)", en: "1 handful (30g)" }, kcal: 170, meals: ["snacks"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "maharage", sw: "Maharage", en: "Beans", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 230, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "choroko", sw: "Choroko", en: "Green grams", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 210, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "kunde", sw: "Kunde", en: "Cowpeas", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 200, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "dengu", sw: "Dengu", en: "Lentils", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 220, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "njegere", sw: "Njegere", en: "Peas", category: "legumes", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "soya", sw: "Soya", en: "Soya", category: "legumes", serving: { sw: "kikombe 1/2", en: "1/2 cup" }, kcal: 190, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
+  { id: "karanga", sw: "Karanga", en: "Peanuts", category: "legumes", serving: { sw: "kiganja 1 (30g)", en: "1 handful (30g)" }, kcal: 170, meals: ["snacks"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"], highProtein: true },
 
   // Vegetables
-  { id: "mchicha", sw: "Mchicha", en: "Amaranth greens", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 40, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "kisamvu", sw: "Kisamvu", en: "Cassava leaves", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 60, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "matembele", sw: "Matembele", en: "Sweet potato leaves", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 50, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "sukuma", sw: "Sukuma wiki", en: "Collard greens", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 45, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "spinachi", sw: "Spinachi", en: "Spinach", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 40, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "bamia", sw: "Bamia", en: "Okra", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 35, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "kabichi", sw: "Kabichi", en: "Cabbage", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 35, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "karoti", sw: "Karoti", en: "Carrots", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 50, meals: ["lunch","dinner","snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "mchicha", sw: "Mchicha", en: "Amaranth greens", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 40, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "kisamvu", sw: "Kisamvu", en: "Cassava leaves", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 60, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "matembele", sw: "Matembele", en: "Sweet potato leaves", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 50, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "sukuma", sw: "Sukuma wiki", en: "Collard greens", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 45, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "spinachi", sw: "Spinachi", en: "Spinach", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 40, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "bamia", sw: "Bamia", en: "Okra", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 35, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "kabichi", sw: "Kabichi", en: "Cabbage", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 35, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "karoti", sw: "Karoti", en: "Carrots", category: "vegetables", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 50, meals: ["lunch","dinner","snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
 
   // Fruits
-  { id: "ndizi_mbivu", sw: "Ndizi mbivu", en: "Ripe banana", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 105, meals: ["breakfast","snacks"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "papai", sw: "Papai", en: "Papaya", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 60, meals: ["breakfast","snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "embe", sw: "Embe", en: "Mango", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 100, meals: ["snacks","breakfast"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "chungwa", sw: "Chungwa", en: "Orange", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 65, meals: ["breakfast","snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "tikiti", sw: "Tikiti maji", en: "Watermelon", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 45, meals: ["snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "fenesi", sw: "Fenesi", en: "Jackfruit", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 155, meals: ["snacks"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "parachichi", sw: "Parachichi", en: "Avocado", category: "fruits", serving: { sw: "1/2 tunda", en: "1/2 fruit" }, kcal: 160, meals: ["breakfast","lunch","snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "ndizi_mbivu", sw: "Ndizi mbivu", en: "Ripe banana", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 105, meals: ["breakfast","snacks"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "papai", sw: "Papai", en: "Papaya", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 60, meals: ["breakfast","snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "embe", sw: "Embe", en: "Mango", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 100, meals: ["snacks","breakfast"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "chungwa", sw: "Chungwa", en: "Orange", category: "fruits", serving: { sw: "tunda 1", en: "1 fruit" }, kcal: 65, meals: ["breakfast","snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "tikiti", sw: "Tikiti maji", en: "Watermelon", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 45, meals: ["snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "fenesi", sw: "Fenesi", en: "Jackfruit", category: "fruits", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 155, meals: ["snacks"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "parachichi", sw: "Parachichi", en: "Avocado", category: "fruits", serving: { sw: "1/2 tunda", en: "1/2 fruit" }, kcal: 160, meals: ["breakfast","lunch","snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
 
   // Animal (optional)
-  { id: "samaki", sw: "Samaki (sangara/sato)", en: "Fish (Nile perch/tilapia)", category: "animal", serving: { sw: "kipande 150g", en: "150g piece" }, kcal: 220, meals: ["lunch","dinner"], diets: ["vegetarian","sda","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
-  { id: "dagaa", sw: "Dagaa", en: "Sardines", category: "animal", serving: { sw: "kikombe 1/2", en: "1/2 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["vegetarian","sda","highProtein","lowSugar"], highProtein: true, animal: true },
-  { id: "mayai", sw: "Mayai", en: "Eggs", category: "animal", serving: { sw: "yai 1", en: "1 egg" }, kcal: 78, meals: ["breakfast","lunch"], diets: ["vegetarian","sda","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
-  { id: "maziwa", sw: "Maziwa fresh", en: "Fresh milk", category: "animal", serving: { sw: "glasi 1 (250ml)", en: "1 glass (250ml)" }, kcal: 150, meals: ["breakfast","snacks"], diets: ["vegetarian","sda","lowSodium"], animal: true },
-  { id: "mtindi", sw: "Mtindi wa asili", en: "Plain yoghurt", category: "animal", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 130, meals: ["breakfast","snacks"], diets: ["vegetarian","sda","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
+  { id: "samaki", sw: "Samaki (sangara/sato)", en: "Fish (Nile perch/tilapia)", category: "animal", serving: { sw: "kipande 150g", en: "150g piece" }, kcal: 220, meals: ["lunch","dinner"], diets: ["vegetarian","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
+  { id: "dagaa", sw: "Dagaa", en: "Sardines", category: "animal", serving: { sw: "kikombe 1/2", en: "1/2 cup" }, kcal: 180, meals: ["lunch","dinner"], diets: ["vegetarian","highProtein","lowSugar"], highProtein: true, animal: true },
+  { id: "mayai", sw: "Mayai", en: "Eggs", category: "animal", serving: { sw: "yai 1", en: "1 egg" }, kcal: 78, meals: ["breakfast","lunch"], diets: ["vegetarian","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
+  { id: "maziwa", sw: "Maziwa fresh", en: "Fresh milk", category: "animal", serving: { sw: "glasi 1 (250ml)", en: "1 glass (250ml)" }, kcal: 150, meals: ["breakfast","snacks"], diets: ["vegetarian","lowSodium"], animal: true },
+  { id: "mtindi", sw: "Mtindi wa asili", en: "Plain yoghurt", category: "animal", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 130, meals: ["breakfast","snacks"], diets: ["vegetarian","highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
   { id: "kuku", sw: "Kuku wa kuchemsha", en: "Boiled chicken", category: "animal", serving: { sw: "kipande 150g", en: "150g piece" }, kcal: 250, meals: ["lunch","dinner"], diets: ["highProtein","lowSugar","lowSodium"], highProtein: true, animal: true },
 
   // Healthy fats
-  { id: "ufuta", sw: "Mbegu za ufuta", en: "Sesame seeds", category: "fats", serving: { sw: "kijiko 1", en: "1 tbsp" }, kcal: 50, meals: ["breakfast","snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "alizeti", sw: "Mbegu za alizeti", en: "Sunflower seeds", category: "fats", serving: { sw: "kijiko 1", en: "1 tbsp" }, kcal: 55, meals: ["snacks"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "nazi", sw: "Nazi", en: "Coconut", category: "fats", serving: { sw: "kijiko 2", en: "2 tbsp" }, kcal: 70, meals: ["lunch","dinner"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "ufuta", sw: "Mbegu za ufuta", en: "Sesame seeds", category: "fats", serving: { sw: "kijiko 1", en: "1 tbsp" }, kcal: 50, meals: ["breakfast","snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "alizeti", sw: "Mbegu za alizeti", en: "Sunflower seeds", category: "fats", serving: { sw: "kijiko 1", en: "1 tbsp" }, kcal: 55, meals: ["snacks"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "nazi", sw: "Nazi", en: "Coconut", category: "fats", serving: { sw: "kijiko 2", en: "2 tbsp" }, kcal: 70, meals: ["lunch","dinner"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
 
   // Healthy snacks
-  { id: "korosho", sw: "Korosho", en: "Cashews", category: "snacks", serving: { sw: "kiganja 1 (30g)", en: "1 handful (30g)" }, kcal: 160, meals: ["snacks"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar"] },
-  { id: "njugu", sw: "Njugu", en: "Groundnuts", category: "snacks", serving: { sw: "kiganja 1", en: "1 handful" }, kcal: 165, meals: ["snacks"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"] },
+  { id: "korosho", sw: "Korosho", en: "Cashews", category: "snacks", serving: { sw: "kiganja 1 (30g)", en: "1 handful (30g)" }, kcal: 160, meals: ["snacks"], diets: ["vegetarian","vegan","highProtein","lowSugar"] },
+  { id: "njugu", sw: "Njugu", en: "Groundnuts", category: "snacks", serving: { sw: "kiganja 1", en: "1 handful" }, kcal: 165, meals: ["snacks"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"] },
 
   // Drinks
-  { id: "maji", sw: "Maji", en: "Water", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 0, meals: ["drinks"], diets: ["sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"] },
-  { id: "fresh_juice", sw: "Juice ya matunda fresh", en: "Fresh fruit juice", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 110, meals: ["drinks","breakfast"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "smoothie", sw: "Smoothie ya matunda", en: "Fruit smoothie", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 180, meals: ["drinks","breakfast"], diets: ["sda","vegetarian","vegan","lowSodium"] },
-  { id: "tangawizi", sw: "Chai ya tangawizi", en: "Ginger tea", category: "drinks", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 5, meals: ["drinks","breakfast"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
-  { id: "limao", sw: "Chai ya limao", en: "Lemon tea", category: "drinks", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 5, meals: ["drinks","breakfast"], diets: ["sda","vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "maji", sw: "Maji", en: "Water", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 0, meals: ["drinks"], diets: ["vegetarian","vegan","highProtein","lowSugar","lowSodium"] },
+  { id: "fresh_juice", sw: "Juice ya matunda fresh", en: "Fresh fruit juice", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 110, meals: ["drinks","breakfast"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "smoothie", sw: "Smoothie ya matunda", en: "Fruit smoothie", category: "drinks", serving: { sw: "glasi 1", en: "1 glass" }, kcal: 180, meals: ["drinks","breakfast"], diets: ["vegetarian","vegan","lowSodium"] },
+  { id: "tangawizi", sw: "Chai ya tangawizi", en: "Ginger tea", category: "drinks", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 5, meals: ["drinks","breakfast"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
+  { id: "limao", sw: "Chai ya limao", en: "Lemon tea", category: "drinks", serving: { sw: "kikombe 1", en: "1 cup" }, kcal: 5, meals: ["drinks","breakfast"], diets: ["vegetarian","vegan","lowSugar","lowSodium"] },
 ];
 
 interface ReduceItem { id: string; sw: string; en: string; reasonSw: string; reasonEn: string; altIds: string[]; flags: { highSugar?: boolean; highSodium?: boolean }; }
@@ -307,7 +307,7 @@ export function CalorieCalculator({ initialWeight = 70, initialHeight = 170, ini
             <label className="text-xs font-semibold text-muted-foreground">{t("nutrition.diet")}</label>
             <select value={diet} onChange={(e) => setDiet(e.target.value as DietMode)}
               className="mt-1 w-full h-10 rounded-xl border-2 border-border/40 bg-background px-2 text-xs font-medium">
-              {(["balanced","sda","vegetarian","vegan","highProtein","lowSugar","lowSodium"] as DietMode[]).map((d) => (
+              {(["balanced","vegetarian","vegan","highProtein","lowSugar","lowSodium"] as DietMode[]).map((d) => (
                 <option key={d} value={d}>{t(`nutrition.diet.${d}`)}</option>
               ))}
             </select>
