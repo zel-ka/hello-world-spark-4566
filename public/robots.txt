@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://hello-world-spark-4566.lovable.app/sitemap.xml
