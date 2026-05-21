@@ -1,0 +1,15 @@
+# Tathmini Afya
+
+> Tathmini Afya is a digital health platform to monitor health, evaluate risk factors, track vital signs, and receive timely guidance for preventing chronic disease.
+
+## Pages
+
+- [Home](/): Overview of Tathmini Afya and what it offers.
+- [About](/about): The mission and team behind Tathmini Afya.
+- [Features](/features): Health monitoring, assessments, and nutrition tools.
+- [Shop](/shop): Recommended health products.
+- [Contact](/contact): Reach the Tathmini Afya support team.
+
+## Optional
+
+- [Try as guest](/try): Explore the patient dashboard without an account.
