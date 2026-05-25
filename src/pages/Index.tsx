@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { SmartPopupManager } from "@/components/onboarding/SmartPopupManager";
 import { BottomNav } from "@/components/BottomNav";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PatientsSection } from "@/components/sections/PatientsSection";
@@ -62,6 +63,7 @@ export default function Index() {
 
   return (
     <div className="h-screen flex flex-col bg-background">
+      <SmartPopupManager context="doctor-dashboard" userId={user?.id} />
       {/* Main scrollable dashboard - always rendered */}
       <div ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar pb-24 safe-area-bottom">
         

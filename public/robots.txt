@@ -1,3 +1,5 @@
+Sitemap: https://tathminiafya.com/sitemap.xml
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,5 +14,3 @@ Allow: /
 
 User-agent: *
 Allow: /
-
-Sitemap: https://hello-world-spark-4566.lovable.app/sitemap.xml

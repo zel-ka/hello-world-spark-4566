@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useI18n } from "@/hooks/useI18n";
+import { SmartPopupManager } from "@/components/onboarding/SmartPopupManager";
 import { Button } from "@/components/ui/button";
 import { BottomNav } from "@/components/BottomNav";
 import { HealthScoreRing } from "@/components/health/HealthScoreRing";
@@ -96,6 +97,7 @@ export default function GuestDashboard() {
 
   return (
     <div className="h-screen flex flex-col bg-background">
+      <SmartPopupManager context="guest-dashboard" />
       <div ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar pb-24 safe-area-bottom">
         {/* Header */}
         <div className="relative overflow-hidden bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-md border-b border-white/20 px-5 pt-8 pb-3">

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hello-world-spark-4566.lovable.app/</loc>
+    <loc>https://tathminiafya.com/</loc>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://hello-world-spark-4566.lovable.app/about</loc>
+    <loc>https://tathminiafya.com/about</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://hello-world-spark-4566.lovable.app/features</loc>
+    <loc>https://tathminiafya.com/features</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://hello-world-spark-4566.lovable.app/contact</loc>
+    <loc>https://tathminiafya.com/contact</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://hello-world-spark-4566.lovable.app/shop</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://hello-world-spark-4566.lovable.app/try</loc>
+    <loc>https://tathminiafya.com/shop</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://tathminiafya.com/try</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
   </url>
 </urlset>

@@ -2,6 +2,7 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/useI18n";
 import { type DbAlert, type DbMedicalHistory, usePatientByUserId, useAlerts, useMedicalHistory, useHealthEntries } from "@/hooks/use-data";
+import { SmartPopupManager } from "@/components/onboarding/SmartPopupManager";
 import { useDailyLogs, useTodayLog, useTodayRecommendations } from "@/hooks/use-daily-logs";
 import { useDayChange } from "@/hooks/use-day-change";
 import { Badge } from "@/components/ui/badge";
@@ -60,6 +61,7 @@ export default function PatientDashboard() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [showQuickLog, setShowQuickLog] = useState(false);
   const observe = useScrollAnimation();
+  const openQuickLog = () => setShowQuickLog(true);
   const mainRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -175,6 +177,15 @@ export default function PatientDashboard() {
 
   return (
     <div className="h-screen flex flex-col bg-background">
+      <SmartPopupManager
+        context="patient-dashboard"
+        userId={user?.id}
+        profile={profile}
+        healthEntries={healthEntries}
+        todayLogMissing={!todayLoading && !todayLog}
+        hasAbnormalVitals={hasAbnormalVitals}
+        onOpenQuickLog={openQuickLog}
+      />
       {/* Main scrollable dashboard - always rendered */}
       <div ref={mainRef} className="flex-1 overflow-y-auto no-scrollbar pb-24 safe-area-bottom">
         

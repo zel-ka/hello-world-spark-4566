@@ -1,0 +1,30 @@
+{
+  "name": "Tathmini Afya",
+  "short_name": "Afya",
+  "description": "Tathmini Afya is a modern digital platform that helps individuals monitor health, evaluate risk factors, track vital signs, and receive timely guidance for preventing chronic disease.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#d3ebe8",
+  "theme_color": "#c7f6f4",
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

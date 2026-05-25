@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Heart, Users, BarChart3, Bell, Activity, Stethoscope, Dumbbell, Moon, Wind, Brain, Sparkles, Shield, ClipboardList, Salad, Droplet, HeartPulse, FileText, Award, AlertTriangle, TrendingUp, Zap, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/useI18n";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import LoginDropdown from "@/components/LoginDropdown";
 import { ExpandableFeatureCard } from "@/components/landing/ExpandableFeatureCard";
+import { SmartPopup } from "@/components/onboarding/SmartPopup";
 
 interface PhonePosition {
   rotateX: number;
@@ -20,10 +21,12 @@ export default function Landing() {
   const scrollRef = useRef(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [expandedFeature, setExpandedFeature] = useState<number | null>(null);
+  const [showTryPopup, setShowTryPopup] = useState(false);
   const navLoginRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const heroMidRef = useRef<HTMLDivElement>(null);
   const heroFgRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -148,18 +151,35 @@ export default function Landing() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center pt-6 sm:pt-8">
-              <Link to="/try" className="w-full sm:w-auto">
-                <Button
-                  type="button"
-                  className="w-full px-8 h-12 sm:h-14 lg:h-16 rounded-2xl text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:-translate-y-0.5 transition-all text-white"
-                >
-                  {t('landing.cta1Text')}
-                </Button>
-              </Link>
+              <div className="w-full sm:w-auto">
+              <Button
+                type="button"
+                onClick={() => setShowTryPopup(true)}
+                className="w-full px-8 h-12 sm:h-14 lg:h-16 rounded-2xl text-base sm:text-lg lg:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:-translate-y-0.5 transition-all text-white"
+              >
+                {t('landing.cta1Text')}
+              </Button>
+            </div>
               <div className="w-full sm:w-auto">
                 <LoginDropdown variant="cta" className="w-full" />
               </div>
             </div>
+
+      <SmartPopup
+        open={showTryPopup}
+        title={t('landing.tryPopupTitle')}
+        description={t('landing.tryPopupDesc')}
+        ctaLabel={t('landing.tryPopupAction')}
+        actionLabel={t('landing.tryPopupAction')}
+        laterLabel={t('popups.later')}
+        variant="feature"
+        onAction={() => {
+          setShowTryPopup(false);
+          navigate('/try?openLog=1');
+        }}
+        onLater={() => setShowTryPopup(false)}
+        onClose={() => setShowTryPopup(false)}
+      />
 
             {/* Feature Cards Marquee */}
             <div className="pt-12 sm:pt-16 lg:pt-20 space-y-6 sm:space-y-8">
