@@ -59,9 +59,14 @@ export function useSaveAssessment() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (input: SaveAssessmentInput) => {
+      const normalizedInput = {
+        ...input,
+        score: Math.round(input.score),
+        raw_score: Math.round(input.raw_score),
+      };
       const { data, error } = await supabase
         .from("assessments")
-        .insert(input)
+        .insert(normalizedInput)
         .select("*")
         .single();
       if (error) throw error;

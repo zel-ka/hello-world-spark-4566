@@ -62,8 +62,8 @@ export function AssessmentRunner({ type, onClose }: Props) {
       await save.mutateAsync({
         user_id: user.id,
         type,
-        score: r.score,
-        raw_score: r.raw_score,
+        score: Math.round(r.score),
+        raw_score: Math.round(r.raw_score),
         risk_level: r.risk_level,
         answers,
         recommendations: r.recommendationKeys,

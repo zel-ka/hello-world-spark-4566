@@ -150,7 +150,7 @@ const nutrition: AssessmentDefinition = {
   ],
   scorer: (answers) => {
     const raw = sumAnswers(answers); // max ~100
-    const score = clamp(raw);
+    const score = Math.round(clamp(raw));
     const risk: RiskLevel = score >= 70 ? "low" : score >= 45 ? "moderate" : "high";
     const recs: string[] = [];
     if ((answers.fruits_veg ?? 0) < 10) recs.push("rec.nutrition.fruitsVeg");
@@ -223,7 +223,7 @@ const exercise: AssessmentDefinition = {
     const aerobicScore = clamp((equivalent / 150) * 70); // up to 70 pts
     const strengthScore = Math.min(20, (a.strength_days ?? 0) * 7); // up to 21
     const sittingPenalty = (a.sitting ?? 0) * 3; // up to 9 deduction
-    const score = clamp(aerobicScore + strengthScore - sittingPenalty + 10);
+    const score = Math.round(clamp(aerobicScore + strengthScore - sittingPenalty + 10));
     const risk: RiskLevel = score >= 70 ? "low" : score >= 40 ? "moderate" : "high";
     const recs: string[] = [];
     if (equivalent < 150) recs.push("rec.exercise.aerobic");
@@ -311,7 +311,7 @@ const sleep: AssessmentDefinition = {
       (a.quality ?? 0) +
       (a.daytime ?? 0); // 0-15
     // Higher raw = worse. Invert.
-    const score = clamp(100 - (raw / 15) * 100);
+    const score = Math.round(clamp(100 - (raw / 15) * 100));
     const risk: RiskLevel = score >= 70 ? "low" : score >= 40 ? "moderate" : "high";
     const recs: string[] = [];
     if (duration < 7) recs.push("rec.sleep.duration");
@@ -398,7 +398,7 @@ const stress: AssessmentDefinition = {
   ],
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-20
-    const score = clamp((raw / 20) * 100);
+    const score = Math.round(clamp((raw / 20) * 100));
     const risk: RiskLevel = score >= 70 ? "low" : score >= 40 ? "moderate" : "high";
     const recs: string[] = [];
     if (score < 70) recs.push("rec.stress.breath");
@@ -444,7 +444,7 @@ const phq9: AssessmentDefinition = {
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-27
     // Higher raw = more depressive symptoms. Invert for normalized score.
-    const score = clamp(100 - (raw / 27) * 100);
+    const score = Math.round(clamp(100 - (raw / 27) * 100));
     let risk: RiskLevel = "low";
     if (raw >= 15) risk = "high"; // moderately severe + severe
     else if (raw >= 10) risk = "moderate";
@@ -474,7 +474,7 @@ const gad7: AssessmentDefinition = {
   })),
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-21
-    const score = clamp(100 - (raw / 21) * 100);
+    const score = Math.round(clamp(100 - (raw / 21) * 100));
     let risk: RiskLevel = "low";
     if (raw >= 15) risk = "high";
     else if (raw >= 10) risk = "moderate";
@@ -577,7 +577,7 @@ const findrisc: AssessmentDefinition = {
   ],
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-26
-    const score = clamp(100 - (raw / 26) * 100);
+    const score = Math.round(clamp(100 - (raw / 26) * 100));
     let risk: RiskLevel = "low";
     if (raw >= 15) risk = "high";
     else if (raw >= 7) risk = "moderate";
@@ -660,7 +660,7 @@ const heart: AssessmentDefinition = {
   ],
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-24
-    const score = clamp(100 - (raw / 24) * 100);
+    const score = Math.round(clamp(100 - (raw / 24) * 100));
     let risk: RiskLevel = "low";
     if (raw >= 12) risk = "high";
     else if (raw >= 6) risk = "moderate";
@@ -747,7 +747,7 @@ const cancer: AssessmentDefinition = {
   ],
   scorer: (a) => {
     const raw = sumAnswers(a); // 0-24
-    const score = clamp(100 - (raw / 24) * 100);
+    const score = Math.round(clamp(100 - (raw / 24) * 100));
     let risk: RiskLevel = "low";
     if (raw >= 12) risk = "high";
     else if (raw >= 6) risk = "moderate";
