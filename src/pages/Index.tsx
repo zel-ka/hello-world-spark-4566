@@ -17,7 +17,7 @@ import { X, Stethoscope, Shield, LogOut } from "lucide-react";
 type OverlaySection = "patients" | "records" | "alerts" | "settings" | null;
 
 export default function Index() {
-  const { profile, roles, signOut } = useAuth();
+  const { user, profile, roles, signOut } = useAuth();
   const { t } = useI18n();
   
   const [overlay, setOverlay] = useState<OverlaySection>(null);
