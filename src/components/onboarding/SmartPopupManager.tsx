@@ -286,9 +286,8 @@ export function SmartPopupManager({
         list.push(doctorAlertsReminder, doctorPatientsReminder);
       }
     }
-    if (context === "guest-dashboard") {
-      list.push(guestSignupReminder);
-    }
+    // Guest dashboard: no auto popups — users explore freely without interruption
+
     return list
       .filter((item) => item.condition)
       .sort((a, b) => b.priority - a.priority);
