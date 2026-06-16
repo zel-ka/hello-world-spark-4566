@@ -278,7 +278,8 @@ export function SmartPopupManager({
   const allCandidates = useMemo(() => {
     const list: PopupCandidate[] = [];
     if (context === "patient-dashboard") {
-      list.push(patientWelcome, profileReminder, firstVitalsReminder, abnormalReadingReminder, dailyLogReminder);
+      // Single consolidated prompt — no duplicate stacking
+      list.push(dailyLogReminder);
     }
     if (context === "doctor-dashboard") {
       if (isDoctor || isAdmin) {
