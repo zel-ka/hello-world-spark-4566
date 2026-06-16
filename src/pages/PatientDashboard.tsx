@@ -73,20 +73,9 @@ export default function PatientDashboard() {
   // Track date changes — when midnight passes, queries auto-refresh and today resets
   const today = useDayChange();
 
-  // Auto-open the daily log sheet once per new day if it hasn't been filled yet
-  useEffect(() => {
-    if (!userId || todayLoading) return;
-    if (todayLog) return; // already logged today
-    const flagKey = `daily-log-prompted-${userId}-${today}`;
-    if (typeof window === "undefined") return;
-    if (window.sessionStorage.getItem(flagKey)) return;
-    // Defer slightly so the dashboard finishes its initial paint
-    const t = setTimeout(() => {
-      setShowQuickLog(true);
-      window.sessionStorage.setItem(flagKey, "1");
-    }, 600);
-    return () => clearTimeout(t);
-  }, [userId, today, todayLog, todayLoading]);
+  // Note: Daily quick-log auto-open removed — the SmartPopupManager now
+  // surfaces a single "Ready for a quick check?" prompt. Users open the
+  // QuickLog sheet by tapping "Start now"; "Later" keeps them on the home page.
 
   // Observe scroll animations
   useEffect(() => {
