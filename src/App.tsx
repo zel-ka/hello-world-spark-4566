@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -12,13 +13,24 @@ import Shop from "@/pages/Shop";
 import Index from "@/pages/Index";
 import PatientDashboard from "@/pages/PatientDashboard";
 import GuestDashboard from "@/pages/GuestDashboard";
+import PwaAuth from "@/pages/PwaAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { I18nProvider } from "@/hooks/useI18n";
+import { useIsStandalone } from "@/hooks/use-is-standalone";
+import { SplashScreen } from "@/components/pwa/SplashScreen";
+import { OfflineIndicator } from "@/components/pwa/OfflineIndicator";
 
 const queryClient = new QueryClient();
 
 function AppRoutes() {
   const { user, roles, loading } = useAuth();
+  const isStandalone = useIsStandalone();
+  const [splashDone, setSplashDone] = useState(false);
+
+  // Installed PWA: show splash screen on cold start.
+  if (isStandalone && !splashDone) {
+    return <SplashScreen onDone={() => setSplashDone(true)} />;
+  }
 
   if (loading) {
     return (
@@ -29,6 +41,15 @@ function AppRoutes() {
   }
 
   if (!user) {
+    // Installed PWA → skip marketing/landing entirely, go straight to auth.
+    if (isStandalone) {
+      return (
+        <Routes>
+          <Route path="/*" element={<PwaAuth />} />
+        </Routes>
+      );
+    }
+
     return (
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -86,6 +107,7 @@ const App = () => (
       <I18nProvider>
         <BrowserRouter>
           <AuthProvider>
+            <OfflineIndicator />
             <AppRoutes />
           </AuthProvider>
         </BrowserRouter>
