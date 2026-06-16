@@ -19,9 +19,17 @@ export default defineConfig(() => ({
       injectRegister: null,
       filename: "sw.js",
       manifest: false, // we keep our /site.webmanifest in public/
+      includeAssets: [
+        "favicon-96x96.png",
+        "favicon.svg",
+        "apple-touch-icon.png",
+        "site.webmanifest",
+        "offline.html",
+        "icons/*",
+      ],
       devOptions: { enabled: false },
       workbox: {
-        navigateFallback: "/index.html",
+        navigateFallback: "/offline.html",
         navigateFallbackDenylist: [/^\/~oauth/, /^\/api/],
         cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff2}"],

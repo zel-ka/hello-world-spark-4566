@@ -132,7 +132,9 @@
   "auth": {
     "login": "Login",
     "signup": "Sign Up",
-"username": "Phone Number",
+    "welcome": "Welcome to Tathmini Afya!",
+    "subtitle": "Sign in or sign up to continue",
+    "username": "Phone Number",
     "phone": "Phone Number",
     "email": "Email",
     "password": "Password",
@@ -152,7 +154,13 @@
     "noAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
     "emailRegistered": "Email address already registered",
-    "googleFailed": "Google login failed"
+    "googleFailed": "Google login failed",
+    "signupError": "Unable to create account. Please try again."
+  },
+  "network": {
+    "offlineBanner": "No internet connection. Please check your network and try again.",
+    "offlineLogin": "No internet connection. Unable to sign in.",
+    "offlineSignup": "No internet connection. Unable to create account."
   },
   "dashboard": {
     "title": "MedFlow",

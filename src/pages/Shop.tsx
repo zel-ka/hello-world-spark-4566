@@ -171,6 +171,7 @@ export default function Shop() {
             <span className="text-sm font-semibold">{isSw ? "Rudi Nyumbani" : "Back to Home"}</span>
           </Link>
           <div className="flex items-center gap-2">
+            <InstallAppButton />
             <LanguageToggle />
             <Sheet>
               <SheetTrigger asChild>

@@ -7,8 +7,18 @@ export function useIsStandalone(): boolean {
   useEffect(() => {
     const mq = window.matchMedia("(display-mode: standalone)");
     const onChange = () => setStandalone(detect());
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
+
+    if (mq.addEventListener) {
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    }
+
+    if (mq.addListener) {
+      mq.addListener(onChange);
+      return () => mq.removeListener(onChange);
+    }
+
+    return undefined;
   }, []);
 
   return standalone;

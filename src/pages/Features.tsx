@@ -3,6 +3,7 @@ import { ArrowLeft, Heart } from "lucide-react";
 import FeaturesShowcaseSection from "@/components/sections/FeaturesShowcaseSection";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import LoginDropdown from "@/components/LoginDropdown";
+import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 import { useI18n } from "@/hooks/useI18n";
 
 export default function Features() {
@@ -19,7 +20,8 @@ export default function Features() {
             />
             <span className="text-base sm:text-lg font-bold text-slate-900">{t('common.appName')}</span>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2 sm:flex-nowrap">
+            <InstallAppButton />
             <LanguageToggle />
             <LoginDropdown />
           </div>

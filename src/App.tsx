@@ -17,8 +17,8 @@ import PwaAuth from "@/pages/PwaAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { I18nProvider } from "@/hooks/useI18n";
 import { useIsStandalone } from "@/hooks/use-is-standalone";
-import { SplashScreen } from "@/components/pwa/SplashScreen";
-import { OfflineIndicator } from "@/components/pwa/OfflineIndicator";
+import { StartupScreen } from "@/components/StartupScreen";
+import { NetworkStatusBanner } from "@/components/NetworkStatusBanner";
 
 const queryClient = new QueryClient();
 
@@ -27,9 +27,9 @@ function AppRoutes() {
   const isStandalone = useIsStandalone();
   const [splashDone, setSplashDone] = useState(false);
 
-  // Installed PWA: show splash screen on cold start.
-  if (isStandalone && !splashDone) {
-    return <SplashScreen onDone={() => setSplashDone(true)} />;
+  // Show a shared startup experience once for both website and installed PWA.
+  if (!splashDone) {
+    return <StartupScreen onDone={() => setSplashDone(true)} />;
   }
 
   if (loading) {
@@ -107,7 +107,7 @@ const App = () => (
       <I18nProvider>
         <BrowserRouter>
           <AuthProvider>
-            <OfflineIndicator />
+            <NetworkStatusBanner />
             <AppRoutes />
           </AuthProvider>
         </BrowserRouter>

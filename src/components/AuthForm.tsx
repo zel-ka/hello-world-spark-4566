@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock, User, ArrowRight, Phone } from "lucide-react";
 import LoginSuccess from "@/components/LoginSuccess";
+import { isNetworkError } from "@/lib/network";
 
 interface AuthFormProps {
   t: (key: string) => string;
@@ -45,6 +46,11 @@ export default function AuthForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (typeof navigator !== "undefined" && !navigator.onLine) {
+      toast.error(mode === "login" ? t("network.offlineLogin") : t("network.offlineSignup"));
+      return;
+    }
+
     if (!isValidPhone(phone)) {
       toast.error(t('auth.usernameInvalid'));
       return;
@@ -68,25 +74,52 @@ export default function AuthForm({
             emailRedirectTo: window.location.origin,
           },
         });
-        if (error) throw error;
+        if (error) {
+          if (isNetworkError(error)) {
+            toast.error(t("network.offlineSignup"));
+          } else {
+            toast.error(t('auth.signupError'));
+          }
+          setLoading(false);
+          return;
+        }
 
         if (data?.user?.identities?.length === 0) {
           toast.error(t('auth.usernameTaken'));
         } else {
-          await supabase.auth.signInWithPassword({ email, password });
+          const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+          if (signInError) {
+            if (isNetworkError(signInError)) {
+              toast.error(t("network.offlineSignup"));
+            } else {
+              toast.error(t('auth.loginError'));
+            }
+            setLoading(false);
+            return;
+          }
           setShowSuccess(true);
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
-          toast.error(t('auth.loginError'));
+          if (isNetworkError(error)) {
+            toast.error(t("network.offlineLogin"));
+          } else {
+            toast.error(t('auth.loginError'));
+          }
           setLoading(false);
           return;
         }
         setShowSuccess(true);
       }
-    } catch (err: any) {
-      toast.error(err.message);
+    } catch (err: unknown) {
+      if (isNetworkError(err)) {
+        toast.error(mode === "login" ? t("network.offlineLogin") : t("network.offlineSignup"));
+      } else if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error(t(mode === "login" ? "auth.loginError" : "auth.signupError"));
+      }
     } finally {
       setLoading(false);
     }

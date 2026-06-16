@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Offline — Tathmini Afya</title>
+    <meta name="theme-color" content="#c7f6f4" />
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        font-family: Inter, system-ui, sans-serif;
+        text-align: center;
+        background: linear-gradient(180deg, #d3ebe8 0%, #f8fafc 100%);
+        color: #0f172a;
+      }
+      .container {
+        max-width: 28rem;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        background: rgba(255,255,255,0.88);
+        box-shadow: 0 25px 80px rgba(15,23,42,0.12);
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2rem, 4vw, 2.75rem);
+      }
+      p {
+        margin: 0 0 1rem;
+        line-height: 1.7;
+        color: #475569;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.95rem 1.5rem;
+        border-radius: 999px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Offline</h1>
+      <p>It looks like you’re not connected to the internet. Please check your connection and try again.</p>
+      <p>The app shell is available, and you may continue once connectivity returns.</p>
+      <a class="button" href="/">Return to home</a>
+    </div>
+  </body>
+</html>

@@ -1,52 +1,112 @@
 import { useEffect, useState } from "react";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
-interface BIPEvent extends Event {
+interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
 export function InstallAppButton({ className }: { className?: string }) {
-  const [evt, setEvt] = useState<BIPEvent | null>(null);
+  const [installEvent, setInstallEvent] = useState<BeforeInstallPromptEvent | null>(null);
+  const [instructionsOpen, setInstructionsOpen] = useState(false);
   const [installed, setInstalled] = useState(false);
 
   useEffect(() => {
-    const onPrompt = (e: Event) => {
-      e.preventDefault();
-      setEvt(e as BIPEvent);
+    const onBeforeInstallPrompt = (event: Event) => {
+      event.preventDefault();
+      setInstallEvent(event as BeforeInstallPromptEvent);
     };
-    const onInstalled = () => {
+
+    const onAppInstalled = () => {
       setInstalled(true);
-      setEvt(null);
+      setInstallEvent(null);
+      setInstructionsOpen(false);
     };
-    window.addEventListener("beforeinstallprompt", onPrompt);
-    window.addEventListener("appinstalled", onInstalled);
+
+    window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
+    window.addEventListener("appinstalled", onAppInstalled);
+
     return () => {
-      window.removeEventListener("beforeinstallprompt", onPrompt);
-      window.removeEventListener("appinstalled", onInstalled);
+      window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", onAppInstalled);
     };
   }, []);
 
-  if (installed || !evt) return null;
+  if (installed) return null;
+
+  const handleInstallClick = async () => {
+    if (!installEvent) {
+      setInstructionsOpen(true);
+      return;
+    }
+
+    try {
+      await installEvent.prompt();
+      const choice = await installEvent.userChoice;
+      if (choice.outcome === "accepted") {
+        setInstalled(true);
+      } else {
+        setInstructionsOpen(true);
+      }
+    } catch (error) {
+      console.warn("Install prompt failed", error);
+      setInstructionsOpen(true);
+    } finally {
+      setInstallEvent(null);
+    }
+  };
 
   return (
-    <Button
-      type="button"
-      variant="outline"
-      size="sm"
-      className={className}
-      onClick={async () => {
-        try {
-          await evt.prompt();
-          await evt.userChoice;
-        } finally {
-          setEvt(null);
-        }
-      }}
-    >
-      <Download className="h-4 w-4 mr-2" />
-      Install App
-    </Button>
+    <>
+      <Button
+        type="button"
+        variant="default"
+        size="sm"
+        className={className}
+        onClick={handleInstallClick}
+      >
+        <Download className="h-4 w-4 mr-2" />
+        Download App
+      </Button>
+      <Dialog open={instructionsOpen} onOpenChange={setInstructionsOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Install Tathmini Afya</DialogTitle>
+            <DialogDescription>
+              Your browser does not currently support the install prompt, or it was dismissed. Follow the instructions below to install the app.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 text-sm text-slate-700">
+            <div>
+              <h3 className="font-semibold">Android (Chrome / Edge)</h3>
+              <p className="mt-1">Open the browser menu, then choose <strong>Add to Home screen</strong> or <strong>Install</strong>.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">iPhone (Safari)</h3>
+              <p className="mt-1">Tap the Share icon, then select <strong>Add to Home Screen</strong>.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold">Desktop Chrome / Edge</h3>
+              <p className="mt-1">Use the browser install badge in the address bar or open the menu and choose <strong>Install app</strong>.</p>
+            </div>
+          </div>
+          <DialogFooter className="mt-6 justify-end">
+            <DialogClose asChild>
+              <Button variant="outline">Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

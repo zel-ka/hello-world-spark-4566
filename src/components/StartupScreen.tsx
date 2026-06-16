@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-interface SplashScreenProps {
+interface StartupScreenProps {
   onDone: () => void;
   minDurationMs?: number;
 }
 
-export function SplashScreen({ onDone, minDurationMs = 2200 }: SplashScreenProps) {
+export function StartupScreen({ onDone, minDurationMs = 2200 }: StartupScreenProps) {
   const [leaving, setLeaving] = useState(false);
 
   useEffect(() => {

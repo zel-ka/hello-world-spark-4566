@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/useI18n";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import LoginDropdown from "@/components/LoginDropdown";
+import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 import { ExpandableFeatureCard } from "@/components/landing/ExpandableFeatureCard";
 import { SmartPopup } from "@/components/onboarding/SmartPopup";
 
@@ -111,9 +112,10 @@ export default function Landing() {
             />
             <span className="text-base sm:text-lg font-bold text-slate-900">{t('common.appName')}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2 sm:flex-nowrap">
+            <InstallAppButton />
             <LanguageToggle />
-            <div ref={navLoginRef}>
+            <div ref={navLoginRef} className="min-w-0">
               <LoginDropdown />
             </div>
           </div>

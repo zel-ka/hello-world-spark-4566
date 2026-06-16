@@ -130,6 +130,8 @@
 "auth": {
 "login": "Ingia",
 "signup": "Jisajili",
+"welcome": "Karibu Tathmini Afya!",
+"subtitle": "Ingia au jisajili ili kuendelea",
 "username": "Namba ya Simu",
 "phone": "Namba ya Simu",
 "email": "Barua Pepe",
@@ -150,7 +152,13 @@
 "noAccount": "Huna akaunti?",
 "haveAccount": "Una akaunti tayari?",
 "emailRegistered": "Barua pepe imeshasajiliwa",
-"googleFailed": "Kuingia kwa Google kumeshindikana"
+"googleFailed": "Kuingia kwa Google kumeshindikana",
+"signupError": "Haikuwezekani kuunda akaunti. Tafadhali jaribu tena."
+},
+"network": {
+"offlineBanner": "Hakuna muunganisho wa intaneti. Tafadhali angalia mtandao wako na ujaribu tena.",
+"offlineLogin": "Hakuna muunganisho wa intaneti. Haikuwezekani kuingia.",
+"offlineSignup": "Hakuna muunganisho wa intaneti. Haikuwezekani kuunda akaunti."
 },
 "dashboard": {
 "title": "AfyaCompass",
