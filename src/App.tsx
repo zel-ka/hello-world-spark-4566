@@ -14,11 +14,13 @@ import Index from "@/pages/Index";
 import PatientDashboard from "@/pages/PatientDashboard";
 import GuestDashboard from "@/pages/GuestDashboard";
 import PwaAuth from "@/pages/PwaAuth";
+import AdminSettings from "@/pages/AdminSettings";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { I18nProvider } from "@/hooks/useI18n";
 import { useIsStandalone } from "@/hooks/use-is-standalone";
 import { StartupScreen } from "@/components/StartupScreen";
 import { NetworkStatusBanner } from "@/components/NetworkStatusBanner";
+import { useLoginTracker } from "@/hooks/use-login-tracker";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,7 @@ function AppRoutes() {
   const { user, roles, loading } = useAuth();
   const isStandalone = useIsStandalone();
   const [splashDone, setSplashDone] = useState(false);
+  useLoginTracker(user?.id);
 
   // Show a shared startup experience once for both website and installed PWA.
   if (!splashDone) {
@@ -82,6 +85,16 @@ function AppRoutes() {
 
       {/* Patient dashboard - default for everyone */}
       <Route path="/patient" element={<PatientDashboard />} />
+
+      {/* Admin settings (admin-only) */}
+      <Route
+        path="/admin/settings"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminSettings />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Admin/Doctor dashboard kept available but not default */}
       <Route
