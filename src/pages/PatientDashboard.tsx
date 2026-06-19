@@ -1,4 +1,5 @@
 import { useMemo, useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/use-auth";
 import { useI18n } from "@/hooks/useI18n";
 import { type DbAlert, type DbMedicalHistory, usePatientByUserId, useAlerts, useMedicalHistory, useHealthEntries } from "@/hooks/use-data";
@@ -24,7 +25,7 @@ import { AssessmentsHub } from "@/components/health/AssessmentsHub";
 import { CalorieCalculator } from "@/components/health/CalorieCalculator";
 import { InsightsTrends } from "@/components/health/InsightsTrends";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { HeartPulse, LogOut, LayoutDashboard, Calculator, BarChart, Activity, ArrowRight, X, PlusCircle, AlertCircle, ClipboardList, Stethoscope, Salad, LineChart as LineChartIcon } from "lucide-react";
+import { HeartPulse, LogOut, LayoutDashboard, Calculator, BarChart, Activity, ArrowRight, X, PlusCircle, AlertCircle, ClipboardList, Stethoscope, Salad, LineChart as LineChartIcon, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, BarChart as RechartsBarChart, Bar, ResponsiveContainer, Legend } from "recharts";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
@@ -44,7 +45,9 @@ const riskColor: Record<string, string> = {
 type PatientFeature = "summary" | "add-data" | "insights" | "calculators" | "assessments";
 
 export default function PatientDashboard() {
-  const { profile, user, signOut } = useAuth();
+  const { profile, user, roles, signOut } = useAuth();
+  const navigate = useNavigate();
+  const isAdmin = roles.includes("admin");
   const { t, lang } = useI18n();
   const userId = user?.id ?? "";
   const { data: patient, isLoading: patientLoading } = usePatientByUserId(userId);
@@ -194,9 +197,23 @@ export default function PatientDashboard() {
                   <h1 className="text-lg font-bold text-foreground">{t('common.appName')}</h1>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" onClick={signOut} className="hover-lift">
-                <LogOut className="h-5 w-5" />
-              </Button>
+              <div className="flex items-center gap-1">
+                {isAdmin && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => navigate("/admin/settings")}
+                    className="hover-lift"
+                    aria-label="Admin Settings"
+                    title="Admin Settings"
+                  >
+                    <Settings className="h-5 w-5" />
+                  </Button>
+                )}
+                <Button variant="ghost" size="icon" onClick={signOut} className="hover-lift">
+                  <LogOut className="h-5 w-5" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
