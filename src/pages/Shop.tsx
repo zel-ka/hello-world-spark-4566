@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Search, ShoppingCart, Plus, Minus, Trash2, Heart, Star, Package, ShieldCheck, Dumbbell, HeartPulse, Moon, Brain, Wind, ClipboardList, X, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
