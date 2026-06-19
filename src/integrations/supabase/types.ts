@@ -704,7 +704,6 @@ export type Database = {
         Args: never
         Returns: {
           created_at: string
-          email: string
           full_name: string
           phone: string
           user_id: string

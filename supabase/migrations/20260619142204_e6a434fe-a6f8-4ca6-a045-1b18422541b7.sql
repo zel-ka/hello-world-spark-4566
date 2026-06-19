@@ -42,7 +42,7 @@ CREATE POLICY "Admins view all login events" ON public.login_events
 
 -- 3) Admin users overview - security definer function returning name + phone of all users
 CREATE OR REPLACE FUNCTION public.admin_list_users()
-RETURNS TABLE (user_id uuid, full_name text, phone text, email text, created_at timestamptz)
+RETURNS TABLE (user_id uuid, full_name text, phone text, created_at timestamptz)
 LANGUAGE sql
 STABLE SECURITY DEFINER
 SET search_path = public
@@ -50,8 +50,12 @@ AS $$
   SELECT 
     u.id AS user_id,
     COALESCE(p.full_name, '') AS full_name,
-    COALESCE(p.phone, u.phone, '') AS phone,
-    COALESCE(u.email, '') AS email,
+    COALESCE(
+      NULLIF(p.phone, ''),
+      NULLIF(u.phone, ''),
+      regexp_replace(split_part(u.email, '@', 1), '\D', '', 'g'),
+      ''
+    ) AS phone,
     u.created_at
   FROM auth.users u
   LEFT JOIN public.profiles p ON p.user_id = u.id

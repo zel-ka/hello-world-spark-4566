@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-type AdminUser = { user_id: string; full_name: string; phone: string; email: string; created_at: string };
+type AdminUser = { user_id: string; full_name: string; phone: string; created_at: string };
 type Bucket = "day" | "week" | "month";
 type AnalyticsRow = { bucket_start: string; login_count: number; unique_users: number };
 
@@ -84,12 +84,11 @@ export default function AdminSettings() {
 
     autoTable(doc, {
       startY: 38,
-      head: [["#", "Jina kamili", "Namba ya simu", "Email", "Tarehe ya kujiunga"]],
+      head: [["#", "Jina kamili", "Namba ya simu", "Tarehe ya kujiunga"]],
       body: users.map((u, i) => [
         String(i + 1),
         u.full_name || "—",
         u.phone || "—",
-        u.email || "—",
         new Date(u.created_at).toLocaleDateString(),
       ]),
       styles: { fontSize: 9, cellPadding: 2 },
@@ -156,22 +155,20 @@ export default function AdminSettings() {
                         <TableHead>#</TableHead>
                         <TableHead>Jina</TableHead>
                         <TableHead>Simu</TableHead>
-                        <TableHead className="hidden md:table-cell">Email</TableHead>
                         <TableHead className="hidden sm:table-cell">Tarehe</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {usersLoading ? (
-                        <TableRow><TableCell colSpan={5} className="text-center py-8 text-muted-foreground">Inapakia…</TableCell></TableRow>
+                        <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground">Inapakia…</TableCell></TableRow>
                       ) : users.length === 0 ? (
-                        <TableRow><TableCell colSpan={5} className="text-center py-8 text-muted-foreground">Hakuna watumiaji</TableCell></TableRow>
+                        <TableRow><TableCell colSpan={4} className="text-center py-8 text-muted-foreground">Hakuna watumiaji</TableCell></TableRow>
                       ) : (
                         users.map((u, i) => (
                           <TableRow key={u.user_id}>
                             <TableCell>{i + 1}</TableCell>
                             <TableCell className="font-medium">{u.full_name || "—"}</TableCell>
                             <TableCell>{u.phone || "—"}</TableCell>
-                            <TableCell className="hidden md:table-cell text-muted-foreground">{u.email || "—"}</TableCell>
                             <TableCell className="hidden sm:table-cell text-muted-foreground">{new Date(u.created_at).toLocaleDateString()}</TableCell>
                           </TableRow>
                         ))
