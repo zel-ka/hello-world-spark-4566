@@ -20,6 +20,7 @@ import { I18nProvider } from "@/hooks/useI18n";
 import { useIsStandalone } from "@/hooks/use-is-standalone";
 import { StartupScreen } from "@/components/StartupScreen";
 import { NetworkStatusBanner } from "@/components/NetworkStatusBanner";
+import { PublicRouteTransition } from "@/components/PublicRouteTransition";
 import { useLoginTracker } from "@/hooks/use-login-tracker";
 
 const queryClient = new QueryClient();
@@ -54,17 +55,19 @@ function AppRoutes() {
     }
 
     return (
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/try" element={<GuestDashboard />} />
-        <Route path="/login" element={<Navigate to="/" replace />} />
-        <Route path="/signup" element={<Navigate to="/" replace />} />
-        <Route path="/*" element={<Landing />} />
-      </Routes>
+      <PublicRouteTransition>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/try" element={<GuestDashboard />} />
+          <Route path="/login" element={<Navigate to="/" replace />} />
+          <Route path="/signup" element={<Navigate to="/" replace />} />
+          <Route path="/*" element={<Landing />} />
+        </Routes>
+      </PublicRouteTransition>
     );
   }
 
