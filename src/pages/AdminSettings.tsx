@@ -9,8 +9,8 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGri
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
-import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { createBrandedPdf, PDF_SIDEBAR_WIDTH } from "@/lib/pdf-template";
 
 type AdminUser = { user_id: string; full_name: string; phone: string; created_at: string };
 type Bucket = "day" | "week" | "month";
@@ -74,16 +74,15 @@ export default function AdminSettings() {
     return { logins, usersMax };
   }, [analytics]);
 
-  const downloadUsersPdf = () => {
-    const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text("Tathmini Afya — Orodha ya Watumiaji", 14, 18);
-    doc.setFontSize(10);
-    doc.text(`Imetolewa: ${new Date().toLocaleString()}`, 14, 25);
-    doc.text(`Jumla ya watumiaji: ${users.length}`, 14, 31);
+  const downloadUsersPdf = async () => {
+    const { doc, startY } = await createBrandedPdf({
+      heading: "Orodha ya Watumiaji",
+      description: `Ripoti rasmi ya watumiaji waliosajiliwa katika mfumo wa Tathmini Afya.\nImetolewa: ${new Date().toLocaleString()}  •  Jumla: ${users.length}`,
+    });
 
     autoTable(doc, {
-      startY: 38,
+      startY,
+      margin: { left: 14, right: 14 + PDF_SIDEBAR_WIDTH },
       head: [["#", "Jina kamili", "Namba ya simu", "Tarehe ya kujiunga"]],
       body: users.map((u, i) => [
         String(i + 1),
