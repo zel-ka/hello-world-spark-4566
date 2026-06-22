@@ -147,15 +147,15 @@ export default function AdminSettings() {
                   </Button>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <Table>
+              <CardContent className="px-2 sm:px-6">
+                <div className="overflow-x-auto -mx-2 sm:mx-0">
+                  <Table className="text-xs sm:text-sm">
                     <TableHeader>
                       <TableRow>
-                        <TableHead>#</TableHead>
-                        <TableHead>Jina</TableHead>
-                        <TableHead>Simu</TableHead>
-                        <TableHead className="hidden sm:table-cell">Tarehe</TableHead>
+                        <TableHead className="px-2 sm:px-4 w-8">#</TableHead>
+                        <TableHead className="px-2 sm:px-4">Jina</TableHead>
+                        <TableHead className="px-2 sm:px-4">Simu</TableHead>
+                        <TableHead className="px-2 sm:px-4 whitespace-nowrap">Tarehe</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -166,10 +166,10 @@ export default function AdminSettings() {
                       ) : (
                         users.map((u, i) => (
                           <TableRow key={u.user_id}>
-                            <TableCell>{i + 1}</TableCell>
-                            <TableCell className="font-medium">{u.full_name || "—"}</TableCell>
-                            <TableCell>{u.phone || "—"}</TableCell>
-                            <TableCell className="hidden sm:table-cell text-muted-foreground">{new Date(u.created_at).toLocaleDateString()}</TableCell>
+                            <TableCell className="px-2 sm:px-4">{i + 1}</TableCell>
+                            <TableCell className="px-2 sm:px-4 font-medium break-words max-w-[120px] sm:max-w-none">{u.full_name || "—"}</TableCell>
+                            <TableCell className="px-2 sm:px-4 whitespace-nowrap">{u.phone || "—"}</TableCell>
+                            <TableCell className="px-2 sm:px-4 whitespace-nowrap text-muted-foreground">{new Date(u.created_at).toLocaleDateString()}</TableCell>
                           </TableRow>
                         ))
                       )}
