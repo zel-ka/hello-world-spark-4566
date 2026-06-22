@@ -65,10 +65,10 @@ export async function createBrandedPdf(opts: PdfTemplateOptions): Promise<{ doc:
 
   // Logo below the name
   const logo = await loadLogo();
-  let y = 22;
+  let y = 20;
   if (logo) {
-    const w = 22;
-    const h = 22;
+    const w = 36;
+    const h = 36;
     try {
       doc.addImage(logo, "PNG", (pageW - w) / 2, y, w, h);
       y += h + 4;
