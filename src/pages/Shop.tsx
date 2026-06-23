@@ -265,48 +265,32 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* Products */}
+      {/* Products - Coming Soon */}
       <section className="px-4 sm:px-6 pb-16">
         <div className="max-w-7xl mx-auto">
-          {loading ? (
-            <div className="text-center py-16 text-slate-500"><Loader2 className="h-8 w-8 mx-auto mb-3 animate-spin" /><p>{isSw ? "Inapakia bidhaa..." : "Loading products..."}</p></div>
-          ) : filtered.length === 0 ? (
-            <div className="text-center py-16 text-slate-500"><Package className="h-12 w-12 mx-auto mb-3 opacity-40" /><p>{isSw ? "Hakuna bidhaa zilizopatikana" : "No products found"}</p></div>
-          ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
-              {filtered.map(p => (
-                <div key={p.id} className="group rounded-2xl bg-white border border-slate-200 overflow-hidden shadow-soft hover:shadow-elevated hover:-translate-y-1 transition-all flex flex-col">
-                  <div className="relative aspect-square bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center text-6xl sm:text-7xl">
-                    {p.emoji}
-                    {p.badge && (
-                      <span className={`absolute top-2 left-2 text-[10px] font-bold uppercase px-2 py-1 rounded-full ${p.badge === "best" ? "bg-amber-100 text-amber-800" : p.badge === "new" ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"}`}>
-                        {p.badge === "best" ? (isSw ? "Bora" : "Best") : p.badge === "new" ? (isSw ? "Mpya" : "New") : (isSw ? "Punguzo" : "Deal")}
-                      </span>
-                    )}
-                    <button onClick={() => toggleFav(p.id)} className="absolute top-2 right-2 h-8 w-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center hover:scale-110 transition">
-                      <Heart className={`h-4 w-4 ${favs.includes(p.id) ? "fill-rose-500 text-rose-500" : "text-slate-400"}`} />
-                    </button>
-                  </div>
-                  <div className="p-3 sm:p-4 flex-1 flex flex-col">
-                    <p className="text-sm font-bold text-slate-900 line-clamp-1">{isSw ? p.name_sw : p.name_en}</p>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 flex-1">{isSw ? p.desc_sw : p.desc_en}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                      <span className="text-xs font-semibold text-slate-700">{p.rating}</span>
-                    </div>
-                    <div className="flex items-center justify-between gap-2 mt-3">
-                      <span className="text-sm sm:text-base font-black text-primary">{fmt(Number(p.price))}</span>
-                      <Button size="sm" onClick={() => addToCart(p.id)} className="h-8 px-3 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs font-bold">
-                        <Plus className="h-3 w-3 sm:mr-1" /><span className="hidden sm:inline">{isSw ? "Ongeza" : "Add"}</span>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          <div className="relative rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 via-white to-primary/10 p-10 sm:p-16 text-center shadow-soft overflow-hidden">
+            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-cyan-300/20 blur-3xl" />
+            <div className="relative">
+              <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl bg-primary/10 mb-5">
+                <Package className="h-10 w-10 text-primary" />
+              </div>
+              <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/15 border-0 text-xs font-bold uppercase tracking-wider px-3 py-1">
+                {isSw ? "Inakuja Hivi Karibuni" : "Coming Soon"}
+              </Badge>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+                {isSw ? "Bidhaa Zinakuja Hivi Karibuni" : "Products Coming Soon"}
+              </h2>
+              <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-md mx-auto">
+                {isSw
+                  ? "Tunaandaa vifaa bora vya kuboresha afya yako. Rudi hivi karibuni!"
+                  : "We are preparing the best tools to improve your health. Check back soon!"}
+              </p>
             </div>
-          )}
+          </div>
         </div>
       </section>
+
 
       {/* Checkout Modal */}
       {checkoutOpen && (
