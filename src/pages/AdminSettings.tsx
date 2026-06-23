@@ -76,6 +76,9 @@ export default function AdminSettings() {
     return { logins, usersMax };
   }, [analytics]);
 
+  const toTitleCase = (s: string) =>
+    s.toLowerCase().replace(/\b\p{L}/gu, (c) => c.toUpperCase());
+
   const downloadUsersPdf = async () => {
     const { doc, startY } = await createBrandedPdf({
       heading: "Orodha ya Watumiaji",
@@ -88,7 +91,7 @@ export default function AdminSettings() {
       head: [["#", "Jina kamili", "Namba ya simu", "Tarehe ya kujiunga"]],
       body: users.map((u, i) => [
         String(i + 1),
-        u.full_name || "—",
+        u.full_name ? toTitleCase(u.full_name) : "—",
         u.phone || "—",
         new Date(u.created_at).toLocaleDateString(),
       ]),
@@ -102,7 +105,7 @@ export default function AdminSettings() {
   const downloadUsersExcel = () => {
     const rows = users.map((u, i) => ({
       "#": i + 1,
-      "Jina kamili": u.full_name || "—",
+      "Jina kamili": u.full_name ? toTitleCase(u.full_name) : "—",
       "Namba ya simu": u.phone || "—",
       "Tarehe ya kujiunga": new Date(u.created_at).toLocaleDateString(),
     }));
@@ -112,6 +115,7 @@ export default function AdminSettings() {
     XLSX.utils.book_append_sheet(wb, ws, "Watumiaji");
     XLSX.writeFile(wb, `tathmini-afya-users-${new Date().toISOString().slice(0, 10)}.xlsx`);
   };
+
 
 
   if (loading || !isAdmin) {
