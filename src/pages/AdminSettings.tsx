@@ -99,6 +99,21 @@ export default function AdminSettings() {
     doc.save(`tathmini-afya-users-${new Date().toISOString().slice(0, 10)}.pdf`);
   };
 
+  const downloadUsersExcel = () => {
+    const rows = users.map((u, i) => ({
+      "#": i + 1,
+      "Jina kamili": u.full_name || "—",
+      "Namba ya simu": u.phone || "—",
+      "Tarehe ya kujiunga": new Date(u.created_at).toLocaleDateString(),
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 5 }, { wch: 28 }, { wch: 18 }, { wch: 20 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Watumiaji");
+    XLSX.writeFile(wb, `tathmini-afya-users-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  };
+
+
   if (loading || !isAdmin) {
     return (
       <div className="min-h-screen flex items-center justify-center">
