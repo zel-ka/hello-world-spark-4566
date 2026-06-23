@@ -157,10 +157,24 @@ export default function AdminSettings() {
                     <RefreshCw className={`h-4 w-4 mr-2 ${usersLoading ? "animate-spin" : ""}`} />
                     Refresh
                   </Button>
-                  <Button size="sm" onClick={downloadUsersPdf} disabled={!users.length}>
-                    <Download className="h-4 w-4 mr-2" />
-                    Pakua PDF
-                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button size="sm" disabled={!users.length}>
+                        <Download className="h-4 w-4 mr-2" />
+                        Pakua
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={downloadUsersPdf}>
+                        <FileText className="h-4 w-4 mr-2" />
+                        PDF
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={downloadUsersExcel}>
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Excel
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </CardHeader>
               <CardContent className="px-2 sm:px-6">
