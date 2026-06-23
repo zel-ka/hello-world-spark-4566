@@ -1,15 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Download, Users, BarChart3, RefreshCw } from "lucide-react";
+import { ArrowLeft, Download, Users, BarChart3, RefreshCw, FileText, FileSpreadsheet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LineChart, Line, Legend } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { toast } from "sonner";
 import autoTable from "jspdf-autotable";
+import * as XLSX from "xlsx";
 import { createBrandedPdf, PDF_SIDEBAR_WIDTH } from "@/lib/pdf-template";
 
 type AdminUser = { user_id: string; full_name: string; phone: string; created_at: string };
@@ -97,6 +99,21 @@ export default function AdminSettings() {
     doc.save(`tathmini-afya-users-${new Date().toISOString().slice(0, 10)}.pdf`);
   };
 
+  const downloadUsersExcel = () => {
+    const rows = users.map((u, i) => ({
+      "#": i + 1,
+      "Jina kamili": u.full_name || "—",
+      "Namba ya simu": u.phone || "—",
+      "Tarehe ya kujiunga": new Date(u.created_at).toLocaleDateString(),
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws["!cols"] = [{ wch: 5 }, { wch: 28 }, { wch: 18 }, { wch: 20 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Watumiaji");
+    XLSX.writeFile(wb, `tathmini-afya-users-${new Date().toISOString().slice(0, 10)}.xlsx`);
+  };
+
+
   if (loading || !isAdmin) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -140,10 +157,24 @@ export default function AdminSettings() {
                     <RefreshCw className={`h-4 w-4 mr-2 ${usersLoading ? "animate-spin" : ""}`} />
                     Refresh
                   </Button>
-                  <Button size="sm" onClick={downloadUsersPdf} disabled={!users.length}>
-                    <Download className="h-4 w-4 mr-2" />
-                    Pakua PDF
-                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button size="sm" disabled={!users.length}>
+                        <Download className="h-4 w-4 mr-2" />
+                        Pakua
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem onClick={downloadUsersPdf}>
+                        <FileText className="h-4 w-4 mr-2" />
+                        PDF
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={downloadUsersExcel}>
+                        <FileSpreadsheet className="h-4 w-4 mr-2" />
+                        Excel
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
               </CardHeader>
               <CardContent className="px-2 sm:px-6">
