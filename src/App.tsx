@@ -26,14 +26,32 @@ import { useLoginTracker } from "@/hooks/use-login-tracker";
 const queryClient = new QueryClient();
 
 function AppRoutes() {
-  const { user, roles, loading } = useAuth();
+  const { user, roles, loading, transition } = useAuth();
   const isStandalone = useIsStandalone();
   const [splashDone, setSplashDone] = useState(false);
+  const [authSplashKey, setAuthSplashKey] = useState<string | null>(null);
   useLoginTracker(user?.id);
 
   // Show a shared startup experience once for both website and installed PWA.
   if (!splashDone) {
     return <StartupScreen onDone={() => setSplashDone(true)} />;
+  }
+
+  // Sign-in / sign-out transition overlay using the startup screen.
+  if (transition && authSplashKey !== transition) {
+    return (
+      <StartupScreen
+        key={transition}
+        celebrate={transition === "sign-in"}
+        minDurationMs={transition === "sign-in" ? 2400 : 1600}
+        message={
+          transition === "sign-in"
+            ? "Karibu! Tunakuandalia..."
+            : "Tunakutoa kwa usalama..."
+        }
+        onDone={() => setAuthSplashKey(transition)}
+      />
+    );
   }
 
   if (loading) {
@@ -43,6 +61,7 @@ function AppRoutes() {
       </div>
     );
   }
+
 
   if (!user) {
     // Installed PWA → skip marketing/landing entirely, go straight to auth.
